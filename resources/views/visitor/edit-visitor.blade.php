@@ -27,18 +27,18 @@
                         <div class="row gx-3 mb-3">
                             <!-- Form Group (first name)-->
                             <div class="col-md-6">
-                                <label class="small mb-1" for="inputFirstName">First name</label>
+                                <label class="small mb-1" for="inputFirstName">First Name</label>
                                 <input class="form-control" id="inputFirstName" type="text" placeholder="Enter first name" value="Nelson" />
                             </div>
                             <!-- Form Group (last name)-->
                             <div class="col-md-6">
-                                <label class="small mb-1" for="inputLastName">Last name</label>
+                                <label class="small mb-1" for="inputLastName">Last Name</label>
                                 <input class="form-control" id="inputLastName" type="text" placeholder="Enter last name" value="Mandela" />
                             </div>
                         </div>
                         <!-- Form Group (email address)-->
                         <div class="mb-3">
-                            <label class="small mb-1" for="inputEmailAddress">Email address</label>
+                            <label class="small mb-1" for="inputEmailAddress">Email Address</label>
                             <input class="form-control" id="inputEmailAddress" type="email" placeholder="Enter email address" value="nelson@mandela.com" />
                         </div>
 
@@ -49,8 +49,8 @@
                         </div>
                         <!-- Form Group (company name)-->
                         <div class="mb-3">
-                            <label class="small mb-1" for="comapny_name">Company Name</label>
-                            <input class="form-control" id="comapny_name" type="text" placeholder="Enter company name" value="Mandela Corp" />
+                            <label class="small mb-1" for="company_name">Company Name</label>
+                            <input class="form-control" id="company_name" type="text" placeholder="Enter company name" value="Mandela Corp" />
                         </div>
                         <!-- Submit button-->
                         <button class="btn btn-primary" type="button">Submit</button>

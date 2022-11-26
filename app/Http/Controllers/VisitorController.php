@@ -25,4 +25,9 @@ class VisitorController extends Controller
     {
         return view('visitor.single-visitor');
     }
+
+    public function addVisit()
+    {
+        return view('visitor.add-visit');
+    }
 }

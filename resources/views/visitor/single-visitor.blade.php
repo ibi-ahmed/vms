@@ -12,22 +12,16 @@
                     <div class="card-body text-center">
                         <!-- Profile picture image-->
                         <img class="img-account-profile rounded-circle mb-2" src="/theme/assets/img/illustrations/profiles/profile-1.png" alt="" />
-                        <!-- Profile picture help block-->
-                        <div class="small font-italic text-muted mb-2">JPG or PNG no larger than 5 MB</div>
-                        <!-- Profile picture upload button-->
-                        {{-- <button class="btn btn-primary" type="button">Upload new image</button> --}}
                         
-                        <!-- Form Group (Profile Pic)-->
-                        <div class="">
-                            <label class="" for="photo">Upload New Photo</label>
-                            <input class="form-control" id="photo" type="file" />
-                        </div>
                     </div>
                     <ul class="list-group list-group-flush">
                       <li class="list-group-item">Bill Gates</li>
                       <li class="list-group-item">Microsoft Corp</li>
                       <li class="list-group-item">bill@gates.com</li>
                       <li class="list-group-item">0801 234 5678</li>
+                      <li class="list-group-item">
+                        <a href="#" class="btn btn-outline-primary">Add Appointment</a>
+                      </li>
                     </ul>
                 </div>
             </div>

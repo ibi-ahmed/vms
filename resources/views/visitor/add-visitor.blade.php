@@ -13,12 +13,12 @@
                         <div class="row gx-3 mb-3">
                             <!-- Form Group (first name)-->
                             <div class="col-md-6">
-                                <label class="mb-1" for="inputFirstName">First name</label>
+                                <label class="mb-1" for="inputFirstName">First Name</label>
                                 <input class="form-control" id="inputFirstName" type="text" placeholder="Enter first name" value="" />
                             </div>
                             <!-- Form Group (last name)-->
                             <div class="col-md-6">
-                                <label class="mb-1" for="inputLastName">Last name</label>
+                                <label class="mb-1" for="inputLastName">Last Name</label>
                                 <input class="form-control" id="inputLastName" type="text" placeholder="Enter last name" value="" />
                             </div>
                         </div>
@@ -29,17 +29,18 @@
                                 <input class="form-control" id="photo" type="file" />
                             </div>
 
-                        <!-- Form Group (email address)-->
-                        <div class="mb-3">
-                            <label class="mb-1" for="inputEmailAddress">Email address</label>
-                            <input class="form-control" id="inputEmailAddress" type="email" placeholder="Enter email address" value="" />
-                        </div>
-
-                        <!-- Form Group (phone number)-->
-                        <div class="mb-3">
-                            <label class="mb-1" for="phonr">Phone Number</label>
-                            <input class="form-control" id="phone" type="text" placeholder="Enter phone number" value="" />
-                        </div>
+                            <div class="row gx-3 mb-3">
+                                <!-- Form Group (Email Address)-->
+                                <div class="col-md-6">
+                                    <label class="mb-1" for="inputEmailAddress">Email Address</label>
+                                    <input class="form-control" id="inputEmailAddress" type="email" placeholder="Enter email address" value="" />
+                                </div>
+                                <!-- Form Group (Phone)-->
+                                <div class="col-md-6">
+                                    <label class="mb-1" for="phone">Phone Number</label>
+                                    <input class="form-control" id="phone" type="text" placeholder="Enter phone number" value="" />
+                                </div>
+                            </div>
 
                         <!-- Form Group (company name)-->
                         <div class="mb-3">
@@ -47,16 +48,23 @@
                             <input class="form-control" id="company_name" type="text" placeholder="Enter company name" value="" />
                         </div>
 
-                        <!-- Form Group (Department)-->
-                        <div class="mb-3">
-                            <label class="mb-1" for="department">Destination</label>
-                            <input class="form-control" id="department" type="text" placeholder="Select Destination" value="" />
+                        <div class="row gx-3 mb-3">
+                            <!-- Form Group (Department)-->
+                            <div class="col-md-6">
+                                <label class="mb-1" for="department">Destination</label>
+                                <input class="form-control" id="department" type="text" placeholder="Select Destination" value="" />
+                            </div>
+                            <!-- Form Group (Staff)-->
+                            <div class="col-md-6">
+                                <label class="mb-1" for="staff">Receiving Staff</label>
+                                <input class="form-control" id="staff" type="text" placeholder="Enter staff name" value="" />
+                            </div>
                         </div>
 
-                        <!-- Form Group (Staff)-->
+                        <!-- Form Group (Tag)-->
                         <div class="mb-3">
-                            <label class="mb-1" for="staff">Receiving Staff</label>
-                            <input class="form-control" id="staff" type="text" placeholder="Enter staff name" value="" />
+                            <label class="mb-1" for="tag">Assign Tag</label>
+                            <input class="form-control" id="tag" type="text" placeholder="Visitor Tag" value="" />
                         </div>
 
                         <!-- Submit button-->
