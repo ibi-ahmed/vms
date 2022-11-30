@@ -2,6 +2,7 @@
 @section('title', 'Appointment')
 
 @section('content')
+@section('icon', 'bookmark')
 @section('sub_head', 'Schedule Appointment')
     <div class="row">
         <div class="col-sm-8 offset-2">
@@ -23,10 +24,10 @@
                             </div>
                         </div>
 
-                        <!-- Form Group (phone number)-->
+                        <!-- Form Group (Company )-->
                         <div class="mb-3">
-                            <label class="mb-1" for="phonr">Phone Number</label>
-                            <input class="form-control" id="phone" type="text" placeholder="Enter phone number" value="" />
+                            <label class="mb-1" for="phonr">Company</label>
+                            <input class="form-control" id="company" type="text" placeholder="Enter company name" value="" />
                         </div>
 
                         <!-- Form Group (Department)-->

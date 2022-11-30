@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('last_name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
+            $table->string('password')->default(bcrypt('123'));
             $table->tinyInteger('type')->default(0); /* Users: 0=>User, 1=>Staff, 2=>Admin 3=>Super */
             $table->boolean('changed_password')->default(false);
             $table->rememberToken();

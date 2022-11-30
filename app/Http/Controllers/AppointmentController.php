@@ -15,4 +15,9 @@ class AppointmentController extends Controller
     {
         return view('appointments.schedule');
     }
+    
+    public function myAppointments() 
+    {
+        return view('appointments.my');
+    }
 }
