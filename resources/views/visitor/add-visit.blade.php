@@ -2,11 +2,12 @@
 @section('title', 'Existing Visitor')
 
 @section('content')
+@section('icon', 'bookmark')
 @section('sub_head', 'Existing Visitor Appointment')
     <div class="row">
         <div class="col-sm-8 offset-2">
             <div class="card mb-4">
-                <div class="card-header">Add Visit</div>
+                <div class="card-header text-center">Mike Tyson</div>
                 <div class="card-body">
                     <form>
 
