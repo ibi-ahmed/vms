@@ -14,13 +14,43 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/home', function () {
+            if (auth()->user()->type == 'super') {
+                return redirect()->route('super.dashboard');
+            }else if (auth()->user()->type == 'admin') {
+                return redirect()->route('admin.dashboard');
+            }else if (auth()->user()->type == 'staff'){
+                return redirect()->route('staff.dashboard');
+            }
+            else{
+                return redirect()->route('user.dashboard');
+            }
 });
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Guest Routes
+Route::get('/', [App\Http\Controllers\Auth\LoginController::class, 'login']);
+
+// User Routes
+Route::middleware(['auth', 'user-access:user'])->group(function () {
+    Route::get('/user-dashboard', [App\Http\Controllers\HomeController::class, 'userDashboard'])->name('user.dashboard');
+});
+
+// Staff Routes
+Route::middleware(['auth', 'user-access:staff'])->group(function () {
+    Route::get('/staff-dashboard', [App\Http\Controllers\HomeController::class, 'staffDashboard'])->name('staff.dashboard');
+});
+
+// Admin Routes
+Route::middleware(['auth', 'user-access:admin'])->group(function () {
+    Route::get('/admin-dashboard', [App\Http\Controllers\HomeController::class, 'adminDashboard'])->name('admin.dashboard');
+});
+
+// Super Routes
+Route::middleware(['auth', 'user-access:super'])->group(function () {  
+    Route::get('/super-dashboard', [App\Http\Controllers\HomeController::class, 'superDashboard'])->name('super.dashboard');
+});
 
 Route::get('/add-visitor', [App\Http\Controllers\VisitorController::class, 'add'])->name('visitor.add');
 Route::get('/edit-visitor', [App\Http\Controllers\VisitorController::class, 'edit'])->name('visitor.edit');
@@ -30,13 +60,8 @@ Route::get('/add-visit', [App\Http\Controllers\VisitorController::class, 'addVis
 
 Route::get('/tag-scan', [App\Http\Controllers\TagController::class, 'scan'])->name('tags.scan');
 
-Route::get('/schedule-appointment', [\App\Http\Controllers\AppointmentController::class, 'schedule'])->name('appointments.schedule');
-Route::get('/all-appointments', [\App\Http\Controllers\AppointmentController::class, 'all'])->name('appointments.all');
+Route::get('/schedule-appointment', [App\Http\Controllers\AppointmentController::class, 'schedule'])->name('appointments.schedule');
+Route::get('/all-appointments', [App\Http\Controllers\AppointmentController::class, 'all'])->name('appointments.all');
+Route::get('/my-appointments', [App\Http\Controllers\AppointmentController::class, 'myAppointments'])->name('appointments.my');
 
-Route::get('/admin-dashboard', [App\Http\Controllers\HomeController::class, 'adminDashboard'])->name('admin-dashboard');
-
-
-Route::get('/blank', function () {
-    return view('blank');
-});
 

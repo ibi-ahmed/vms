@@ -1,18 +1,62 @@
 @extends('layouts.layout')
-@section('title', 'Staff Dashboard')
+@section('title', 'Administrator Dashboard')
 
 @section('content')
-@section('sub_head', 'Staff Dashboard')
+@section('sub_head', 'Administrator Dashboard')
+
+<link href="https://cdn.jsdelivr.net/npm/litepicker/dist/css/litepicker.css" rel="stylesheet" />
+
+    <div class="row">
+        <div class="col-6">
+            <div class="card h-100">
+                <div class="card-header text-center">Monthly Visitors By Department</div>
+                <div class="card-body d-flex flex-column justify-content-center">
+                    <div class="chart-bar"><canvas id="myBarChart" width="100%" height="30"></canvas></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="card h-100">
+                <div class="card-header text-center">Most Visited Department</div>
+                <div class="card-body">
+                    <div class="chart-pie mb-4"><canvas id="myPieChart" width="100%" height="50"></canvas></div>
+                    <div class="list-group list-group-flush">
+                        <div class="list-group-item d-flex align-items-center justify-content-between small px-0 py-2">
+                            <div class="me-3">
+                                <i class="fas fa-circle fa-sm me-1 text-blue"></i>
+                                ACE Office
+                            </div>
+                            <div class="fw-500 text-dark">55%</div>
+                        </div>
+                        <div class="list-group-item d-flex align-items-center justify-content-between small px-0 py-2">
+                            <div class="me-3">
+                                <i class="fas fa-circle fa-sm me-1 text-purple"></i>
+                                DSSRI
+                            </div>
+                            <div class="fw-500 text-dark">15%</div>
+                        </div>
+                        <div class="list-group-item d-flex align-items-center justify-content-between small px-0 py-2">
+                            <div class="me-3">
+                                <i class="fas fa-circle fa-sm me-1 text-green"></i>
+                                CS&A
+                            </div>
+                            <div class="fw-500 text-dark">30%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="mt-4 row">
         <div class="col-sm-10 offset-1">
             <div class="card">
                 <div class="card-header border-bottom">
                     <ul class="nav nav-tabs card-header-tabs" id="cardTab" role="tablist">
                         <li class="nav-item">
-                            <a class="nav-link active" id="visitors-tab" href="#visitors" data-bs-toggle="tab" role="tab" aria-controls="visitors" aria-selected="true">My Visitors</a>
+                            <a class="nav-link active" id="visitors-tab" href="#visitors" data-bs-toggle="tab" role="tab" aria-controls="visitors" aria-selected="true">Most Recent Visitors</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="appointments-tab" href="#appointments" data-bs-toggle="tab" role="tab" aria-controls="appointments" aria-selected="false">My Appointments</a>
+                            <a class="nav-link" id="appointments-tab" href="#appointments" data-bs-toggle="tab" role="tab" aria-controls="appointments" aria-selected="false">Most Recent Appointments</a>
                         </li>
                     </ul>
                 </div>
@@ -50,6 +94,7 @@
                                             {{-- <a class="btn btn-datatable btn-icon btn-transparent-dark me-2" href="user-management-edit-user.html"><i data-feather="edit"></i></a> --}}
                                             {{-- <a class="btn btn-datatable btn-icon btn-transparent-dark" href="#!"><i data-feather="trash-2"></i></a> --}}
                                             <a href="#"><span style="color: green;"><i class="fa-solid fa-eye"></i></span></i></a>
+                                            <a class="px-3" href="#"><span style="color: dodgerblue;"><i class="fa-solid fa-pen-to-square"></i></span></i></a>
                                         </td>
                                     </tr>
                                     <tr>
@@ -68,6 +113,7 @@
                                         <td>20 Jun 2021</td>
                                         <td>
                                             <a href="#"><span style="color: green;"><i class="fa-solid fa-eye"></i></span></i></a>
+                                            <a class="px-3" href="#"><span style="color: dodgerblue;"><i class="fa-solid fa-pen-to-square"></i></span></i></a>
                                         </td>
                                     </tr>
                                     <tr>
@@ -86,6 +132,7 @@
                                         <td>20 Jun 2021</td>
                                         <td>
                                             <a href="#"><span style="color: green;"><i class="fa-solid fa-eye"></i></span></i></a>
+                                            <a class="px-3" href="#"><span style="color: dodgerblue;"><i class="fa-solid fa-pen-to-square"></i></span></i></a>
                                         </td>
                                     </tr>
                                     <tr>
@@ -104,6 +151,7 @@
                                         <td>20 Jun 2021</td>
                                         <td>
                                             <a href="#"><span style="color: green;"><i class="fa-solid fa-eye"></i></span></i></a>
+                                            <a class="px-3" href="#"><span style="color: dodgerblue;"><i class="fa-solid fa-pen-to-square"></i></span></i></a>
                                         </td>
                                     </tr>
                                     <tr>
@@ -122,6 +170,7 @@
                                         <td>20 Jun 2021</td>
                                         <td>
                                             <a href="#"><span style="color: green;"><i class="fa-solid fa-eye"></i></span></i></a>
+                                            <a class="px-3" href="#"><span style="color: dodgerblue;"><i class="fa-solid fa-pen-to-square"></i></span></i></a>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -137,6 +186,7 @@
                                         <th>Staff</th>
                                         <th>Department</th>
                                         <th>Time</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -154,6 +204,9 @@
                                         </td>
                                         <td>DSSRI</td>
                                         <td>10.00am</td>
+                                        <td>
+                                            <a href="#"><span style="color: green;"><i class="fa-solid fa-person-circle-check"></i></span></i></a>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td>2</td>
@@ -169,6 +222,9 @@
                                         </td>
                                         <td>ACE Office</td>
                                         <td>12.00pm</td>
+                                        <td>
+                                            <a href="#"><span style="color: green;"><i class="fa-solid fa-person-circle-check"></i></span></i></a>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td>3</td>
@@ -184,6 +240,9 @@
                                         </td>
                                         <td>IT</td>
                                         <td>11.30am</td>
+                                        <td>
+                                            <a href="#"><span style="color: green;"><i class="fa-solid fa-person-circle-check"></i></span></i></a>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td>4</td>
@@ -199,6 +258,9 @@
                                         </td>
                                         <td>HSE</td>
                                         <td>1.45pm</td>
+                                        <td>
+                                            <a href="#"><span style="color: green;"><i class="fa-solid fa-person-circle-check"></i></span></i></a>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td>5</td>
@@ -214,6 +276,9 @@
                                         </td>
                                         <td>CS&A</td>
                                         <td>2.00pm</td>
+                                        <td>
+                                            <a href="#"><span style="color: green;"><i class="fa-solid fa-person-circle-check"></i></span></i></a>
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -223,4 +288,11 @@
             </div>
         </div>
     </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js" crossorigin="anonymous"></script>
+<script src="/theme/assets/demo/chart-area-demo.js"></script>
+<script src="/theme/assets/demo/chart-bar-demo.js"></script>
+<script src="/theme/assets/demo/chart-pie-demo.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/litepicker/dist/bundle.js" crossorigin="anonymous"></script>
+<script src="/theme/js/litepicker.js"></script>
 @stop

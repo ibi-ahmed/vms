@@ -17,11 +17,10 @@ return new class extends Migration
             $table->id();
             $table->string('first_name');
             $table->string('last_name');
-            $table->string('phone');
-            $table->string('department');
+            $table->integer('department_id');
             $table->dateTime('date_time');
-            $table->integer('user_id');
-            $table->boolean('status')->default(true);
+            $table->integer('staff_id');
+            $table->boolean('status')->default(false);
             $table->timestamps();
         });
     }

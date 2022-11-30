@@ -31,7 +31,7 @@
                     <div class="ml-4 border-r border-gray-400">|</div>
 
                     <div class="px-4 uppercase">
-                        <a class="btn btn-link text-lg text-gray-500" href="">Homepage</a>
+                        <a class="btn btn-link text-lg text-gray-500" href="/">Go Back</a>
                     </div>
                     
                 </div>

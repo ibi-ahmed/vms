@@ -19,8 +19,9 @@
                       <li class="list-group-item">Microsoft Corp</li>
                       <li class="list-group-item">bill@gates.com</li>
                       <li class="list-group-item">0801 234 5678</li>
-                      <li class="list-group-item">
-                        <a href="#" class="btn btn-outline-primary">Add Appointment</a>
+                      <li class="list-group-item text-center">
+                        <a href="#" class="btn btn-outline-primary">Add Visit</a>
+                        <a href="#" class="btn btn-outline-danger">Deactivate Tag</a>
                       </li>
                     </ul>
                 </div>

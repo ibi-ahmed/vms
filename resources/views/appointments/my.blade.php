@@ -1,10 +1,10 @@
 @extends('layouts.layout')
-@section('title', 'All Appointments')
+@section('title', 'My Appointments')
 
 {{-- <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" /> --}}
 
 @section('content')
-@section('sub_head', 'All Appointments')
+@section('sub_head', 'My Appointments')
 
     <div class="row">
         <div class="col-sm-12">
@@ -19,10 +19,7 @@
                                 <th>S/N</th>
                                 <th>Name</th>
                                 <th>Company</th>
-                                <th>Staff</th>
-                                <th>Department</th>
                                 <th>Time</th>
-                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -34,15 +31,12 @@
                                         Tiger Nixon
                                     </div>
                                 </td>
-                                <td>NUPRC</td>
-                                <td>
-                                    Mike Tyson
-                                </td>
-                                <td>DSSRI</td>
-                                <td>10.00am</td>
-                                <td>
-                                    <a href="#"><span style="color: green;"><i class="fa-solid fa-person-circle-check"></i></span></i></a>
-                                </td>
+                                <td>NNPC Limited</td>
+                                <td>20 Jun 2021 - 10.00am</td>
+                                {{-- <td>
+                                    <a href="#"><span style="color: green;"><i class="fa-solid fa-square-check"></i></span></i></a>
+                                    <a class="px-3" href="#"><span style="color: red;"><i class="fa-solid fa-square-xmark"></i></span></i></a>
+                                </td> --}}
                             </tr>
                             <tr>
                                 <td>2</td>
@@ -52,15 +46,8 @@
                                         Garrett Winters
                                     </div>
                                 </td>
-                                <td>PTDF</td>
-                                <td>
-                                    Patrice Lumumba
-                                </td>
-                                <td>ACE Office</td>
-                                <td>12.00pm</td>
-                                <td>
-                                    <a href="#"><span style="color: green;"><i class="fa-solid fa-person-circle-check"></i></span></i></a>
-                                </td>
+                                <td>NUPRC</td>
+                                <td>20 Jun 2021 - 12.00pm</td>
                             </tr>
                             <tr>
                                 <td>3</td>
@@ -70,15 +57,8 @@
                                         Ashton Cox
                                     </div>
                                 </td>
-                                <td>NCDMB</td>
-                                <td>
-                                    Albert Einstein
-                                </td>
-                                <td>IT</td>
-                                <td>11.30am</td>
-                                <td>
-                                    <a href="#"><span style="color: green;"><i class="fa-solid fa-person-circle-check"></i></span></i></a>
-                                </td>
+                                <td>NITDA</td>
+                                <td>20 Jun 2021 - 11.30am</td>
                             </tr>
                             <tr>
                                 <td>4</td>
@@ -88,15 +68,8 @@
                                         Cedric Kelly
                                     </div>
                                 </td>
-                                <td>NNPC Ltd</td>
-                                <td>
-                                    Nicholas Copernicus
-                                </td>
-                                <td>HSE</td>
-                                <td>1.45pm</td>
-                                <td>
-                                    <a href="#"><span style="color: green;"><i class="fa-solid fa-person-circle-check"></i></span></i></a>
-                                </td>
+                                <td>NCDMB</td>
+                                <td>20 Jun 2021 - 1.45pm</td>
                             </tr>
                             <tr>
                                 <td>5</td>
@@ -106,15 +79,8 @@
                                         Airi Satou
                                     </div>
                                 </td>
-                                <td>Google Inc.</td>
-                                <td>
-                                    Galileo Galilei
-                                </td>
-                                <td>CS&A</td>
-                                <td>2.00pm</td>
-                                <td>
-                                    <a href="#"><span style="color: green;"><i class="fa-solid fa-person-circle-check"></i></span></i></a>
-                                </td>
+                                <td>PTDF</td>
+                                <td>20 Jun 2021 - 2.00pm</td>
                             </tr>
                         </tbody>
                     </table>
