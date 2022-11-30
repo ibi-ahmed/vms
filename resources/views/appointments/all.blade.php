@@ -4,6 +4,7 @@
 {{-- <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" /> --}}
 
 @section('content')
+@section('icon', 'bookmark')
 @section('sub_head', 'All Appointments')
 
     <div class="row">

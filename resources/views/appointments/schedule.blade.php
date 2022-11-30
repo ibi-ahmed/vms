@@ -2,6 +2,7 @@
 @section('title', 'Appointment')
 
 @section('content')
+@section('icon', 'bookmark')
 @section('sub_head', 'Schedule Appointment')
     <div class="row">
         <div class="col-sm-8 offset-2">

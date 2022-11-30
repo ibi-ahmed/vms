@@ -4,6 +4,7 @@
 {{-- <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" /> --}}
 
 @section('content')
+@section('icon', 'users')
 @section('sub_head', 'All Visitors')
 
     <div class="row">

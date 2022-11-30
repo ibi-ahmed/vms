@@ -8,6 +8,7 @@
         <div id="layoutSidenav_content">
             <main>
                 @include('layouts.sub_header')
+                <x-alerts />
                 <div class="container-xl px-4 mt-4">
                     @yield('content')
                 </div>

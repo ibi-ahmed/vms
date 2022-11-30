@@ -2,6 +2,7 @@
 @section('title', 'User Dashboard')
 
 @section('content')
+@section('icon', 'activity')
 @section('sub_head', 'User Dashboard')
     <div class="mt-4 row">
         <div class="col-sm-10 offset-1">

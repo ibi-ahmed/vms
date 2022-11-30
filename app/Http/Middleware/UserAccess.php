@@ -21,8 +21,8 @@ class UserAccess
         }
         
         // return response()->json(['You do not have permission to access for this page.']);
-        return redirect('errors.401');
-        // return response()->view('errors.401')->with('message', 'no');
+        return redirect()->route('login');
+        // return response()->view('errors.401');
         // abort(401, 'You dont have permission!');
     }
 }

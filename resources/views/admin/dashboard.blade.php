@@ -2,6 +2,7 @@
 @section('title', 'Administrator Dashboard')
 
 @section('content')
+@section('icon', 'activity')
 @section('sub_head', 'Administrator Dashboard')
 
 <link href="https://cdn.jsdelivr.net/npm/litepicker/dist/css/litepicker.css" rel="stylesheet" />

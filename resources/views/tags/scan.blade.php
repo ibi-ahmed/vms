@@ -2,6 +2,7 @@
 @section('title', 'Visit Details')
 
 @section('content')
+@section('icon', 'tag')
 @section('sub_head', 'Visit Details')
     <div class="row">
             <div class="col-4 offset-4">

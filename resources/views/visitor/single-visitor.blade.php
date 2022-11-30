@@ -2,6 +2,7 @@
 @section('title', 'Visitor Details')
 
 @section('content')
+@section('icon', 'user')
 @section('sub_head', 'Visitor Details')
     <div class="row">
             <div class="col-4">

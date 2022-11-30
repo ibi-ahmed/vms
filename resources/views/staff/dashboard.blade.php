@@ -2,6 +2,7 @@
 @section('title', 'Staff Dashboard')
 
 @section('content')
+@section('icon', 'activity')
 @section('sub_head', 'Staff Dashboard')
     <div class="mt-4 row">
         <div class="col-sm-10 offset-1">
@@ -28,7 +29,6 @@
                                         <th>Phone</th>
                                         <th>Company</th>
                                         <th>Last Visit</th>
-                                        <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -46,11 +46,6 @@
                                             Microsoft Corp.
                                         </td>
                                         <td>20 Jun 2021</td>
-                                        <td>
-                                            {{-- <a class="btn btn-datatable btn-icon btn-transparent-dark me-2" href="user-management-edit-user.html"><i data-feather="edit"></i></a> --}}
-                                            {{-- <a class="btn btn-datatable btn-icon btn-transparent-dark" href="#!"><i data-feather="trash-2"></i></a> --}}
-                                            <a href="#"><span style="color: green;"><i class="fa-solid fa-eye"></i></span></i></a>
-                                        </td>
                                     </tr>
                                     <tr>
                                         <td>2</td>
@@ -66,9 +61,6 @@
                                             Apple Inc.
                                         </td>
                                         <td>20 Jun 2021</td>
-                                        <td>
-                                            <a href="#"><span style="color: green;"><i class="fa-solid fa-eye"></i></span></i></a>
-                                        </td>
                                     </tr>
                                     <tr>
                                         <td>3</td>
@@ -84,9 +76,6 @@
                                             NUPRC
                                         </td>
                                         <td>20 Jun 2021</td>
-                                        <td>
-                                            <a href="#"><span style="color: green;"><i class="fa-solid fa-eye"></i></span></i></a>
-                                        </td>
                                     </tr>
                                     <tr>
                                         <td>4</td>
@@ -102,9 +91,6 @@
                                             NNPC Limited
                                         </td>
                                         <td>20 Jun 2021</td>
-                                        <td>
-                                            <a href="#"><span style="color: green;"><i class="fa-solid fa-eye"></i></span></i></a>
-                                        </td>
                                     </tr>
                                     <tr>
                                         <td>5</td>
@@ -120,9 +106,6 @@
                                             Ministry of Petroleum Resources
                                         </td>
                                         <td>20 Jun 2021</td>
-                                        <td>
-                                            <a href="#"><span style="color: green;"><i class="fa-solid fa-eye"></i></span></i></a>
-                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -134,9 +117,8 @@
                                         <th>S/N</th>
                                         <th>Name</th>
                                         <th>Company</th>
-                                        <th>Staff</th>
-                                        <th>Department</th>
                                         <th>Time</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -148,12 +130,11 @@
                                                 Tiger Nixon
                                             </div>
                                         </td>
-                                        <td>NUPRC</td>
+                                        <td>NNPC Limited</td>
+                                        <td>20 Jun 2021 - 10.00am</td>
                                         <td>
-                                            Mike Tyson
+                                            <a href="#"><span style="color: red;"><i class="fa-solid fa-square-xmark"></i></span></i></a>
                                         </td>
-                                        <td>DSSRI</td>
-                                        <td>10.00am</td>
                                     </tr>
                                     <tr>
                                         <td>2</td>
@@ -163,12 +144,11 @@
                                                 Garrett Winters
                                             </div>
                                         </td>
-                                        <td>PTDF</td>
+                                        <td>NUPRC</td>
+                                        <td>20 Jun 2021 - 12.00pm</td>
                                         <td>
-                                            Patrice Lumumba
+                                            <a href="#"><span style="color: red;"><i class="fa-solid fa-square-xmark"></i></span></i></a>
                                         </td>
-                                        <td>ACE Office</td>
-                                        <td>12.00pm</td>
                                     </tr>
                                     <tr>
                                         <td>3</td>
@@ -178,12 +158,11 @@
                                                 Ashton Cox
                                             </div>
                                         </td>
-                                        <td>NCDMB</td>
+                                        <td>NITDA</td>
+                                        <td>20 Jun 2021 - 11.30am</td>
                                         <td>
-                                            Albert Einstein
+                                            <a href="#"><span style="color: red;"><i class="fa-solid fa-square-xmark"></i></span></i></a>
                                         </td>
-                                        <td>IT</td>
-                                        <td>11.30am</td>
                                     </tr>
                                     <tr>
                                         <td>4</td>
@@ -193,12 +172,11 @@
                                                 Cedric Kelly
                                             </div>
                                         </td>
-                                        <td>NNPC Ltd</td>
+                                        <td>NCDMB</td>
+                                        <td>20 Jun 2021 - 1.45pm</td>
                                         <td>
-                                            Nicholas Copernicus
+                                            <a href="#"><span style="color: red;"><i class="fa-solid fa-square-xmark"></i></span></i></a>
                                         </td>
-                                        <td>HSE</td>
-                                        <td>1.45pm</td>
                                     </tr>
                                     <tr>
                                         <td>5</td>
@@ -208,12 +186,11 @@
                                                 Airi Satou
                                             </div>
                                         </td>
-                                        <td>Google Inc.</td>
+                                        <td>PTDF</td>
+                                        <td>20 Jun 2021 - 2.00pm</td>
                                         <td>
-                                            Galileo Galilei
+                                            <a href="#"><span style="color: red;"><i class="fa-solid fa-square-xmark"></i></span></i></a>
                                         </td>
-                                        <td>CS&A</td>
-                                        <td>2.00pm</td>
                                     </tr>
                                 </tbody>
                             </table>

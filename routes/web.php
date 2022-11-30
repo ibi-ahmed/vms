@@ -14,23 +14,20 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::get('/home', function () {
-            if (auth()->user()->type == 'super') {
-                return redirect()->route('super.dashboard');
-            }else if (auth()->user()->type == 'admin') {
-                return redirect()->route('admin.dashboard');
-            }else if (auth()->user()->type == 'staff'){
-                return redirect()->route('staff.dashboard');
-            }
-            else{
-                return redirect()->route('user.dashboard');
-            }
+Route::get('/', function () {
+    if (Auth::check()) {
+        return redirect()->route(Auth::user()->type.'.dashboard');
+    }else {
+        return redirect()->route('login');
+    }
 });
 
-Auth::routes();
+Route::get('/z', function () {
+    // return view('blank');
+    return redirect()->route('admin.dashboard')->with('success', 'Test');
+});
 
-// Guest Routes
-Route::get('/', [App\Http\Controllers\Auth\LoginController::class, 'login']);
+Auth::routes(['register' => false]);
 
 // User Routes
 Route::middleware(['auth', 'user-access:user'])->group(function () {
@@ -51,6 +48,9 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
 Route::middleware(['auth', 'user-access:super'])->group(function () {  
     Route::get('/super-dashboard', [App\Http\Controllers\HomeController::class, 'superDashboard'])->name('super.dashboard');
 });
+
+Route::get('/add-user', [App\Http\Controllers\HomeController::class, 'addUser'])->name('user.register');
+Route::post('/add-user', [App\Http\Controllers\HomeController::class, 'storeUser'])->name('user.store');
 
 Route::get('/add-visitor', [App\Http\Controllers\VisitorController::class, 'add'])->name('visitor.add');
 Route::get('/edit-visitor', [App\Http\Controllers\VisitorController::class, 'edit'])->name('visitor.edit');

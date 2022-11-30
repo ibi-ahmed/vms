@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 class HomeController extends Controller
 {
@@ -21,10 +23,11 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    // public function index()
-    // {
-    //     return view('home');
-    // }
+    
+     public function addUser()
+    {
+        return view('user.register');
+    }
 
     public function superDashboard()
     {
@@ -44,6 +47,19 @@ class HomeController extends Controller
     public function userDashboard()
     {
         return view('user.dashboard');
+    }
+
+    public function storeUser(Request $request)
+    {
+        $input = $request->validate([
+            'first_name' => ['required', 'string', 'max:255'],
+            'last_name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+        ]);
+
+        // dd(Auth::user()->type.'.dashboard');
+        User::create($input);
+        return redirect()->route(Auth::user()->type.'.dashboard')->with('success', 'New User Created!');
     }
 
 }

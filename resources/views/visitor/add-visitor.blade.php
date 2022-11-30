@@ -2,6 +2,7 @@
 @section('title', 'Add Visitor')
 
 @section('content')
+@section('icon', 'user-plus')
 @section('sub_head', 'Register Visitor')
     <div class="row">
         <div class="col-sm-8 offset-2">

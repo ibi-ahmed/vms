@@ -4,6 +4,7 @@
 {{-- <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" /> --}}
 
 @section('content')
+@section('icon', 'briefcase')
 @section('sub_head', 'My Appointments')
 
     <div class="row">
@@ -20,6 +21,7 @@
                                 <th>Name</th>
                                 <th>Company</th>
                                 <th>Time</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -33,10 +35,9 @@
                                 </td>
                                 <td>NNPC Limited</td>
                                 <td>20 Jun 2021 - 10.00am</td>
-                                {{-- <td>
-                                    <a href="#"><span style="color: green;"><i class="fa-solid fa-square-check"></i></span></i></a>
-                                    <a class="px-3" href="#"><span style="color: red;"><i class="fa-solid fa-square-xmark"></i></span></i></a>
-                                </td> --}}
+                                <td>
+                                    <a href="#"><span style="color: red;"><i class="fa-solid fa-square-xmark"></i></span></i></a>
+                                </td>
                             </tr>
                             <tr>
                                 <td>2</td>
@@ -48,6 +49,9 @@
                                 </td>
                                 <td>NUPRC</td>
                                 <td>20 Jun 2021 - 12.00pm</td>
+                                <td>
+                                    <a href="#"><span style="color: red;"><i class="fa-solid fa-square-xmark"></i></span></i></a>
+                                </td>
                             </tr>
                             <tr>
                                 <td>3</td>
@@ -59,6 +63,9 @@
                                 </td>
                                 <td>NITDA</td>
                                 <td>20 Jun 2021 - 11.30am</td>
+                                <td>
+                                    <a href="#"><span style="color: red;"><i class="fa-solid fa-square-xmark"></i></span></i></a>
+                                </td>
                             </tr>
                             <tr>
                                 <td>4</td>
@@ -70,6 +77,9 @@
                                 </td>
                                 <td>NCDMB</td>
                                 <td>20 Jun 2021 - 1.45pm</td>
+                                <td>
+                                    <a href="#"><span style="color: red;"><i class="fa-solid fa-square-xmark"></i></span></i></a>
+                                </td>
                             </tr>
                             <tr>
                                 <td>5</td>
@@ -81,6 +91,9 @@
                                 </td>
                                 <td>PTDF</td>
                                 <td>20 Jun 2021 - 2.00pm</td>
+                                <td>
+                                    <a href="#"><span style="color: red;"><i class="fa-solid fa-square-xmark"></i></span></i></a>
+                                </td>
                             </tr>
                         </tbody>
                     </table>

@@ -21,28 +21,28 @@ class CreateUsersSeeder extends Seeder
                'last_name'=>'Super',
                'email'=>'super@super.vms',
                'type'=> 3,
-               'password'=> bcrypt('12345678'),
+               'password'=> bcrypt('123'),
             ],
             [
                'first_name'=>'Admin',
                'last_name'=>'Admin',
                'email'=>'admin@admin.vms',
                'type'=>2,
-               'password'=> bcrypt('12345678'),
+               'password'=> bcrypt('123'),
             ],
             [
                 'first_name'=>'Staff',
                 'last_name'=>'Staff',
                 'email'=>'staff@staff.vms',
                 'type'=>1,
-                'password'=> bcrypt('12345678'),
+                'password'=> bcrypt('123'),
              ],
             [
                'first_name'=>'User',
                'last_name'=>'User',
                'email'=>'user@user.vms',
                'type'=>0,
-               'password'=> bcrypt('12345678'),
+               'password'=> bcrypt('123'),
             ],
         ];
 
