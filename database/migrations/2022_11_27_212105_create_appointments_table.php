@@ -20,7 +20,7 @@ return new class extends Migration
             $table->integer('department_id');
             $table->dateTime('date_time');
             $table->integer('staff_id');
-            $table->boolean('status')->default(false);
+            $table->tinyInteger('status')->default(0);
             $table->timestamps();
         });
     }

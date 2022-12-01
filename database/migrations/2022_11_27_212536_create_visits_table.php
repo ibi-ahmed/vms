@@ -17,8 +17,9 @@ return new class extends Migration
             $table->id();
             $table->integer('visitor_id');
             $table->integer('user_id');
+            $table->integer('tag_id');
             $table->integer('department_id');
-            $table->boolean('status')->default(true);
+            $table->tinyInteger('status')->default(1);
             $table->timestamps();
         });
     }
