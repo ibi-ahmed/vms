@@ -65,3 +65,7 @@ Route::get('/all-appointments', [App\Http\Controllers\AppointmentController::cla
 Route::get('/my-appointments', [App\Http\Controllers\AppointmentController::class, 'myAppointments'])->name('appointments.my');
 
 
+Route::get('/staff-search', [App\Http\Controllers\StaffController::class, 'getStaff'])->name('staff.search');
+
+
+

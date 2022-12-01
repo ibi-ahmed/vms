@@ -84,7 +84,8 @@
                                 <!-- Form Group (Tag)-->
                                 <div class="mb-3">
                                     <label class="mb-1" for="staff">Receiving Staff</label>
-                                    <input class="form-control" name="staff" type="text" placeholder="Enter staff name" value="" required/>
+                                    {{-- <input class="form-control" name="staff" type="text" placeholder="Enter staff name" value="" required/> --}}
+                                    <sstaff-search-component></sstaff-search-component>
                                 </div>
         
                                 <!-- Submit button-->
