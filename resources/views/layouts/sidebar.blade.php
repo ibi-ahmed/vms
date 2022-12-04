@@ -61,6 +61,10 @@
                     <div class="nav-link-icon"><i data-feather="users"></i></div>
                     All Visitors
                 </a>
+                <a class="nav-link" href="/tagged-visitors">
+                    <div class="nav-link-icon"><i data-feather="users"></i></div>
+                    Tagged Visitors
+                </a>
                 @endif
             </div>
         </div>

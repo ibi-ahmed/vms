@@ -1,4 +1,5 @@
 #   user dashboard -> all appointments, search visitor, add visitor, add visit, (deactivate tag)
 #   staff dashboard -> prev appointments, prev visitors, set appointment, cancel appointment, approve appt
-#   admin -> all above + active visits, add user, edit staff, edit user, edit visitor, total visits by dept
+#   admin -> all above + active visits, add user, edit staff, edit user, 
+        edit visitor, total visits by dept, add new tag, delete tag, unattach tag to visitor 
 #   super -> all + add/edit staff/admin

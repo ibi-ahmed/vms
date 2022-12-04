@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 @include('layouts.head')
-<body class="nav-fixed bg-img-repeat overlay overlay-10" style="background-image: url('images/bg.jpeg')">
+<body class="nav-fixed bg-img-repeat overlay overlay-10" style="background-image: url('images/bg.jpeg')" id="app">
     @include('layouts.topbar')
     <div id="layoutSidenav">
         @include('layouts.sidebar')

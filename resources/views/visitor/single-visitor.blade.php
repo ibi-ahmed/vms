@@ -12,17 +12,19 @@
                     </div>
                     <div class="card-body text-center">
                         <!-- Profile picture image-->
-                        <img class="img-account-profile rounded-circle mb-2" src="/theme/assets/img/illustrations/profiles/profile-1.png" alt="" />
+                        <img class="img-account-profile rounded-circle mb-2" src="/images/avatar/avatar.png" alt="" />
                         
                     </div>
                     <ul class="list-group list-group-flush">
-                      <li class="list-group-item">Bill Gates</li>
-                      <li class="list-group-item">Microsoft Corp</li>
-                      <li class="list-group-item">bill@gates.com</li>
-                      <li class="list-group-item">0801 234 5678</li>
+                      <li class="list-group-item">{{ $visitor->first_name.' '.$visitor->last_name }}</li>
+                      <li class="list-group-item">{{ $visitor->company }}</li>
+                      <li class="list-group-item">{{ $visitor->email }}</li>
+                      <li class="list-group-item">{{ $visitor->phone }}</li>
                       <li class="list-group-item text-center">
-                        <a href="#" class="btn btn-outline-primary">Add Visit</a>
-                        <a href="#" class="btn btn-outline-danger">Deactivate Tag</a>
+                        {{-- <a href="#" class="btn btn-outline-primary">Add Visit</a> --}}
+                        @if ($visitor->status == 1)                           
+                            <a href="#" class="btn btn-outline-danger">Deactivate Tag</a>
+                        @endif
                       </li>
                     </ul>
                 </div>
@@ -30,6 +32,7 @@
             <div class="col-8">
                 <div class="card">
                     <div class="card-body">
+                        @if (count($visits) > 0)
                         <table class="table table-striped table-hover">
                             <thead class="">
                                 <tr>
@@ -41,68 +44,22 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach ($visits as $visit)
                                 <tr>
-                                    <td>1</td>
+                                    <td>{{ $loop->iteration }}</td>
                                     <td>
                                         <div class="d-flex">
                                             <div class=""></div>
-                                            Tiger Nixon
+                                            {{ $visit->user->first_name.' '.$visit->user->last_name }}
                                         </div>
                                     </td>
-                                    <td>ACE Office</td>
+                                    <td>{{ $visit->department->name }}</td>
                                     <td>
-                                        9.00am
+                                        {{ date('h:i A', strtotime($visit->created_at)) }}
                                     </td>
-                                    <td>20 Jun 2021</td>
+                                    <td>{{ date("D M j", strtotime($visit->created_at)) }}</td>
                                 </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>
-                                        <div class="d-flex">
-                                            <div class=""></div>
-                                            Garrett Winters
-                                        </div>
-                                    </td>
-                                    <td>DSSRI</td>
-                                    <td>12.00pm</td>
-                                    <td>20 Jun 2021</td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>
-                                        <div class="d-flex">
-                                            <div class=""></div>
-                                            Ashton Cox
-                                        </div>
-                                    </td>
-                                    <td>CS&A</td>
-                                    <td>2.00pm</td>
-                                    <td>20 Jun 2021</td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td>
-                                        <div class="d-flex">
-                                            <div class=""></div>
-                                            Cedric Kelly
-                                        </div>
-                                    </td>
-                                    <td>HSE</td>
-                                    <td>11.45am</td>
-                                    <td>20 Jun 2021</td>
-                                </tr>
-                                <tr>
-                                    <td>5</td>
-                                    <td>
-                                        <div class="d-flex">
-                                            <div class=""></div>
-                                            Airi Satou
-                                        </div>
-                                    </td>
-                                    <td>IT</td>
-                                    <td>10.30am</td>
-                                    <td>20 Jun 2021</td>
-                                </tr>
+                                @endforeach
                             </tbody>
                             <tfoot class="text-center">
                                 <tr>
@@ -110,6 +67,9 @@
                                 </tr>
                             </tfoot>
                         </table>
+                        @else
+                    <h4 class=" font-monospace mt-2 text-center">No records to show!</h4>
+                @endif
                     </div>
                 </div>
             </div>

@@ -1,14 +1,14 @@
 @extends('layouts.layout')
-@section('title', 'All Visitors')
+@section('title', 'Tagged Visitors')
 
 {{-- <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" /> --}}
 
 @section('content')
 @section('icon', 'users')
-@section('sub_head', 'All Visitors')
+@section('sub_head', 'Tagged Visitors')
 
 <div class="row">
-    <div class="col-12">
+    <div class="col-sm-12">
         <div class="card">
             <div class="card-body">
                 @if (count($visitors) > 0)
@@ -42,11 +42,12 @@
                                         {{-- <a class="btn btn-datatable btn-icon btn-transparent-dark me-2" href="user-management-edit-user.html"><i data-feather="edit"></i></a> --}}
                                         {{-- <a class="btn btn-datatable btn-icon btn-transparent-dark" href="#!"><i data-feather="trash-2"></i></a> --}}
                                         <form action="{{ route('visitor.single', $visitor->id) }}" method="GET">
+                                            
                                             <button class="btn btn-link" type="submit"><span style="color: green;"><i
-                                                        class="fa-solid fa-eye"></i></span></button>
-                                        </form>
+                                                class="fa-solid fa-eye"></i></span></button>
+                                            </form>
                                         <a class="px-3" href="#"><span style="color: dodgerblue;"><i
-                                                    class="fa-solid fa-pen-to-square"></i></span></a>
+                                                    class="fa-solid fa-pen-to-square"></i></span></i></a>
                                     </td>
                                 </tr>
                             @endforeach
