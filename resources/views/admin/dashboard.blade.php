@@ -155,8 +155,11 @@
                                             <td>{{ $appointment->date }}</td>
                                             <td>{{ date('h:i A', strtotime($appointment->time)) }}</td>
                                             <td>
-                                                <a href="#"><span style="color: green;"><i
-                                                            class="fa-solid fa-person-circle-check"></i></span></i></a>
+                                                <form action="{{ route('appointments.approve', $appointment->id) }}" method="post">
+                                                    @csrf
+                                                    <button class="btn btn-link" href="#"><span style="color: green;"><i
+                                                        class="fa-solid fa-person-circle-check"></i></span></button>
+                                                    </form>
                                             </td>
                                         </tr>
                                     @endforeach
