@@ -17,8 +17,10 @@ return new class extends Migration
             $table->id();
             $table->string('first_name');
             $table->string('last_name');
+            $table->string('company');
             $table->integer('department_id');
-            $table->dateTime('date_time');
+            $table->date('date');
+            $table->time('time');
             $table->integer('staff_id');
             $table->tinyInteger('status')->default(0);
             $table->timestamps();

@@ -50,11 +50,8 @@
                                     <td>{{ $appointment->date }}</td>
                                     <td>{{ date('h:i A', strtotime($appointment->time)) }}</td>
                                     <td>
-                                        <form action="{{ route('appointments.approve', $appointment->id) }}" method="post">
-                                            @csrf
-                                            <button class="btn btn-link" href="#"><span style="color: green;"><i
-                                                class="fa-solid fa-person-circle-check"></i></span></button>
-                                            </form>
+                                        <a href="#"><span style="color: green;"><i
+                                                    class="fa-solid fa-person-circle-check"></i></span></i></a>
                                     </td>
                                 </tr>
                             @endforeach

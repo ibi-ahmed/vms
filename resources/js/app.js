@@ -21,6 +21,9 @@ app.component('example-component', ExampleComponent);
 import StaffSearchComponent from './components/StaffSearchComponent.vue';
 app.component('staff-search-component', StaffSearchComponent);
 
+import VisitorSearchComponent from './components/VisitorSearchComponent.vue';
+app.component('visitor-search-component', VisitorSearchComponent);
+
 import SStaffSearchComponent from './components/SStaffSearchComponent.vue';
 app.component('sstaff-search-component', SStaffSearchComponent);
 

@@ -12,7 +12,7 @@
         v-for="user in Users"
         :key="user.id"
         v-text="user.email"
-        @click="autocomplete(user.email)"
+        @click="autocomplete(user.email, user.id)"
       ></li>
     </ul>
   </div>
@@ -33,6 +33,7 @@ export default {
     data() {
         return {
             keyword: null,
+            id: null,
             Users: []
         };
     },
@@ -51,9 +52,10 @@ export default {
             // "keyword" programmatically from the user clicking a list item
             this.getResults();
         },
-        autocomplete(email) {
+        autocomplete(email, id) {
             // Change "keyword" programmatically
             this.keyword = email;
+            this.id = id;
 
             // Reset to hide autocomplete list
             this.Users = [];

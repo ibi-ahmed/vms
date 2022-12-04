@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Appointment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\Visitor;
+use App\Models\Visit;
 
 class HomeController extends Controller
 {
@@ -36,7 +39,9 @@ class HomeController extends Controller
 
     public function adminDashboard()
     {
-        return view('admin.dashboard');
+        $appointments = Appointment::where('status', 0)->get();
+        $visits = Visit::where('status', 1)->get();
+        return view('admin.dashboard', compact('appointments', 'visits'));
     }
     
     public function staffDashboard()

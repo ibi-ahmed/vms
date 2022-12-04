@@ -1,9 +1,9 @@
 <template>
     <div>
-        <input class="form-control" name="staff_email" type="email" v-model="keyword" @input="handleInput">
-        <ul class="list-group" v-if="Users.length > 0">
+        <input class="form-control" name="visitor_email" type="email" v-model="keyword" @input="handleInput" placeholder="Search Visitor...">
+        <ul class="list-group" v-if="Visitors.length > 0">
             <a role="button">
-                <li class="list-group-item" v-for="user in Users" :key="user.id" v-text="user.email" @click="autocomplete(user.email)"></li>
+                <li class="list-group-item" v-for="visitor in Visitors" :key="visitor.id" v-text="visitor.email" @click="autocomplete(visitor.email)"></li>
             </a>
         </ul>
     </div>
@@ -13,7 +13,7 @@ export default {
     data() {
         return {
             keyword: null,
-            Users: []
+            Visitors: []
         };
     },
     watch: {
@@ -23,11 +23,11 @@ export default {
     },
     methods: {
         getResults() {
-            axios.get('/staff-search', { params: { keyword: this.keyword } })
-                .then(res => this.Users = res.data)
+            axios.get('/visitor-search', { params: { keyword: this.keyword } })
+                .then(res => this.Visitors = res.data)
                 .catch(error => { });
         },
-        handleInput(userInput) {
+        handleInput(visitorInput) {
             this.getResults();
         },
         autocomplete(email) {
@@ -35,7 +35,7 @@ export default {
             this.keyword = email;
 
             // Reset to hide autocomplete list
-            this.Users = [];
+            this.Visitors = [];
         }
     }
 }
