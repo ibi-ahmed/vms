@@ -12,7 +12,7 @@
                     </div>
                     <div class="card-body text-center">
                         <!-- Profile picture image-->
-                        <img class="img-account-profile rounded-circle mb-2" src="/images/avatar/avatar.png" alt="" />
+                        <img class="img-account-profile rounded-circle mb-2" src="/images/avatar/{{ $visitor->photo }}" alt="Profile Pic" />
                         
                     </div>
                     <ul class="list-group list-group-flush">

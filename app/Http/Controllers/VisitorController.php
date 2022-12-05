@@ -12,6 +12,11 @@ use Illuminate\Support\Facades\Auth;
 
 class VisitorController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function add()
     {
         $departments = Department::all();
@@ -77,9 +82,32 @@ class VisitorController extends Controller
         return response()->json($visitor);
     }
     
-    public function edit()
+    public function edit($id)
     {
-        return view('visitor.edit-visitor');
+        $visitor = Visitor::find($id);
+        return view('visitor.edit-visitor', compact('visitor'));
+    }
+    
+    public function editVisitor(Request $request, $id)
+    {
+        $input = $request->validate([
+            'first_name' => ['required', 'string', 'max:255'],
+            'last_name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'phone' => ['required', 'string', 'max:15'],
+            'company' => ['required', 'string', 'max:255'],
+        ]);
+
+        $visitor = Visitor::find($id);
+
+        $visitor->first_name = $input['first_name'];
+        $visitor->last_name = $input['last_name'];
+        $visitor->email = $input['email'];
+        $visitor->phone = $input['phone'];
+        $visitor->company = $input['company'];
+        $visitor->save();
+
+        return redirect()->route('visitor.edit', $id)->with('success', 'Visitor profile edited!');
     }
 
     public function all()

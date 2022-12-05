@@ -26,10 +26,12 @@
                     <div class="nav-link-icon"><i data-feather="activity"></i></div>
                     Dashboard
                 </a>
+                @if(Auth::user()->type == 'admin' || Auth::user()->type == 'super')
                 <a class="nav-link" href="{{ route('user.register') }}">
                     <div class="nav-link-icon"><i data-feather="user-plus"></i></div>
                     Add New User
                 </a>
+                @endif
 
                 @if(Auth::user()->type !== 'staff')
                 <a class="nav-link" href="all-appointments">
@@ -61,6 +63,8 @@
                     <div class="nav-link-icon"><i data-feather="users"></i></div>
                     All Visitors
                 </a>
+                @endif
+                @if(Auth::user()->type !== 'staff')
                 <a class="nav-link" href="/tagged-visitors">
                     <div class="nav-link-icon"><i data-feather="users"></i></div>
                     Tagged Visitors

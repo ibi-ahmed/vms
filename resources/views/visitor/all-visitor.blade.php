@@ -45,8 +45,11 @@
                                             <button class="btn btn-link" type="submit"><span style="color: green;"><i
                                                         class="fa-solid fa-eye"></i></span></button>
                                         </form>
-                                        <a class="px-3" href="#"><span style="color: dodgerblue;"><i
-                                                    class="fa-solid fa-pen-to-square"></i></span></a>
+                                        <form action="{{ route('visitor.edit', $visitor->id) }}" method="GET">
+                                            <button class="btn btn-link" type="submit"><span
+                                                    style="color: dodgerblue;"><i
+                                                        class="fa-solid fa-pen-to-square"></i></span></button>
+                                        </form>
                                     </td>
                                 </tr>
                             @endforeach

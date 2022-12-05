@@ -26,45 +26,13 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
+
     
-     public function addUser()
-    {
-        return view('user.register');
-    }
 
-    public function superDashboard()
+    public function getStaff(Request $request)
     {
-        return view('super.dashboard');
-    }
-
-    public function adminDashboard()
-    {
-        $appointments = Appointment::where('status', 0)->get();
-        $visits = Visit::where('status', 1)->get();
-        return view('admin.dashboard', compact('appointments', 'visits'));
-    }
-    
-    public function staffDashboard()
-    {
-        return view('staff.dashboard');
-    }
-    
-    public function userDashboard()
-    {
-        return view('user.dashboard');
-    }
-
-    public function storeUser(Request $request)
-    {
-        $input = $request->validate([
-            'first_name' => ['required', 'string', 'max:255'],
-            'last_name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-        ]);
-
-        // dd(Auth::user()->type.'.dashboard');
-        User::create($input);
-        return redirect()->route(Auth::user()->type.'.dashboard')->with('success', 'New User Created!');
+        $staff = User::where('email', 'LIKE', '%'.$request->keyword.'%')->get();
+        return response()->json($staff);
     }
 
 }

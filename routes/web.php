@@ -22,44 +22,47 @@ Route::get('/', function () {
     }
 });
 
-Route::get('/z', function () {
-    
-    return redirect()->route('admin.dashboard')->with('success', 'Test');
-});
-
 Auth::routes(['register' => false]);
 
 // User Routes
-Route::middleware(['auth', 'user-access:user'])->group(function () {
-    Route::get('/user-dashboard', [App\Http\Controllers\HomeController::class, 'userDashboard'])->name('user.dashboard');
-});
+// Route::middleware(['user-access:user'])->group(function () {
+    Route::get('/user-dashboard', [App\Http\Controllers\UserController::class, 'userDashboard'])->name('user.dashboard');
+// });
+
+// Route::middleware(['user-access:user'])->group(function () {
+    // Route::get('/q', function(){ 
+    //     return response()->json('supp'); 
+    // })->middleware(['user-access:staff', 'user-access:user']);
+// });
 
 // Staff Routes
-Route::middleware(['auth', 'user-access:staff'])->group(function () {
-    Route::get('/staff-dashboard', [App\Http\Controllers\HomeController::class, 'staffDashboard'])->name('staff.dashboard');
-});
+// Route::middleware(['auth', 'user-access:staff'])->group(function () {
+    Route::get('/staff-dashboard', [App\Http\Controllers\StaffController::class, 'staffDashboard'])->name('staff.dashboard');
+// });
 
 // Admin Routes
-Route::middleware(['auth', 'user-access:admin'])->group(function () {
-    Route::get('/admin-dashboard', [App\Http\Controllers\HomeController::class, 'adminDashboard'])->name('admin.dashboard');
-});
+// Route::middleware(['auth', 'user-access:admin'])->group(function () {
+    Route::get('/admin-dashboard', [App\Http\Controllers\AdminController::class, 'adminDashboard'])->name('admin.dashboard');
+// });
 
 // Super Routes
-Route::middleware(['auth', 'user-access:super'])->group(function () {  
-    Route::get('/super-dashboard', [App\Http\Controllers\HomeController::class, 'superDashboard'])->name('super.dashboard');
-});
+// Route::middleware(['auth', 'user-access:super'])->group(function () {  
+    Route::get('/super-dashboard', [App\Http\Controllers\SuperController::class, 'superDashboard'])->name('super.dashboard');
+// });
 
-Route::get('/add-user', [App\Http\Controllers\HomeController::class, 'addUser'])->name('user.register');
-Route::post('/add-user', [App\Http\Controllers\HomeController::class, 'storeUser'])->name('user.store');
+Route::get('/add-user', [App\Http\Controllers\AdminController::class, 'addUser'])->name('user.register');
+Route::post('/add-user', [App\Http\Controllers\AdminController::class, 'storeUser'])->name('user.store');
 
 Route::get('/visitor-search', [App\Http\Controllers\VisitorController::class, 'getVisitor'])->name('visitor.search');
 
 Route::get('/add-visitor', [App\Http\Controllers\VisitorController::class, 'add'])->name('visitor.add');
 Route::post('/add-visitor', [App\Http\Controllers\VisitorController::class, 'storeVisitor'])->name('visitor.store');
 
-Route::get('/edit-visitor', [App\Http\Controllers\VisitorController::class, 'edit'])->name('visitor.edit');
+Route::get('/edit-visitor/{id}', [App\Http\Controllers\VisitorController::class, 'edit'])->name('visitor.edit');
+Route::post('/edit-visitor/{id}', [App\Http\Controllers\VisitorController::class, 'editVisitor'])->name('visitor.editVisitor');
 
 Route::get('/all-visitor', [App\Http\Controllers\VisitorController::class, 'all'])->name('visitor.all');
+// Route::get('/all-visitors', [App\Http\Controllers\VisitorController::class, 'all'])->name('visitor.all')->middleware('user-access:staff');
 Route::get('/tagged-visitors', [App\Http\Controllers\VisitorController::class, 'taggedVisitors'])->name('tagged.visitors');
 
 Route::get('/single-visitor/{id}', [App\Http\Controllers\VisitorController::class, 'single'])->name('visitor.single');
@@ -79,7 +82,7 @@ Route::get('/all-appointments', [App\Http\Controllers\AppointmentController::cla
 Route::get('/my-appointments', [App\Http\Controllers\AppointmentController::class, 'myAppointments'])->name('appointments.my');
 
 
-Route::get('/staff-search', [App\Http\Controllers\StaffController::class, 'getStaff'])->name('staff.search');
+Route::get('/staff-search', [App\Http\Controllers\HomeController::class, 'getStaff'])->name('staff.search');
 
 
 
