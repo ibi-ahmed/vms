@@ -15,8 +15,8 @@ import { createApp } from 'vue';
 
 const app = createApp({});
 
-import ExampleComponent from './components/ExampleComponent.vue';
-app.component('example-component', ExampleComponent);
+// import ExampleComponent from './components/ExampleComponent.vue';
+// app.component('example-component', ExampleComponent);
 
 import StaffSearchComponent from './components/StaffSearchComponent.vue';
 app.component('staff-search-component', StaffSearchComponent);
@@ -24,8 +24,8 @@ app.component('staff-search-component', StaffSearchComponent);
 import VisitorSearchComponent from './components/VisitorSearchComponent.vue';
 app.component('visitor-search-component', VisitorSearchComponent);
 
-import SStaffSearchComponent from './components/SStaffSearchComponent.vue';
-app.component('sstaff-search-component', SStaffSearchComponent);
+// import VisitorPhoneSearchComponent from './components/VisitorPhoneSearchComponent.vue';
+// app.component('visitor-phone-search-component', VisitorPhoneSearchComponent);
 
 /**
  * The following block of code may be used to automatically register your

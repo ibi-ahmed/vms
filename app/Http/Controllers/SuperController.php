@@ -8,7 +8,7 @@ class SuperController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('user-access:super');
+        // $this->middleware('user-access:super');
     }
 
     public function superDashboard()

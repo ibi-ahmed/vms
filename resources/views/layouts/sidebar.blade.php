@@ -34,7 +34,7 @@
                 @endif
 
                 @if(Auth::user()->type !== 'staff')
-                <a class="nav-link" href="all-appointments">
+                <a class="nav-link" href="/all-appointments">
                     <div class="nav-link-icon"><i data-feather="briefcase"></i></div>
                     All Appointments
                 </a>
@@ -55,7 +55,7 @@
                 @if(Auth::user()->type !== 'staff')
                 <a class="nav-link" href="/add-visitor">
                     <div class="nav-link-icon"><i data-feather="user-plus"></i></div>
-                    Register Visitor
+                    Create Appointment
                 </a>
                 @endif
                 @if(Auth::user()->type == 'super' || Auth::user()->type == 'admin')

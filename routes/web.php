@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
+Route::get('/q', function () { return view('auth.login2'); });
+
 Route::get('/', function () {
     if (Auth::check()) {
         return redirect()->route(Auth::user()->type.'.dashboard');
@@ -54,6 +56,7 @@ Route::get('/add-user', [App\Http\Controllers\AdminController::class, 'addUser']
 Route::post('/add-user', [App\Http\Controllers\AdminController::class, 'storeUser'])->name('user.store');
 
 Route::get('/visitor-search', [App\Http\Controllers\VisitorController::class, 'getVisitor'])->name('visitor.search');
+// Route::get('/visitor-search-phone', [App\Http\Controllers\VisitorController::class, 'getVisitorByPhone'])->name('visitor.search.phone');
 
 Route::get('/add-visitor', [App\Http\Controllers\VisitorController::class, 'add'])->name('visitor.add');
 Route::post('/add-visitor', [App\Http\Controllers\VisitorController::class, 'storeVisitor'])->name('visitor.store');
@@ -70,13 +73,16 @@ Route::get('/single-visitor/{id}', [App\Http\Controllers\VisitorController::clas
 Route::get('/add-visit', [App\Http\Controllers\VisitorController::class, 'addVisit'])->name('visitor.add-visit');
 Route::post('/add-visit', [App\Http\Controllers\VisitorController::class, 'storeVisit'])->name('visit.store');
 
-Route::get('/tag-scan', [App\Http\Controllers\TagController::class, 'scan'])->name('tags.scan');
+Route::get('/tag-scan/{tag_no}', [App\Http\Controllers\TagController::class, 'scan'])->name('tags.scan');
+Route::post('/tag-assign/{id}', [App\Http\Controllers\TagController::class, 'tagAssign'])->name('tag.assign');
 
 Route::get('/schedule-appointment', [App\Http\Controllers\AppointmentController::class, 'schedule'])->name('appointments.schedule');
 Route::post('/schedule-appointment', [App\Http\Controllers\AppointmentController::class, 'storeAppointment'])->name('appointments.store');
+Route::post('/schedule-existing-visitor-appointment', [App\Http\Controllers\AppointmentController::class, 'storeExistingVisitorAppointment'])->name('existing_visitor_appointments.store');
 
 Route::post('/cancel-appointment/{id}', [App\Http\Controllers\AppointmentController::class, 'cancel'])->name('appointments.cancel');
 Route::post('/approve-appointment/{id}', [App\Http\Controllers\AppointmentController::class, 'approveAppointment'])->name('appointments.approve');
+Route::post('/staff-approve-appointment/{id}', [App\Http\Controllers\AppointmentController::class, 'staffApproveAppointment'])->name('appointments.staff-approve');
 
 Route::get('/all-appointments', [App\Http\Controllers\AppointmentController::class, 'all'])->name('appointments.all');
 Route::get('/my-appointments', [App\Http\Controllers\AppointmentController::class, 'myAppointments'])->name('appointments.my');

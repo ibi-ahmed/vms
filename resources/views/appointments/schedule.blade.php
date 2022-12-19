@@ -7,65 +7,111 @@
 <div class="row">
     <div class="col-sm-8 offset-2">
         <div class="card mb-4">
-            <div class="card-header">Schedule Visitor Appointment</div>
+            <div class="card-header border-bottom">
+                <ul class="nav nav-tabs card-header-tabs" id="cardTab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="new_visitor-tab" href="#new_visitor" data-bs-toggle="tab" role="tab"
+                            aria-controls="new_visitor" aria-selected="true">Schedule New Visitor Appointment</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="existing_visitor-tab" href="#existing_visitor" data-bs-toggle="tab" role="tab"
+                            aria-controls="existing_visitor" aria-selected="false">Existing Visitor Appointment</a>
+                    </li>
+                </ul>
+            </div>
             <div class="card-body">
-                <form method="POST" action="{{ route('appointments.store') }}">
-                    @csrf
-                    <!-- Form Row-->
-                    <div class="row gx-3 mb-3">
-                        <!-- Form Group (first name)-->
-                        <div class="col-md-6">
-                            <label class="mb-1" for="first_name">First Name</label>
-                            <input class="form-control" name="first_name" type="text"
-                                placeholder="Enter visitor first name" value="" required/>
-                        </div>
-                        <!-- Form Group (last name)-->
-                        <div class="col-md-6">
-                            <label class="mb-1" for="last_name">Last Name</label>
-                            <input class="form-control" name="last_name" type="text"
-                                placeholder="Enter visitor last name" value="" required/>
-                        </div>
-                    </div>
-
-                    <!-- Form Group (Company )-->
-                    <div class="mb-3">
-                        <label class="mb-1" for="company">Company</label>
-                        <input class="form-control" name="company" type="text" placeholder="Enter company name"
-                            value="" required/>
-                    </div>
-
-                    <!-- Form Group (Department)-->
-                    <div class="mb-3">
-                        <label class="mb-1" for="department_id">Select Destination</label>
-                        <select class="form-select" name="department_id" aria-label="Default select example" required>
-                            {{-- <option selected>Select Destination</option> --}}
-                            @foreach ($departments as $department)
-                                <option value="{{ $department->id }}">{{ $department->name }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-
-                    <!-- Form Group (Date_time)-->
-                    <div class="row gx-3 mb-3">
-                        <div class="col-6">
-                            <div class="mb-3">
-                                <label class="mb-1" for="date">Date</label>
-                                <input class="form-control" name="date" type="date" value="" required/>
-                            </div>             
-                        </div>
-                        <div class="col-6">
-                            <div class="mb-3">
-                                <label class="mb-1" for="time">Time</label>
-                                <input class="form-control" name="time" type="time" value="" required/>
+                <div class="tab-content" id="cardTabContent">
+                    <div class="tab-pane fade show active" id="new_visitor" role="tabpanel"
+                        aria-labelledby="new_visitor-tab">
+                        <form method="POST" action="{{ route('appointments.store') }}">
+                            @csrf
+                            <!-- Form Row-->
+                            <div class="row gx-3 mb-3">
+                                <!-- Form Group (first name)-->
+                                <div class="col-md-6">
+                                    <label class="mb-1" for="first_name">First Name</label>
+                                    <input class="form-control" name="first_name" type="text"
+                                        placeholder="Enter visitor first name" value="" required/>
+                                </div>
+                                <!-- Form Group (last name)-->
+                                <div class="col-md-6">
+                                    <label class="mb-1" for="last_name">Last Name</label>
+                                    <input class="form-control" name="last_name" type="text"
+                                        placeholder="Enter visitor last name" value="" required/>
+                                </div>
                             </div>
-                        </div>
-                    </div>
+        
+                            <!-- Form Group (Company )-->
+                            <div class="mb-3">
+                                <label class="mb-1" for="company">Company</label>
+                                <input class="form-control" name="company" type="text" placeholder="Enter company name"
+                                    value="" required/>
+                            </div>
 
-                    <!-- Submit button-->
-                    <div class="d-grid gap-2 col-6 mx-auto">
-                        <button class="btn btn-outline-primary" type="submit">Submit</button>
+                            <div class="row gx-3 mb-3">
+                                <!-- Form Group (Phone)-->
+                                <div class="col-md-6">
+                                    <label class="mb-1" for="phone">Phone Number</label>
+                                    <input class="form-control" name="phone" type="text"
+                                        placeholder="Enter phone number" value="" required />
+                                </div>
+
+                                <!-- Form Group (Email Address)-->
+                                <div class="col-md-6">
+                                    <label class="mb-1" for="email">Email Address</label>
+                                    <input class="form-control" name="email" type="email"
+                                        placeholder="Enter email address : optional" value=""/>
+                                </div>
+                                
+                            </div>
+        
+                            <!-- Form Group (Department)-->
+                            <div class="mb-3">
+                                <label class="mb-1" for="department_id">Select Destination</label>
+                                <select class="form-select" name="department_id" aria-label="Default select example" required>
+                                    {{-- <option selected>Select Destination</option> --}}
+                                    @foreach ($departments as $department)
+                                        <option value="{{ $department->id }}">{{ $department->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+        
+                            <!-- Submit button-->
+                            <div class="d-grid gap-2 col-6 mx-auto">
+                                <button class="btn btn-outline-primary" type="submit">Submit</button>
+                            </div>
+                        </form>
                     </div>
-                </form>
+                    <div class="tab-pane fade show" id="existing_visitor" role="tabpanel" aria-labelledby="existing_visitor-tab">
+                        <form method="POST" action="{{ route('existing_visitor_appointments.store') }}">
+                            @csrf
+                            <div class="mb-4 row">
+                                <div class="col-6">
+                                    <label class="mb-1" for="vis_id">Select Visitor</label>
+                                    <visitor-search-component></visitor-search-component>
+                                </div>
+                                <div class="col-6">
+                                    <label class="mb-1" for="department_id">Select Destination</label>
+                                    <select class="form-select" name="department_id"
+                                        aria-label="Default select example" required>
+                                        {{-- <option selected>Select Destination</option> --}}
+                                        @foreach ($departments as $department)
+                                            <option value="{{ $department->id }}">{{ $department->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Submit button-->
+                            <div class="d-grid gap-2 col-6 mx-auto">
+                                <button class="btn btn-outline-primary" type="submit">Submit</button>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+                
+                
             </div>
         </div>
     </div>

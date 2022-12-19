@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Appointment;
+use App\Models\Tag;
 use App\Models\User;
 use App\Models\Visit;
 use Illuminate\Http\Request;
@@ -12,14 +13,15 @@ class AdminController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('user-access:admin');
+        // $this->middleware('user-access:admin');
     }
 
     public function adminDashboard()
     {
-        $appointments = Appointment::where('status', 0)->get();
+        $appointments = Appointment::orderByDesc('updated_at')->get();
         $visits = Visit::where('status', 1)->get();
-        return view('admin.dashboard', compact('appointments', 'visits'));
+        $tags = Tag::where('status', 0)->get();
+        return view('admin.dashboard', compact('appointments', 'visits', 'tags'));
     }
 
     public function addUser()

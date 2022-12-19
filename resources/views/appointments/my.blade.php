@@ -19,13 +19,10 @@
                                 <th>First Name</th>
                                 <th>Last Name</th>
                                 <th>Company</th>
-                                <th>Date</th>
-                                <th>Time</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-
                             @foreach ($appointments as $index => $appointment)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
@@ -42,20 +39,26 @@
                                         </div>
                                     </td>
                                     <td>{{ $appointment->company }}</td>
-                                    <td>{{ $appointment->date }}</td>
-                                    <td>{{ date('h:i A', strtotime($appointment->time)) }}</td>
-                                    <td class="text-center">
+                                    <td class="">
 
                                         @if ($appointment->status == 0)
                                             <form action="{{ route('appointments.cancel', $appointment->id) }}"
                                                 method="post">
                                                 @csrf
-                                                <button class="btn btn-link" type="submit"><span><i class="fa-solid fa-square-xmark"
-                                                            style="color: red;"></i></span></button>
+                                                <button class="btn btn-danger btn-sm" type="submit">Cancel</button>
                                             </form>
                                         @elseif ($appointment->status == 1)
-                                            <span class=""><i
-                                                    class="fa-solid fa-square-check disabled"></i></span></i>
+                                            <button class="btn btn-info btn-sm disabled">Approved</button>
+                                        @elseif ($appointment->status == 2)
+                                            <button class="btn btn-warning btn-sm disabled">Canceled</button>
+                                        @elseif ($appointment->status == 3)
+                                            <form action="{{ route('appointments.staff-approve', $appointment->id) }}"
+                                                method="post">
+                                                @csrf
+                                                <button class="btn btn-success btn-sm" type="submit">Approve</button>
+                                            </form>
+                                        @elseif ($appointment->status == 4)
+                                            <button class="btn btn-dark btn-sm disabled">Pending</button>
                                         @endif
 
                                     </td>
