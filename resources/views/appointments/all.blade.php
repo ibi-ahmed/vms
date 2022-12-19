@@ -21,8 +21,6 @@
                                 <th>Company</th>
                                 <th>Staff</th>
                                 <th>Department</th>
-                                <th>Date</th>
-                                <th>Time</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -44,17 +42,29 @@
                                     </td>
                                     <td>{{ $appointment->company }}</td>
                                     <td>
-                                        {{ $appointment->staff->first_name.' '.$appointment->staff->last_name }}
+                                        {{ $appointment->staff->first_name . ' ' . $appointment->staff->last_name }}
                                     </td>
                                     <td>{{ $appointment->department->name }}</td>
-                                    <td>{{ $appointment->date }}</td>
-                                    <td>{{ date('h:i A', strtotime($appointment->time)) }}</td>
                                     <td>
-                                        <form action="{{ route('appointments.approve', $appointment->id) }}" method="post">
-                                            @csrf
-                                            <button class="btn btn-link" href="#"><span style="color: green;"><i
-                                                class="fa-solid fa-person-circle-check"></i></span></button>
-                                            </form>
+                                        @if ($appointment->status == 0)
+                                            <button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal"
+                                                data-bs-target="#staticBackdrop">
+                                                Approve
+                                            </button>
+                                            <x-approve-appointment :$appointment :$tags />
+                                        @elseif ($appointment->status == 1)
+                                            <button class="btn btn-info btn-sm disabled">Approved</button>
+                                        @elseif ($appointment->status == 2)
+                                            <button class="btn btn-warning btn-sm disabled">Canceled</button>
+                                        @elseif ($appointment->status == 3)
+                                            <button class="btn btn-info btn-sm disabled">Pending</button>
+                                        @elseif ($appointment->status == 4)
+                                            <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal"
+                                                data-bs-target="#tagModal">
+                                                Assign Tag
+                                            </button>
+                                            <x-assign-tag :$appointment :$tags />
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach

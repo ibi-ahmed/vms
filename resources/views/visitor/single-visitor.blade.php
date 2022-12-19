@@ -12,19 +12,25 @@
                     </div>
                     <div class="card-body text-center">
                         <!-- Profile picture image-->
-                        <img class="img-account-profile rounded-circle mb-2" src="/images/avatar/avatar.png" alt="" />
+                        <img class="img-account-profile rounded-circle mb-2" src="/images/avatar/{{ $visitor->photo }}" alt="Profile Pic" />
                         
                     </div>
                     <ul class="list-group list-group-flush">
                       <li class="list-group-item">{{ $visitor->first_name.' '.$visitor->last_name }}</li>
                       <li class="list-group-item">{{ $visitor->company }}</li>
-                      <li class="list-group-item">{{ $visitor->email }}</li>
+                      @if ($visitor->email)
+                      <li class="list-group-item">{{ $visitor->email }}</li>                       
+                      @endif
                       <li class="list-group-item">{{ $visitor->phone }}</li>
                       <li class="list-group-item text-center">
-                        {{-- <a href="#" class="btn btn-outline-primary">Add Visit</a> --}}
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <form action="{{ route('visitor.edit', $visitor->id) }}" method="GET">
+                                <button class="btn btn-primary btn-sm" type="submit">Edit</button>
+                            </form>
                         @if ($visitor->status == 1)                           
-                            <a href="#" class="btn btn-outline-danger">Deactivate Tag</a>
+                            <a href="#" class="btn btn-danger btn-sm">Deactivate Tag</a>
                         @endif
+                        </div>
                       </li>
                     </ul>
                 </div>

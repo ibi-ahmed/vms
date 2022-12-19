@@ -4,22 +4,25 @@
 @section('content')
 @section('icon', 'activity')
 @section('sub_head', 'User Dashboard')
-    <div class="mt-4 row">
-        <div class="col-sm-10 offset-1">
-            <div class="card">
-                <div class="card-header border-bottom">
-                    <ul class="nav nav-tabs card-header-tabs" id="cardTab" role="tablist">
-                        <li class="nav-item">
-                            <a class="nav-link active" id="visitors-tab" href="#visitors" data-bs-toggle="tab" role="tab" aria-controls="visitors" aria-selected="true">Active Visitors</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="appointments-tab" href="#appointments" data-bs-toggle="tab" role="tab" aria-controls="appointments" aria-selected="false">Appointments</a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="card-body">
-                    <div class="tab-content" id="cardTabContent">
-                        <div class="tab-pane fade show active" id="visitors" role="tabpanel" aria-labelledby="visitors-tab">                
+<div class="mt-4 row">
+    <div class="col-sm-10 offset-1">
+        <div class="card">
+            <div class="card-header border-bottom">
+                <ul class="nav nav-tabs card-header-tabs" id="cardTab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link" id="visitors-tab" href="#visitors" data-bs-toggle="tab" role="tab"
+                            aria-controls="visitors" aria-selected="true">Active Visitors</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" id="appointments-tab" href="#appointments" data-bs-toggle="tab"
+                            role="tab" aria-controls="appointments" aria-selected="false">Appointments</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="card-body">
+                <div class="tab-content" id="cardTabContent">
+                    <div class="tab-pane fade show" id="visitors" role="tabpanel" aria-labelledby="visitors-tab">
+                        @if (count($visits) > 0)
                             <table class="table table-striped table-hover">
                                 <thead>
                                     <tr>
@@ -28,192 +31,107 @@
                                         <th>Company</th>
                                         <th>Department</th>
                                         <th>Tag No</th>
+                                        <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>
-                                            <div class="d-flex">
-                                                <div class=""></div>
-                                                Tiger Nixon
-                                            </div>
-                                        </td>
-                                        <td>
-                                            Microsoft Corp.
-                                        </td>
-                                        <td>DSSRI</td>
-                                        <td>12</td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>
-                                            <div class="d-flex">
-                                                <div class=""></div>
-                                                Garrett Winters
-                                            </div>
-                                        </td>
-                                        <td>
-                                            Apple Inc.
-                                        </td>
-                                        <td>HSEC</td>
-                                        <td>05</td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>
-                                            <div class="d-flex">
-                                                <div class=""></div>
-                                                Ashton Cox
-                                            </div>
-                                        </td>
-                                        <td>
-                                            NUPRC
-                                        </td>
-                                        <td>ACE Office</td>
-                                        <td>24</td>
-                                    </tr>
-                                    <tr>
-                                        <td>4</td>
-                                        <td>
-                                            <div class="d-flex">
-                                                <div class=""></div>
-                                                Cedric Kelly
-                                            </div>
-                                        </td>
-                                        <td>
-                                            NNPC Limited
-                                        </td>
-                                        <td>ERSP</td>
-                                        <td>31</td>
-                                    </tr>
-                                    <tr>
-                                        <td>5</td>
-                                        <td>
-                                            <div class="d-flex">
-                                                <div class=""></div>
-                                                Airi Satou
-                                            </div>
-                                        </td>
-                                        <td>
-                                            Ministry of Petroleum Resources
-                                        </td>
-                                        <td>IT</td>
-                                        <td>06</td>
-                                    </tr>
+                                    @foreach ($visits as $visit)
+                                        <tr>
+                                            <td>{{ $loop->iteration }}</td>
+                                            <td>
+                                                <div class="d-flex">
+                                                    <div class=""></div>
+                                                    {{ $visit->visitor->first_name . ' ' . $visit->visitor->last_name }}
+                                                </div>
+                                            </td>
+                                            <td>
+                                                {{ $visit->visitor->company }}
+                                            </td>
+                                            <td>{{ $visit->department->name }}</td>
+                                            <td>{{ $visit->tag->number }}</td>
+                                            <td>
+                                                <form action="{{ route('visitor.single', $visit->visitor->id) }}"
+                                                    method="GET">
+
+                                                    <button class="btn btn-sm btn-primary" type="submit">View</button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
-                        </div>
-                        <div class="tab-pane fade show" id="appointments" role="tabpanel" aria-labelledby="appointments-tab">                
+                        @else
+                            <h4 class=" font-monospace mt-2 text-center">No records to show!</h4>
+                        @endif
+                    </div>
+                    <div class="tab-pane fade show active" id="appointments" role="tabpanel"
+                        aria-labelledby="appointments-tab">
+                        @if (count($appointments) > 0)
                             <table class="table table-striped table-hover">
                                 <thead>
                                     <tr>
                                         <th>S/N</th>
-                                        <th>Name</th>
+                                        <th>First Name</th>
+                                        <th>Last Name</th>
                                         <th>Company</th>
                                         <th>Staff</th>
                                         <th>Department</th>
-                                        <th>Time</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>
-                                            <div class="d-flex">
-                                                <div class=""></div>
-                                                Tiger Nixon
-                                            </div>
-                                        </td>
-                                        <td>NUPRC</td>
-                                        <td>
-                                            Mike Tyson
-                                        </td>
-                                        <td>DSSRI</td>
-                                        <td>10.00am</td>
-                                        <td>
-                                            <a href="#"><span style="color: green;"><i class="fa-solid fa-person-circle-check"></i></span></i></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>
-                                            <div class="d-flex">
-                                                <div class=""></div>
-                                                Garrett Winters
-                                            </div>
-                                        </td>
-                                        <td>PTDF</td>
-                                        <td>
-                                            Patrice Lumumba
-                                        </td>
-                                        <td>ACE Office</td>
-                                        <td>12.00pm</td>
-                                        <td>
-                                            <a href="#"><span style="color: green;"><i class="fa-solid fa-person-circle-check"></i></span></i></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>
-                                            <div class="d-flex">
-                                                <div class=""></div>
-                                                Ashton Cox
-                                            </div>
-                                        </td>
-                                        <td>NCDMB</td>
-                                        <td>
-                                            Albert Einstein
-                                        </td>
-                                        <td>IT</td>
-                                        <td>11.30am</td>
-                                        <td>
-                                            <a href="#"><span style="color: green;"><i class="fa-solid fa-person-circle-check"></i></span></i></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>4</td>
-                                        <td>
-                                            <div class="d-flex">
-                                                <div class=""></div>
-                                                Cedric Kelly
-                                            </div>
-                                        </td>
-                                        <td>NNPC Ltd</td>
-                                        <td>
-                                            Nicholas Copernicus
-                                        </td>
-                                        <td>HSE</td>
-                                        <td>1.45pm</td>
-                                        <td>
-                                            <a href="#"><span style="color: green;"><i class="fa-solid fa-person-circle-check"></i></span></i></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>5</td>
-                                        <td>
-                                            <div class="d-flex">
-                                                <div class=""></div>
-                                                Airi Satou
-                                            </div>
-                                        </td>
-                                        <td>Google Inc.</td>
-                                        <td>
-                                            Galileo Galilei
-                                        </td>
-                                        <td>CS&A</td>
-                                        <td>2.00pm</td>
-                                        <td>
-                                            <a href="#"><span style="color: green;"><i class="fa-solid fa-person-circle-check"></i></span></i></a>
-                                        </td>
-                                    </tr>
+                                    @foreach ($appointments as $appointment)
+                                        <tr>
+                                            <td>{{ $loop->iteration }}</td>
+                                            <td>
+                                                <div class="d-flex">
+                                                    <div class=""></div>
+                                                    {{ $appointment->first_name }}
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="d-flex">
+                                                    <div class=""></div>
+                                                    {{ $appointment->last_name }}
+                                                </div>
+                                            </td>
+                                            <td>{{ $appointment->company }}</td>
+                                            <td>
+                                                {{ $appointment->staff->first_name . ' ' . $appointment->staff->last_name }}
+                                            </td>
+                                            <td>{{ $appointment->department->name }}</td>
+                                            <td>
+                                                @if ($appointment->status == 0)
+                                                    <button type="button" class="btn btn-sm btn-success"
+                                                        data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                                        Approve
+                                                    </button>
+                                                    <x-approve-appointment :$appointment :$tags />
+                                                @elseif ($appointment->status == 1)
+                                                    <button class="btn btn-dark btn-sm disabled">Approved</button>
+                                                @elseif ($appointment->status == 2)
+                                                    <button class="btn btn-warning btn-sm disabled">Canceled</button>
+                                                @elseif ($appointment->status == 3)
+                                                    <button class="btn btn-info btn-sm disabled">Pending</button>
+                                                @elseif ($appointment->status == 4)
+                                                    <button type="button" class="btn btn-sm btn-primary"
+                                                        data-bs-toggle="modal" data-bs-target="#tagModal">
+                                                        Assign Tag
+                                                    </button>
+                                                    <x-assign-tag :$appointment :$tags />
+                                                @endif
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
-                        </div>
+                        @else
+                            <h4 class=" font-monospace mt-2 text-center">No records to show!</h4>
+                        @endif
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 @stop

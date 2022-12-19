@@ -11,7 +11,7 @@
                 <div class="card-header">Profile Picture</div>
                 <div class="card-body text-center">
                     <!-- Profile picture image-->
-                    <img class="img-account-profile rounded-circle mb-2" src="/theme/assets/img/illustrations/profiles/profile-1.png" alt="" />
+                    <img class="img-account-profile rounded-circle mb-2" src="/images/avatar/{{ $visitor->photo }}" alt="" />
                     <!-- Profile picture help block-->
                     <div class="small font-italic text-muted mb-4">JPG or PNG no larger than 5 MB</div>
                     <!-- Profile picture upload button-->
@@ -23,38 +23,41 @@
             <div class="card mb-4">
                 <div class="card-header">Edit Visitor</div>
                 <div class="card-body">
-                    <form>
+                    <form method="POST" action="{{ route('visitor.editVisitor', $visitor->id) }}">
+                        @csrf
                         <!-- Form Row-->
                         <div class="row gx-3 mb-3">
                             <!-- Form Group (first name)-->
                             <div class="col-md-6">
-                                <label class="small mb-1" for="inputFirstName">First Name</label>
-                                <input class="form-control" id="inputFirstName" type="text" placeholder="Enter first name" value="Nelson" />
+                                <label class="small mb-1" for="first_name">First Name</label>
+                                <input class="form-control" name="first_name" type="text" placeholder="Enter first name" value="{{ $visitor->first_name }}" />
                             </div>
                             <!-- Form Group (last name)-->
                             <div class="col-md-6">
-                                <label class="small mb-1" for="inputLastName">Last Name</label>
-                                <input class="form-control" id="inputLastName" type="text" placeholder="Enter last name" value="Mandela" />
+                                <label class="small mb-1" for="last_name">Last Name</label>
+                                <input class="form-control" name="last_name" type="text" placeholder="Enter last name" value="{{ $visitor->last_name }}" />
                             </div>
                         </div>
                         <!-- Form Group (email address)-->
                         <div class="mb-3">
-                            <label class="small mb-1" for="inputEmailAddress">Email Address</label>
-                            <input class="form-control" id="inputEmailAddress" type="email" placeholder="Enter email address" value="nelson@mandela.com" />
+                            <label class="small mb-1" for="email">Email Address</label>
+                            <input class="form-control" name="email" type="email" placeholder="Enter email address" value="{{ $visitor->email }}" />
                         </div>
 
                         <!-- Form Group (phone number)-->
                         <div class="mb-3">
-                            <label class="small mb-1" for="phonr">Phone Number</label>
-                            <input class="form-control" id="phone" type="text" placeholder="Enter phone number" value="0801 2345 678" />
+                            <label class="small mb-1" for="phone">Phone Number</label>
+                            <input class="form-control" name="phone" type="text" placeholder="Enter phone number" value="{{ $visitor->phone }}" />
                         </div>
                         <!-- Form Group (company name)-->
                         <div class="mb-3">
-                            <label class="small mb-1" for="company_name">Company Name</label>
-                            <input class="form-control" id="company_name" type="text" placeholder="Enter company name" value="Mandela Corp" />
+                            <label class="small mb-1" for="company">Company Name</label>
+                            <input class="form-control" name="company" type="text" placeholder="Enter company name" value="{{ $visitor->company }}" />
                         </div>
                         <!-- Submit button-->
-                        <button class="btn btn-primary" type="button">Submit</button>
+                        <div class="d-grid gap-2 col-6 mx-auto">
+                            <button class="btn btn-outline-primary" type="submit">Submit</button>
+                        </div>
                     </form>
                 </div>
             </div>

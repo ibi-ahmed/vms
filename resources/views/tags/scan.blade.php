@@ -16,9 +16,10 @@
                         
                     </div>
                     <ul class="list-group list-group-flush">
-                      <li class="list-group-item">Bill Gates</li>
-                      <li class="list-group-item">Microsoft Corp</li>
-                      <li class="list-group-item">Visiting - DSSRI</li>
+                      <li class="list-group-item">{{ $visit->visitor->first_name.' '.$visit->visitor->last_name }}</li>
+                      <li class="list-group-item">{{ $visit->visitor->company }}</li>
+                      <li class="list-group-item">Department - {{ $visit->department->name }}</li>
+                      <li class="list-group-item">Staff - {{ $visit->user->first_name.' '.$visit->user->last_name }}</li>
                       <li class="list-group-item">
                         <a href="#" class="btn btn-outline-danger">Deactivate Tag</a>
                       </li>

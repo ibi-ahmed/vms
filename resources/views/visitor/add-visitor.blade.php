@@ -1,9 +1,9 @@
 @extends('layouts.layout')
-@section('title', 'Add Visitor')
+@section('title', 'Create Appointment')
 
 @section('content')
 @section('icon', 'user-plus')
-@section('sub_head', 'Register Visitor')
+@section('sub_head', 'Create Appointment')
 <div class="row">
     <div class="col-sm-8 offset-2">
         <div class="card mb-4">
@@ -11,11 +11,11 @@
                 <ul class="nav nav-tabs card-header-tabs" id="cardTab" role="tablist">
                     <li class="nav-item">
                         <a class="nav-link active" id="register-tab" href="#register" data-bs-toggle="tab" role="tab"
-                            aria-controls="register" aria-selected="true">Register New Visitor</a>
+                            aria-controls="register" aria-selected="true">Create New Visitor Appointment</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" id="existing-tab" href="#existing" data-bs-toggle="tab" role="tab"
-                            aria-controls="existing" aria-selected="false">Existing Visitor</a>
+                            aria-controls="existing" aria-selected="false">Existing Visitor Appointment</a>
                     </li>
                 </ul>
             </div>
@@ -23,7 +23,7 @@
                 <div class="tab-content" id="cardTabContent">
                     <div class="tab-pane fade show active" id="register" role="tabpanel"
                         aria-labelledby="register-tab">
-                        <form method="POST" action="{{ route('visitor.store') }}">
+                        <form method="POST" action="{{ route('visitor.store') }}" enctype="multipart/form-data">
                             @csrf
                             <!-- Form Row-->
                             <div class="row gx-3 mb-3">
@@ -44,22 +44,24 @@
                             <!-- Form Group (Profile Pic)-->
                             <div class="mb-3">
                                 <label class="mb-1" for="photo">Upload Photo</label>
-                                <input class="form-control" id="photo" type="file" />
+                                <input class="form-control" name="photo" type="file" />
                             </div>
 
                             <div class="row gx-3 mb-3">
-                                <!-- Form Group (Email Address)-->
-                                <div class="col-md-6">
-                                    <label class="mb-1" for="email">Email Address</label>
-                                    <input class="form-control" name="email" type="email"
-                                        placeholder="Enter email address" value="" required />
-                                </div>
                                 <!-- Form Group (Phone)-->
                                 <div class="col-md-6">
                                     <label class="mb-1" for="phone">Phone Number</label>
                                     <input class="form-control" name="phone" type="text"
                                         placeholder="Enter phone number" value="" required />
                                 </div>
+
+                                <!-- Form Group (Email Address)-->
+                                <div class="col-md-6">
+                                    <label class="mb-1" for="email">Email Address</label>
+                                    <input class="form-control" name="email" type="email"
+                                        placeholder="Enter email address : optional" value="" />
+                                </div>
+                                
                             </div>
 
                             <!-- Form Group (company name)-->
@@ -83,22 +85,9 @@
                                 </div>
 
                                 <div class="col-md-6">
-                                    <label class="mb-1" for="tag_id">Select Tag</label>
-                                    <select class="form-select" name="tag_id" aria-label="Default select example"
-                                        required>
-                                        {{-- <option selected>Assign Tag</option> --}}
-                                        @foreach ($tags as $tag)
-                                            <option value="{{ $tag->id }}">{{ $tag->number }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
-
-                            <!-- Form Group (Tag)-->
-                            <div class="mb-3">
-                                <label class="mb-1" for="staff_email">Receiving Staff</label>
-                                {{-- <input class="form-control" name="staff" type="text" placeholder="Enter staff name" value="" required/> --}}
+                                    <label class="mb-1" for="staff_email">Receiving Staff</label>
                                 <staff-search-component></staff-search-component>
+                                </div>
                             </div>
 
                             <!-- Submit button-->
@@ -112,10 +101,10 @@
                             @csrf
                             <div class="mb-4 row">
                                 <div class="col-6 offset-3">
+                                    <label class="mb-1" for="vis_id">Select Visitor</label>
                                     <visitor-search-component></visitor-search-component>
                                 </div>
-                            </div>
-                            <hr>
+                            </div><hr>
 
                             <div class="row gx-3 mb-3">
                                 <!-- Form Group (Department)-->
@@ -131,22 +120,9 @@
                                 </div>
 
                                 <div class="col-md-6">
-                                    <label class="mb-1" for="tag_id">Select Tag</label>
-                                    <select class="form-select" name="tag_id" aria-label="Default select example"
-                                        required>
-                                        {{-- <option selected>Assign Tag</option> --}}
-                                        @foreach ($tags as $tag)
-                                            <option value="{{ $tag->id }}">{{ $tag->number }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
-
-                            <!-- Form Group (Tag)-->
-                            <div class="mb-3">
-                                <label class="mb-1" for="staff_email">Receiving Staff</label>
-                                {{-- <input class="form-control" name="staff" type="text" placeholder="Enter staff name" value="" required/> --}}
+                                    <label class="mb-1" for="staff_id">Receiving Staff</label>
                                 <staff-search-component></staff-search-component>
+                                </div>
                             </div>
 
                             <!-- Submit button-->

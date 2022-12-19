@@ -7,7 +7,7 @@
 
 <link href="https://cdn.jsdelivr.net/npm/litepicker/dist/css/litepicker.css" rel="stylesheet" />
 
-<div class="row">
+{{-- <div class="row">
     <div class="col-6">
         <div class="card h-100">
             <div class="card-header text-center">Monthly Visitors By Department</div>
@@ -47,18 +47,18 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 <div class="mt-4 row">
     <div class="col-sm-10 offset-1">
         <div class="card">
             <div class="card-header border-bottom">
                 <ul class="nav nav-tabs card-header-tabs" id="cardTab" role="tablist">
                     <li class="nav-item">
-                        <a class="nav-link active" id="visits-tab" href="#visits" data-bs-toggle="tab"
-                            role="tab" aria-controls="visits" aria-selected="true">Most Recent Visits</a>
+                        <a class="nav-link" id="visits-tab" href="#visits" data-bs-toggle="tab" role="tab"
+                            aria-controls="visits" aria-selected="true">Most Recent Visits</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="appointments-tab" href="#appointments" data-bs-toggle="tab"
+                        <a class="nav-link active" id="appointments-tab" href="#appointments" data-bs-toggle="tab"
                             role="tab" aria-controls="appointments" aria-selected="false">Most Recent
                             Appointments</a>
                     </li>
@@ -66,55 +66,52 @@
             </div>
             <div class="card-body">
                 <div class="tab-content" id="cardTabContent">
-                    <div class="tab-pane fade show active" id="visits" role="tabpanel"
-                        aria-labelledby="visits-tab">
+                    <div class="tab-pane fade show" id="visits" role="tabpanel" aria-labelledby="visits-tab">
                         @if (count($visits) > 0)
-                        <table class="table table-striped table-hover">
-                            <thead>
-                                <tr>
-                                    <th>S/N</th>
-                                    <th>Name</th>
-                                    <th>Email</th>
-                                    <th>Phone</th>
-                                    <th>Company</th>
-                                    <th>Date</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($visits as $visit)
-                                <tr>
-                                    <td>{{ $loop->iteration }}</td>
-                                    <td>
-                                        <div class="d-flex">
-                                            <div class=""></div>
-                                            {{ $visit->visitor->first_name . ' ' . $visit->visitor->last_name }}
-                                        </div>
-                                    </td>
-                                    <td>{{ $visit->visitor->email }}</td>
-                                    <td>{{ $visit->visitor->phone }}</td>
-                                    <td>
-                                        {{ $visit->visitor->company }}
-                                    </td>
-                                    <td>{{ date("D M j - h:i A", strtotime($visit->created_at)) }}</td>
-                                    <td>
-                                        {{-- <a class="btn btn-datatable btn-icon btn-transparent-dark me-2" href="user-management-edit-user.html"><i data-feather="edit"></i></a> --}}
-                                        {{-- <a class="btn btn-datatable btn-icon btn-transparent-dark" href="#!"><i data-feather="trash-2"></i></a> --}}
-                                        <form action="{{ route('visitor.single', $visit->visitor->id) }}" method="GET">
+                            <table class="table table-striped table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>S/N</th>
+                                        <th>Name</th>
+                                        <th>Phone</th>
+                                        <th>Company</th>
+                                        <th>Date</th>
+                                        <th>Tag No</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($visits as $visit)
+                                        <tr>
+                                            <td>{{ $loop->iteration }}</td>
+                                            <td>
+                                                <div class="d-flex">
+                                                    <div class=""></div>
+                                                    {{ $visit->visitor->first_name . ' ' . $visit->visitor->last_name }}
+                                                </div>
+                                            </td>
+                                            <td>{{ $visit->visitor->phone }}</td>
+                                            <td>
+                                                {{ $visit->visitor->company }}
+                                            </td>
+                                            <td>{{ date('D M j - h:i A', strtotime($visit->created_at)) }}</td>
+                                            <td>{{ $visit->tag->number }}</td>
+                                            <td>
+                                                <form action="{{ route('visitor.single', $visit->visitor->id) }}"
+                                                    method="GET">
 
-                                            <button class="btn btn-link" type="submit"><span style="color: green;"><i
-                                                        class="fa-solid fa-eye"></i></span></button>
-                                        </form>
-                                    </td>
-                                </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+                                                    <button class="btn btn-sm btn-primary" type="submit">View</button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
                         @else
-                    <h4 class=" font-monospace mt-2 text-center">No records to show!</h4>
-                @endif
+                            <h4 class=" font-monospace mt-2 text-center">No records to show!</h4>
+                        @endif
                     </div>
-                    <div class="tab-pane fade show" id="appointments" role="tabpanel"
+                    <div class="tab-pane fade show active" id="appointments" role="tabpanel"
                         aria-labelledby="appointments-tab">
                         @if (count($appointments) > 0)
                             <table class="table table-striped table-hover">
@@ -126,8 +123,6 @@
                                         <th>Company</th>
                                         <th>Staff</th>
                                         <th>Department</th>
-                                        <th>Date</th>
-                                        <th>Time</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -152,14 +147,26 @@
                                                 {{ $appointment->staff->first_name . ' ' . $appointment->staff->last_name }}
                                             </td>
                                             <td>{{ $appointment->department->name }}</td>
-                                            <td>{{ $appointment->date }}</td>
-                                            <td>{{ date('h:i A', strtotime($appointment->time)) }}</td>
                                             <td>
-                                                <form action="{{ route('appointments.approve', $appointment->id) }}" method="post">
-                                                    @csrf
-                                                    <button class="btn btn-link" href="#"><span style="color: green;"><i
-                                                        class="fa-solid fa-person-circle-check"></i></span></button>
-                                                    </form>
+                                                @if ($appointment->status == 0)
+                                                    <button type="button" class="btn btn-sm btn-success"
+                                                        data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                                        Approve
+                                                    </button>
+                                                    <x-approve-appointment :$appointment :$tags />
+                                                @elseif ($appointment->status == 1)
+                                                    <button class="btn btn-info btn-sm disabled">Approved</button>
+                                                @elseif ($appointment->status == 2)
+                                                    <button class="btn btn-warning btn-sm disabled">Canceled</button>
+                                                @elseif ($appointment->status == 3)
+                                                    <button class="btn btn-info btn-sm disabled">Pending</button>
+                                                @elseif ($appointment->status == 4)
+                                                    <button type="button" class="btn btn-sm btn-primary"
+                                                        data-bs-toggle="modal" data-bs-target="#tagModal">
+                                                        Assign Tag
+                                                    </button>
+                                                    <x-assign-tag :$appointment :$tags />
+                                                @endif
                                             </td>
                                         </tr>
                                     @endforeach
