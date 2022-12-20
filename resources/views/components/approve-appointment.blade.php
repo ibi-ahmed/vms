@@ -1,12 +1,12 @@
 
 <!-- Modal -->
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <form action="{{ route('appointments.approve', $appointment->id) }}" method="post">
+    <form action="{{ route('appointments.approve', $appointment->id) }}" method="post" enctype="multipart/form-data">
         @csrf
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">Visit Approval</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -32,7 +32,7 @@
                     <!-- Form Group (Profile Pic)-->
                     <div class="mb-3">
                         <label class="mb-1" for="photo">Upload Photo</label>
-                        <input class="form-control" id="photo" type="file" />
+                        <input class="form-control" name="photo" type="file" />
                     </div>
 
                     <div class="row gx-3 mb-3">

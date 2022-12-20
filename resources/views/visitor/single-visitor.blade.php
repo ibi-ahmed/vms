@@ -28,7 +28,10 @@
                                 <button class="btn btn-primary btn-sm" type="submit">Edit</button>
                             </form>
                         @if ($visitor->status == 1)                           
-                            <a href="#" class="btn btn-danger btn-sm">Deactivate Tag</a>
+                        <form action="{{ route('tag.deactivate', $visitor->id) }}" method="POST">
+                            @csrf
+                            <button class="btn btn-danger btn-sm" type="submit">Deactivate</button>
+                        </form>
                         @endif
                         </div>
                       </li>

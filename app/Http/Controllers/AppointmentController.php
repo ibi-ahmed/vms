@@ -92,6 +92,12 @@ class AppointmentController extends Controller
 
     public function approveAppointment(Request $request, $id)
     {
+        if ($request->photo) {
+            $request->validate([
+                'photo' => 'image', 'mimes:jpeg,png,jpg,svg', 'max:5120'
+            ]);
+        }
+
         $appointment = Appointment::find($id);
         $appointment->status = 1;
         $appointment->save();
@@ -102,9 +108,17 @@ class AppointmentController extends Controller
             $visitor = new Visitor;
             $visitor->first_name = $appointment->first_name;
             $visitor->last_name = $appointment->last_name;
+            
             if ($appointment->email) {
                 $visitor->email = $appointment->email;
             }
+
+            if ($request->photo) {
+                $photoName = time().'.'.$request->photo->extension();
+                $request->photo->move(public_path('images/avatar'), $photoName);
+                $visitor->photo = $photoName;
+            }
+
             $visitor->phone = $appointment->phone;
             $visitor->company = $appointment->company;
             $visitor->status = 1;

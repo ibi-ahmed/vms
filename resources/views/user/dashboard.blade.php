@@ -50,11 +50,17 @@
                                             <td>{{ $visit->department->name }}</td>
                                             <td>{{ $visit->tag->number }}</td>
                                             <td>
+                                                <div class="d-grid gap-2 d-md-flex justify-content-md">
                                                 <form action="{{ route('visitor.single', $visit->visitor->id) }}"
                                                     method="GET">
 
                                                     <button class="btn btn-sm btn-primary" type="submit">View</button>
                                                 </form>
+                                                <form action="{{ route('tag.deactivate', $visit->visitor->id) }}" method="POST">
+                                                    @csrf
+                                                    <button class="btn btn-danger btn-sm" type="submit">Deactivate</button>
+                                                </form>
+                                            </div>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -108,7 +114,7 @@
                                                     </button>
                                                     <x-approve-appointment :$appointment :$tags />
                                                 @elseif ($appointment->status == 1)
-                                                    <button class="btn btn-dark btn-sm disabled">Approved</button>
+                                                    <button class="btn btn-info btn-sm disabled">Approved</button>
                                                 @elseif ($appointment->status == 2)
                                                     <button class="btn btn-warning btn-sm disabled">Canceled</button>
                                                 @elseif ($appointment->status == 3)

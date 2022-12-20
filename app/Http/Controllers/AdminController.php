@@ -19,7 +19,7 @@ class AdminController extends Controller
     public function adminDashboard()
     {
         $appointments = Appointment::orderByDesc('updated_at')->get();
-        $visits = Visit::where('status', 1)->get();
+        $visits = Visit::orderByDesc('updated_at')->where('status', 1)->get();
         $tags = Tag::where('status', 0)->get();
         return view('admin.dashboard', compact('appointments', 'visits', 'tags'));
     }

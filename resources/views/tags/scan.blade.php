@@ -10,9 +10,10 @@
                     <div class="card-header">
                       Visitor Info
                     </div>
+                    @if (isset($visit))
                     <div class="card-body text-center">
                         <!-- Profile picture image-->
-                        <img class="img-account-profile rounded-circle mb-2" src="/theme/assets/img/illustrations/profiles/profile-1.png" alt="" />
+                        <img class="img-account-profile rounded-circle mb-2" src="/images/avatar/{{ $visit->visitor->photo }}" alt="" />
                         
                     </div>
                     <ul class="list-group list-group-flush">
@@ -21,9 +22,18 @@
                       <li class="list-group-item">Department - {{ $visit->department->name }}</li>
                       <li class="list-group-item">Staff - {{ $visit->user->first_name.' '.$visit->user->last_name }}</li>
                       <li class="list-group-item">
-                        <a href="#" class="btn btn-outline-danger">Deactivate Tag</a>
+                        <form action="{{ route('tag.deactivate', $visit->visitor->id) }}" method="POST">
+                          @csrf
+                          <button class="btn btn-danger btn-sm" type="submit">Deactivate</button>
+                      </form>
                       </li>
                     </ul>
+                    @else
+                    <div class="card-body text-center">
+                      <h2>Tag is unattached</h2>
+                      
+                      @endif
+                </div>
                 </div>
             </div>
     </div>

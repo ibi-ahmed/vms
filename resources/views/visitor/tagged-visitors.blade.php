@@ -46,6 +46,10 @@
                                                 <form action="{{ route('visitor.edit', $visit->visitor->id) }}" method="GET">
                                                     <button class="btn btn-primary btn-sm" type="submit">Edit</button>
                                                 </form>
+                                                <form action="{{ route('tag.deactivate', $visit->visitor->id) }}" method="POST">
+                                                    @csrf
+                                                    <button class="btn btn-danger btn-sm" type="submit">Deactivate</button>
+                                                </form>
                                         </div>
                                     </td>
                                 </tr>

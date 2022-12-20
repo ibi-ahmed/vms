@@ -14,8 +14,6 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::get('/q', function () { return view('auth.login2'); });
-
 Route::get('/', function () {
     if (Auth::check()) {
         return redirect()->route(Auth::user()->type.'.dashboard');
@@ -75,6 +73,7 @@ Route::post('/add-visit', [App\Http\Controllers\VisitorController::class, 'store
 
 Route::get('/tag-scan/{tag_no}', [App\Http\Controllers\TagController::class, 'scan'])->name('tags.scan');
 Route::post('/tag-assign/{id}', [App\Http\Controllers\TagController::class, 'tagAssign'])->name('tag.assign');
+Route::post('/tag-deactivate/{id}', [App\Http\Controllers\TagController::class, 'tagDeactivate'])->name('tag.deactivate');
 
 Route::get('/schedule-appointment', [App\Http\Controllers\AppointmentController::class, 'schedule'])->name('appointments.schedule');
 Route::post('/schedule-appointment', [App\Http\Controllers\AppointmentController::class, 'storeAppointment'])->name('appointments.store');

@@ -15,7 +15,7 @@
                     <!-- Profile picture help block-->
                     <div class="small font-italic text-muted mb-4">JPG or PNG no larger than 5 MB</div>
                     <!-- Profile picture upload button-->
-                    <button class="btn btn-primary" type="button">Upload new image</button>
+                    <input class="form-control" type="file" name="photo" form="editForm">
                 </div>
             </div>
         </div>
@@ -23,7 +23,7 @@
             <div class="card mb-4">
                 <div class="card-header">Edit Visitor</div>
                 <div class="card-body">
-                    <form method="POST" action="{{ route('visitor.editVisitor', $visitor->id) }}">
+                    <form method="POST" action="{{ route('visitor.editVisitor', $visitor->id) }}" id="editForm" enctype="multipart/form-data">
                         @csrf
                         <!-- Form Row-->
                         <div class="row gx-3 mb-3">

@@ -11,10 +11,17 @@ use Illuminate\Support\Facades\Auth;
 
 class TagController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function scan($tag_no)
     {
         $tag_id = Tag::where('number', $tag_no)->first()->id;
-        $visit = Visit::where('tag_id', $tag_id)->first();
+        $visit = Visit::where('tag_id', $tag_id)
+        ->where('status', 1)
+        ->first();
         // $visitor = Visitor::where('id', $visitor_id)->first();
         // dd($visitor);
         // return view('tags.scan');
@@ -43,6 +50,23 @@ class TagController extends Controller
         $visit->status = 1;
         $visit->save();
 
-        return redirect()->route(Auth::user()->type . '.dashboard')->with('success', 'Tag Assigned!');
+        return redirect()->route(Auth::user()->type.'.dashboard')->with('success', 'Tag Assigned!');
+    }
+
+    public function tagDeactivate($id)
+    {
+        $visitor = Visitor::find($id);
+        $visitor->status = 0;
+        $visitor->save();
+
+        $visit = Visit::where('visitor_id', $visitor->id)->first();
+        $visit->status = 0;
+        $visit->save();
+
+        $tag = Tag::find($visit->tag_id);
+        $tag->status = 0;
+        $tag->save();
+
+        return redirect()->route(Auth::user()->type.'.dashboard')->with('success', 'Tag Deactivated!');
     }
 }
