@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Appointment;
-use App\Models\Department;
 use App\Models\Tag;
 use App\Models\User;
-use Illuminate\Http\Request;
-use App\Models\Visitor;
 use App\Models\Visit;
+use App\Models\Visitor;
+use App\Models\Department;
+use App\Models\Appointment;
+use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
 
 class VisitorController extends Controller
@@ -30,19 +31,19 @@ class VisitorController extends Controller
         $input = $request->validate([
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
-            'phone' => 'required', 'string', 'max:15', 'unique:visitors',
+            'phone' => ['required', 'string', 'max:15', 'unique:visitors'],
             'company' => ['required', 'string', 'max:255'],
         ]);
 
         if ($request->email) {
             $request->validate([
-                'email' => 'string', 'email', 'max:255', 'unique:visitors'
+                'email' => ['string', 'email', 'max:255', 'unique:visitors']
             ]);
         }
 
         if ($request->photo) {
             $request->validate([
-                'photo' => 'image', 'mimes:jpeg,png,jpg,svg', 'max:5120'
+                'photo' => ['image', 'mimes:jpeg,png,jpg,svg', 'max:5120']
             ]);
         }
 
@@ -130,19 +131,20 @@ class VisitorController extends Controller
         $input = $request->validate([
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
-            'phone' => 'required', 'string', 'max:15', 'unique:visitors',
+            // 'phone' => ['required', 'string', 'max:15', 'unique:visitors'],
+            'phone' => ['required', 'string', 'max:15', Rule::unique('visitors')->ignore(Visitor::find($id))],
             'company' => ['required', 'string', 'max:255'],
         ]);
         
         if ($request->email) {
             $request->validate([
-                'email' => 'string', 'email', 'max:255', 'unique:visitors'
+                'email' => ['string', 'email', 'max:255', Rule::unique('visitors')->ignore(Visitor::find($id))]
             ]);
         }
 
         if ($request->photo) {
             $request->validate([
-                'photo' => 'image', 'mimes:jpeg,png,jpg,svg', 'max:5120'
+                'photo' => ['image', 'mimes:jpeg,png,jpg,svg', 'max:5120']
             ]);
         }
 

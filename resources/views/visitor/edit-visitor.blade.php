@@ -28,12 +28,12 @@
                         <!-- Form Row-->
                         <div class="row gx-3 mb-3">
                             <!-- Form Group (first name)-->
-                            <div class="col-md-6">
+                            <div class="col-sm-6">
                                 <label class="small mb-1" for="first_name">First Name</label>
                                 <input class="form-control" name="first_name" type="text" placeholder="Enter first name" value="{{ $visitor->first_name }}" />
                             </div>
                             <!-- Form Group (last name)-->
-                            <div class="col-md-6">
+                            <div class="col-sm-6">
                                 <label class="small mb-1" for="last_name">Last Name</label>
                                 <input class="form-control" name="last_name" type="text" placeholder="Enter last name" value="{{ $visitor->last_name }}" />
                             </div>
@@ -55,7 +55,7 @@
                             <input class="form-control" name="company" type="text" placeholder="Enter company name" value="{{ $visitor->company }}" />
                         </div>
                         <!-- Submit button-->
-                        <div class="d-grid gap-2 col-6 mx-auto">
+                        <div class="d-grid gap-2 col-sm-6 mx-auto">
                             <button class="btn btn-outline-primary" type="submit">Submit</button>
                         </div>
                     </form>

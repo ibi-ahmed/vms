@@ -4,44 +4,46 @@
 @section('content')
 @section('icon', 'user')
 @section('sub_head', 'Visitor Details')
-    <div class="row">
-            <div class="col-4">
-                <div class="card mb-4">
-                    <div class="card-header">
-                      Visitor Info
-                    </div>
-                    <div class="card-body text-center">
-                        <!-- Profile picture image-->
-                        <img class="img-account-profile rounded-circle mb-2" src="/images/avatar/{{ $visitor->photo }}" alt="Profile Pic" />
-                        
-                    </div>
-                    <ul class="list-group list-group-flush">
-                      <li class="list-group-item">{{ $visitor->first_name.' '.$visitor->last_name }}</li>
-                      <li class="list-group-item">{{ $visitor->company }}</li>
-                      @if ($visitor->email)
-                      <li class="list-group-item">{{ $visitor->email }}</li>                       
-                      @endif
-                      <li class="list-group-item">{{ $visitor->phone }}</li>
-                      <li class="list-group-item text-center">
-                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                            <form action="{{ route('visitor.edit', $visitor->id) }}" method="GET">
-                                <button class="btn btn-primary btn-sm" type="submit">Edit</button>
-                            </form>
-                        @if ($visitor->status == 1)                           
-                        <form action="{{ route('tag.deactivate', $visitor->id) }}" method="POST">
-                            @csrf
-                            <button class="btn btn-danger btn-sm" type="submit">Deactivate</button>
-                        </form>
-                        @endif
-                        </div>
-                      </li>
-                    </ul>
-                </div>
+<div class="row">
+    <div class="col-sm-4">
+        <div class="card mb-4">
+            <div class="card-header">
+                Visitor Info
             </div>
-            <div class="col-8">
-                <div class="card">
-                    <div class="card-body">
-                        @if (count($visits) > 0)
+            <div class="card-body text-center">
+                <!-- Profile picture image-->
+                <img class="img-account-profile rounded-circle mb-2" src="/images/avatar/{{ $visitor->photo }}"
+                    alt="Profile Pic" />
+
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">{{ $visitor->first_name . ' ' . $visitor->last_name }}</li>
+                <li class="list-group-item">{{ $visitor->company }}</li>
+                @if ($visitor->email)
+                    <li class="list-group-item">{{ $visitor->email }}</li>
+                @endif
+                <li class="list-group-item">{{ $visitor->phone }}</li>
+                <li class="list-group-item text-center">
+                    <div class="d-grid gap-2 d-sm-flex justify-content-sm-end">
+                        <form action="{{ route('visitor.edit', $visitor->id) }}" method="GET">
+                            <button class="btn btn-primary btn-sm" type="submit">Edit</button>
+                        </form>
+                        @if ($visitor->status == 1)
+                            <form action="{{ route('tag.deactivate', $visitor->id) }}" method="POST">
+                                @csrf
+                                <button class="btn btn-danger btn-sm" type="submit">Deactivate</button>
+                            </form>
+                        @endif
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-sm-8">
+        <div class="card">
+            <div class="card-body">
+                @if (count($visits) > 0)
+                    <div class="table-responsive">
                         <table class="table table-striped table-hover">
                             <thead class="">
                                 <tr>
@@ -54,20 +56,20 @@
                             </thead>
                             <tbody>
                                 @foreach ($visits as $visit)
-                                <tr>
-                                    <td>{{ $loop->iteration }}</td>
-                                    <td>
-                                        <div class="d-flex">
-                                            <div class=""></div>
-                                            {{ $visit->user->first_name.' '.$visit->user->last_name }}
-                                        </div>
-                                    </td>
-                                    <td>{{ $visit->department->name }}</td>
-                                    <td>
-                                        {{ date('h:i A', strtotime($visit->created_at)) }}
-                                    </td>
-                                    <td>{{ date("D M j", strtotime($visit->created_at)) }}</td>
-                                </tr>
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>
+                                            <div class="d-flex">
+                                                <div class=""></div>
+                                                {{ $visit->user->first_name . ' ' . $visit->user->last_name }}
+                                            </div>
+                                        </td>
+                                        <td>{{ $visit->department->name }}</td>
+                                        <td>
+                                            {{ date('h:i A', strtotime($visit->created_at)) }}
+                                        </td>
+                                        <td>{{ date('D M j', strtotime($visit->created_at)) }}</td>
+                                    </tr>
                                 @endforeach
                             </tbody>
                             <tfoot class="text-center">
@@ -76,11 +78,12 @@
                                 </tr>
                             </tfoot>
                         </table>
-                        @else
+                    </div>
+                @else
                     <h4 class=" font-monospace mt-2 text-center">No records to show!</h4>
                 @endif
-                    </div>
-                </div>
             </div>
+        </div>
     </div>
+</div>
 @stop

@@ -7,3 +7,4 @@
 # optimise for all screen sizes
 # azure auth
 # separate user table
+# separate personal/official vist by radio/checkbox

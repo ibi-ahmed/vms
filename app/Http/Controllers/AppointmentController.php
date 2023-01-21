@@ -94,7 +94,7 @@ class AppointmentController extends Controller
     {
         if ($request->photo) {
             $request->validate([
-                'photo' => 'image', 'mimes:jpeg,png,jpg,svg', 'max:5120'
+                'photo' => ['image', 'mimes:jpeg,png,jpg,svg', 'max:5120']
             ]);
         }
 

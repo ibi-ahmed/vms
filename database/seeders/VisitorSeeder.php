@@ -15,6 +15,6 @@ class VisitorSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\Visitor::factory(20)->create();
+        \App\Models\Visitor::factory(6)->create();
     }
 }

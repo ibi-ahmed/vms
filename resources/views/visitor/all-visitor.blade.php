@@ -8,10 +8,11 @@
 @section('sub_head', 'All Visitors')
 
 <div class="row">
-    <div class="col-12">
+    <div class="col-sm-12">
         <div class="card">
             <div class="card-body">
                 @if (count($visitors) > 0)
+                <div class="table-responsive">
                     <table class="table table-striped table-hover">
                         <thead>
                             <tr>
@@ -41,7 +42,7 @@
                                     <td>
                                         {{-- <a class="btn btn-datatable btn-icon btn-transparent-dark me-2" href="user-management-edit-user.html"><i data-feather="edit"></i></a> --}}
                                         {{-- <a class="btn btn-datatable btn-icon btn-transparent-dark" href="#!"><i data-feather="trash-2"></i></a> --}}
-                                    <div class="d-grid gap-2 d-md-flex justify-content-md">
+                                    <div class="d-grid gap-2 d-sm-flex justify-content-sm">
                                         <form action="{{ route('visitor.single', $visitor->id) }}" method="GET">
                                             <button class="btn btn-sm btn-primary" type="submit">View</button>
                                         </form>
@@ -54,6 +55,7 @@
                             @endforeach
                         </tbody>
                     </table>
+                </div>
                 @else
                     <h4 class=" font-monospace mt-2 text-center">No records to show!</h4>
                 @endif

@@ -22,9 +22,6 @@ class TagController extends Controller
         $visit = Visit::where('tag_id', $tag_id)
         ->where('status', 1)
         ->first();
-        // $visitor = Visitor::where('id', $visitor_id)->first();
-        // dd($visitor);
-        // return view('tags.scan');
         return view('tags.scan', compact('visit'));
     }
 

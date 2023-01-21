@@ -12,6 +12,7 @@
         <div class="card">
             <div class="card-body">
                 @if (count($appointments) > 0)
+                <div class="table-responsive">
                     <table class="table table-striped table-hover">
                         <thead>
                             <tr>
@@ -67,6 +68,7 @@
 
                         </tbody>
                     </table>
+                </div>
                 @else
                     <h4 class=" font-monospace mt-2 text-center">No records to show!</h4>
                 @endif
