@@ -9,7 +9,7 @@
             </div>
             <div class="modal-body">
                 <div class="row">
-                    <div class="col-10 offset-1">
+                    <div class="col-sm-10 offset-sm-1">
                         <form action="{{ route('tag.assign', $appointment->id) }}" method="POST" id="tag_form">
                             @csrf
                             <label class="mb-1" for="tag_id">Select Tag</label>

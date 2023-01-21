@@ -15,7 +15,7 @@
                     <!-- Profile picture help block-->
                     <div class="small font-italic text-muted mb-4">JPG or PNG no larger than 5 MB</div>
                     <!-- Profile picture upload button-->
-                    <button class="btn btn-primary" type="button">Upload new image</button>
+                    <input class="form-control" type="file" name="photo" form="editForm">
                 </div>
             </div>
         </div>
@@ -23,17 +23,17 @@
             <div class="card mb-4">
                 <div class="card-header">Edit Visitor</div>
                 <div class="card-body">
-                    <form method="POST" action="{{ route('visitor.editVisitor', $visitor->id) }}">
+                    <form method="POST" action="{{ route('visitor.editVisitor', $visitor->id) }}" id="editForm" enctype="multipart/form-data">
                         @csrf
                         <!-- Form Row-->
                         <div class="row gx-3 mb-3">
                             <!-- Form Group (first name)-->
-                            <div class="col-md-6">
+                            <div class="col-sm-6">
                                 <label class="small mb-1" for="first_name">First Name</label>
                                 <input class="form-control" name="first_name" type="text" placeholder="Enter first name" value="{{ $visitor->first_name }}" />
                             </div>
                             <!-- Form Group (last name)-->
-                            <div class="col-md-6">
+                            <div class="col-sm-6">
                                 <label class="small mb-1" for="last_name">Last Name</label>
                                 <input class="form-control" name="last_name" type="text" placeholder="Enter last name" value="{{ $visitor->last_name }}" />
                             </div>
@@ -55,7 +55,7 @@
                             <input class="form-control" name="company" type="text" placeholder="Enter company name" value="{{ $visitor->company }}" />
                         </div>
                         <!-- Submit button-->
-                        <div class="d-grid gap-2 col-6 mx-auto">
+                        <div class="d-grid gap-2 col-sm-6 mx-auto">
                             <button class="btn btn-outline-primary" type="submit">Submit</button>
                         </div>
                     </form>

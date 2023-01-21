@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Appointment;
-use App\Models\Department;
 use App\Models\Tag;
 use App\Models\User;
-use Illuminate\Http\Request;
-use App\Models\Visitor;
 use App\Models\Visit;
+use App\Models\Visitor;
+use App\Models\Department;
+use App\Models\Appointment;
+use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
 
 class VisitorController extends Controller
@@ -35,17 +36,31 @@ class VisitorController extends Controller
         ]);
 
         if ($request->email) {
-            $email = $request->validate([
+            $request->validate([
                 'email' => ['string', 'email', 'max:255', 'unique:visitors']
+            ]);
+        }
+
+        if ($request->photo) {
+            $request->validate([
+                'photo' => ['image', 'mimes:jpeg,png,jpg,svg', 'max:5120']
             ]);
         }
 
         $visitor = new Visitor;
         $visitor->first_name = $input['first_name'];
         $visitor->last_name = $input['last_name'];
+        
         if ($request->email) {
-            $visitor->email = $email;
+            $visitor->email = $request->email;
         }
+
+        if ($request->photo) {
+            $photoName = time().'.'.$request->photo->extension();
+            $request->photo->move(public_path('images/avatar'), $photoName);
+            $visitor->photo = $photoName;
+        }
+
         $visitor->phone = $input['phone'];
         $visitor->company = $input['company'];
         $visitor->save();
@@ -64,17 +79,6 @@ class VisitorController extends Controller
         $appointment->staff_id = $request->staff_id;
         $appointment->status = 3;
         $appointment->save();
-
-        // $visit = new Visit;
-        // $visit->visitor_id = $visitor->id;
-        // $visit->user_id = $request->staff_id;
-        // $visit->tag_id = $request->tag_id;
-        // $visit->department_id = $request->department_id;
-        // $visit->save();
-
-        // $tag = Tag::find($request->tag_id);
-        // $tag->status = 1;
-        // $tag->save();
 
         return redirect()->route(Auth::user()->type.'.dashboard')->with('success', 'Appointment Created!');
     }
@@ -127,13 +131,20 @@ class VisitorController extends Controller
         $input = $request->validate([
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
-            'phone' => ['required', 'string', 'max:15', 'unique:users'],
+            // 'phone' => ['required', 'string', 'max:15', 'unique:visitors'],
+            'phone' => ['required', 'string', 'max:15', Rule::unique('visitors')->ignore(Visitor::find($id))],
             'company' => ['required', 'string', 'max:255'],
         ]);
-
+        
         if ($request->email) {
-            $email = $request->validate([
-                'email' => ['string', 'email', 'max:255', 'unique:users']
+            $request->validate([
+                'email' => ['string', 'email', 'max:255', Rule::unique('visitors')->ignore(Visitor::find($id))]
+            ]);
+        }
+
+        if ($request->photo) {
+            $request->validate([
+                'photo' => ['image', 'mimes:jpeg,png,jpg,svg', 'max:5120']
             ]);
         }
 
@@ -141,10 +152,17 @@ class VisitorController extends Controller
 
         $visitor->first_name = $input['first_name'];
         $visitor->last_name = $input['last_name'];
+        
         if ($request->email) {
-            $visitor->email = $email;
+            $visitor->email = $request->email;
         }
-        // $visitor->email = $input['email'];
+        
+        if ($request->photo) {
+            $photoName = time().'.'.$request->photo->extension();
+            $request->photo->move(public_path('images/avatar'), $photoName);
+            $visitor->photo = $photoName;
+        }
+
         $visitor->phone = $input['phone'];
         $visitor->company = $input['company'];
         $visitor->save();
@@ -160,7 +178,7 @@ class VisitorController extends Controller
 
     public function taggedVisitors()
     {
-        $visits = Visit::where('status', 1)->get();
+        $visits = Visit::orderByDesc('updated_at')->where('status', 1)->get();
         return view('visitor.tagged-visitors', compact('visits'));
     }
 

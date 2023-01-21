@@ -5,7 +5,7 @@
 @section('icon', 'activity')
 @section('sub_head', 'User Dashboard')
 <div class="mt-4 row">
-    <div class="col-sm-10 offset-1">
+    <div class="col-sm-10 offset-sm-1">
         <div class="card">
             <div class="card-header border-bottom">
                 <ul class="nav nav-tabs card-header-tabs" id="cardTab" role="tablist">
@@ -23,6 +23,7 @@
                 <div class="tab-content" id="cardTabContent">
                     <div class="tab-pane fade show" id="visitors" role="tabpanel" aria-labelledby="visitors-tab">
                         @if (count($visits) > 0)
+                        <div class="table-responsive">
                             <table class="table table-striped table-hover">
                                 <thead>
                                     <tr>
@@ -50,16 +51,23 @@
                                             <td>{{ $visit->department->name }}</td>
                                             <td>{{ $visit->tag->number }}</td>
                                             <td>
+                                                <div class="d-grid gap-2 d-sm-flex justify-content-sm">
                                                 <form action="{{ route('visitor.single', $visit->visitor->id) }}"
                                                     method="GET">
 
                                                     <button class="btn btn-sm btn-primary" type="submit">View</button>
                                                 </form>
+                                                <form action="{{ route('tag.deactivate', $visit->visitor->id) }}" method="POST">
+                                                    @csrf
+                                                    <button class="btn btn-danger btn-sm" type="submit">Deactivate</button>
+                                                </form>
+                                            </div>
                                             </td>
                                         </tr>
                                     @endforeach
                                 </tbody>
                             </table>
+                        </div>
                         @else
                             <h4 class=" font-monospace mt-2 text-center">No records to show!</h4>
                         @endif
@@ -67,6 +75,7 @@
                     <div class="tab-pane fade show active" id="appointments" role="tabpanel"
                         aria-labelledby="appointments-tab">
                         @if (count($appointments) > 0)
+                        <div class="table-responsive">
                             <table class="table table-striped table-hover">
                                 <thead>
                                     <tr>
@@ -108,7 +117,7 @@
                                                     </button>
                                                     <x-approve-appointment :$appointment :$tags />
                                                 @elseif ($appointment->status == 1)
-                                                    <button class="btn btn-dark btn-sm disabled">Approved</button>
+                                                    <button class="btn btn-info btn-sm disabled">Approved</button>
                                                 @elseif ($appointment->status == 2)
                                                     <button class="btn btn-warning btn-sm disabled">Canceled</button>
                                                 @elseif ($appointment->status == 3)
@@ -125,6 +134,7 @@
                                     @endforeach
                                 </tbody>
                             </table>
+                        </div>
                         @else
                             <h4 class=" font-monospace mt-2 text-center">No records to show!</h4>
                         @endif

@@ -17,7 +17,7 @@
     <!-- Navbar Items-->
     <ul class="navbar-nav align-items-center ms-auto">
         <!-- Documentation Dropdown-->
-        <li class="nav-item dropdown no-caret d-none d-md-block me-3">
+        <li class="nav-item dropdown no-caret d-none d-sm-block me-3">
             <span class="dropdown-toggle" id="navbarDropdownDocs" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <div class="fw-500">{{ Auth::user()->first_name.' '.Auth::user()->last_name }}</div>
                 {{-- <i class="fas fa-chevron-right dropdown-arrow"></i> --}}
