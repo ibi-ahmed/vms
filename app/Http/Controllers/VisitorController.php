@@ -25,6 +25,13 @@ class VisitorController extends Controller
         $tags = Tag::where('status', 0)->get();
         return view('visitor.add-visitor', compact('departments', 'tags'));
     }
+
+    public function recent()
+    {
+        $visits = Visit::orderByDesc('updated_at')->where('status', 1)->paginate(5);
+        $tags = Tag::where('status', 0)->get();
+        return view('visitor.recent', compact('visits', 'tags'));
+    }
     
     public function storeVisitor(Request $request)
     {   
@@ -170,15 +177,27 @@ class VisitorController extends Controller
         return redirect()->route('visitor.edit', $id)->with('success', 'Visitor profile edited!');
     }
 
-    public function all()
+    public function all(Request $request)
     {
-        $visitors = Visitor::all();
+        $query = $request->get('query');
+        $visitors = Visitor::where('email', 'LIKE', '%'.$query.'%')
+            ->orWhere('phone', 'LIKE', '%'.$query.'%')
+            ->orWhere('last_name', 'LIKE', '%'.$query.'%')
+            ->paginate(5);
+            
         return view('visitor.all-visitor', compact('visitors'));
+
+        // $visitors = Visitor::whereNotNull('status')
+        //     ->orWhere('email', 'LIKE', '%'.$request->keyword.'%')
+        //     ->orWhere('phone', 'LIKE', '%'.$request->keyword.'%')
+        //     ->orWhere('last_name', 'LIKE', '%'.$request->keyword.'%')
+        //     ->paginate(5);
+        // return response()->json($visitors);
     }
 
     public function taggedVisitors()
     {
-        $visits = Visit::orderByDesc('updated_at')->where('status', 1)->get();
+        $visits = Visit::orderByDesc('updated_at')->where('status', 1)->paginate(5);
         return view('visitor.tagged-visitors', compact('visits'));
     }
 
@@ -189,8 +208,8 @@ class VisitorController extends Controller
         return view('visitor.single-visitor', compact('visits', 'visitor'));
     }
 
-    public function addVisit()
-    {
-        return view('visitor.add-visit');
-    }
+    // public function addVisit()
+    // {
+    //     return view('visitor.add-visit');
+    // }
 }

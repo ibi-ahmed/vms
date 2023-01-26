@@ -40,6 +40,13 @@
                 </a>
                 @endif
                 
+                @if(Auth::user()->type !== 'staff')
+                <a class="nav-link" href="/recent-appointments">
+                    <div class="nav-link-icon"><i data-feather="briefcase"></i></div>
+                    Recent Appointments
+                </a>
+                @endif
+                
                 @if(Auth::user()->type !== 'user')
                 <a class="nav-link" href="/schedule-appointment">
                     <div class="nav-link-icon"><i data-feather="bookmark"></i></div>
@@ -58,12 +65,21 @@
                     Create Appointment
                 </a>
                 @endif
+
                 @if(Auth::user()->type == 'super' || Auth::user()->type == 'admin')
                 <a class="nav-link" href="/all-visitor">
                     <div class="nav-link-icon"><i data-feather="users"></i></div>
                     All Visitors
                 </a>
                 @endif
+
+                @if(Auth::user()->type !== 'staff')
+                <a class="nav-link" href="/recent-visits">
+                    <div class="nav-link-icon"><i data-feather="briefcase"></i></div>
+                    Recent Visits
+                </a>
+                @endif
+
                 @if(Auth::user()->type !== 'staff')
                 <a class="nav-link" href="/tagged-visitors">
                     <div class="nav-link-icon"><i data-feather="users"></i></div>

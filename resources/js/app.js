@@ -24,6 +24,9 @@ app.component('staff-search-component', StaffSearchComponent);
 import VisitorSearchComponent from './components/VisitorSearchComponent.vue';
 app.component('visitor-search-component', VisitorSearchComponent);
 
+import AllVisitorsComponent from './components/AllVisitorsComponent.vue';
+app.component('all-visitors-component', AllVisitorsComponent);
+
 // import VisitorPhoneSearchComponent from './components/VisitorPhoneSearchComponent.vue';
 // app.component('visitor-phone-search-component', VisitorPhoneSearchComponent);
 

@@ -6,8 +6,9 @@
 @section('sub_head', 'Tagged Visitors')
 
 <div class="row">
-    <div class="col-sm-12">
+    <div class="col-sm-10 offset-sm-1">
         <div class="card">
+            <div class="card-header text-center">Tagged Visitors</div>
             <div class="card-body">
                 @if (count($visits) > 0)
                 <div class="table-responsive">
@@ -55,6 +56,9 @@
                             @endforeach
                         </tbody>
                     </table>
+                    <div class="text-center">
+                        {{ $visits->links() }}
+                    </div>
                 </div>
                 @else
                     <h4 class=" font-monospace mt-2 text-center">No records to show!</h4>

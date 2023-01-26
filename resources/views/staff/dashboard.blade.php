@@ -55,6 +55,9 @@
                                     @endforeach
                                 </tbody>
                             </table>
+                            <div class="text-center">
+                                {{ $visits->links() }}
+                            </div>
                         </div>
                         @else
                             <h4 class=" font-monospace mt-2 text-center">No records to show!</h4>
@@ -119,9 +122,11 @@
                                             </td>
                                         </tr>
                                     @endforeach
-
                                 </tbody>
                             </table>
+                            <div class="text-center">
+                                {{ $appointments->links() }}
+                            </div>
                         </div>
                         @else
                             <h4 class=" font-monospace mt-2 text-center">No records to show!</h4>
