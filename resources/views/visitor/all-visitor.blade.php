@@ -8,8 +8,20 @@
 @section('sub_head', 'All Visitors')
 
 <div class="row">
-    <div class="col-sm-12">
+    <div class="col-sm-10 offset-sm-1">
         <div class="card">
+            <div class="card-header text-center">
+                <div class="row">
+                    <div class="col-4 offset-4">
+                        <form action="{{ route('visitor.all') }}">
+                            <div class="input-group">
+                                <input class="form-control text-center" name="query" type="text" placeholder="Search Visitor..." aria-describedby="button-addon" required>
+                                <button class="btn btn-sm btn-primary" type="submit" id="button-addon">Search</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
             <div class="card-body">
                 @if (count($visitors) > 0)
                 <div class="table-responsive">
@@ -55,6 +67,9 @@
                             @endforeach
                         </tbody>
                     </table>
+                    <div class="">
+                        {{ $visitors->links() }}
+                    </div>
                 </div>
                 @else
                     <h4 class=" font-monospace mt-2 text-center">No records to show!</h4>

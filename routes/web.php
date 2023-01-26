@@ -62,13 +62,14 @@ Route::post('/add-visitor', [App\Http\Controllers\VisitorController::class, 'sto
 Route::get('/edit-visitor/{id}', [App\Http\Controllers\VisitorController::class, 'edit'])->name('visitor.edit');
 Route::post('/edit-visitor/{id}', [App\Http\Controllers\VisitorController::class, 'editVisitor'])->name('visitor.editVisitor');
 
-Route::get('/all-visitor', [App\Http\Controllers\VisitorController::class, 'all'])->name('visitor.all');
+Route::get('/all-visitor/{query?}', [App\Http\Controllers\VisitorController::class, 'all'])->name('visitor.all');
 // Route::get('/all-visitors', [App\Http\Controllers\VisitorController::class, 'all'])->name('visitor.all')->middleware('user-access:staff');
-Route::get('/tagged-visitors', [App\Http\Controllers\VisitorController::class, 'taggedVisitors'])->name('tagged.visitors');
+Route::get('/tagged-visitors/{query?}', [App\Http\Controllers\VisitorController::class, 'taggedVisitors'])->name('tagged.visitors');
 
 Route::get('/single-visitor/{id}', [App\Http\Controllers\VisitorController::class, 'single'])->name('visitor.single');
 
-Route::get('/add-visit', [App\Http\Controllers\VisitorController::class, 'addVisit'])->name('visitor.add-visit');
+Route::get('/recent-visits', [App\Http\Controllers\VisitorController::class, 'recent'])->name('visitor.recent');
+// Route::get('/add-visit', [App\Http\Controllers\VisitorController::class, 'addVisit'])->name('visitor.add-visit');
 Route::post('/add-visit', [App\Http\Controllers\VisitorController::class, 'storeVisit'])->name('visit.store');
 
 Route::get('/tag-scan/{tag_no}', [App\Http\Controllers\TagController::class, 'scan'])->name('tags.scan');
@@ -85,6 +86,7 @@ Route::post('/staff-approve-appointment/{id}', [App\Http\Controllers\Appointment
 
 Route::get('/all-appointments', [App\Http\Controllers\AppointmentController::class, 'all'])->name('appointments.all');
 Route::get('/my-appointments', [App\Http\Controllers\AppointmentController::class, 'myAppointments'])->name('appointments.my');
+Route::get('/recent-appointments', [App\Http\Controllers\AppointmentController::class, 'recent'])->name('appointments.recent');
 
 
 Route::get('/staff-search', [App\Http\Controllers\HomeController::class, 'getStaff'])->name('staff.search');

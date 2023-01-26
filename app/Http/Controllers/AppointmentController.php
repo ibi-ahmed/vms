@@ -14,7 +14,7 @@ class AppointmentController extends Controller
 {
     public function all()
     {
-        $appointments = Appointment::orderByDesc('updated_at')->get();
+        $appointments = Appointment::orderByDesc('updated_at')->paginate(5);
         $tags = Tag::where('status', 0)->get();
         return view('appointments.all', compact('appointments', 'tags'));
     }
@@ -23,6 +23,13 @@ class AppointmentController extends Controller
     {
         $departments = Department::all();
         return view('appointments.schedule', compact('departments'));
+    }
+
+    public function recent()
+    {
+        $appointments = Appointment::orderByDesc('updated_at')->paginate(5);
+        $tags = Tag::where('status', 0)->get();
+        return view('appointments.recent', compact('appointments', 'tags'));
     }
 
     public function storeAppointment(Request $request)
@@ -78,7 +85,7 @@ class AppointmentController extends Controller
     {
         $appointments = Appointment::where('staff_id', Auth::user()->id)
             ->orderByDesc('updated_at')
-            ->get();
+            ->paginate(5);
         return view('appointments.my', compact('appointments'));
     }
 

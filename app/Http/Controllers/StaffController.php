@@ -18,10 +18,10 @@ class StaffController extends Controller
 
     public function staffDashboard()
     {
-        $visits = Visit::orderByDesc('updated_at')->where('user_id', Auth::user()->id)->get();
+        $visits = Visit::orderByDesc('updated_at')->where('user_id', Auth::user()->id)->paginate(5);
         $appointments = Appointment::where('staff_id', Auth::user()->id)
             ->orderByDesc('updated_at')
-            ->get();
+            ->paginate(5);
         return view('staff.dashboard', compact('visits', 'appointments'));
     }
 }
