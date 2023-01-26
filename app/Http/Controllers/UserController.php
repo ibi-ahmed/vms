@@ -16,9 +16,10 @@ class UserController extends Controller
 
     public function userDashboard()
     {
-        $appointments = Appointment::orderByDesc('updated_at')->paginate(5);
-        $visits = Visit::orderByDesc('updated_at')->where('status', 1)->paginate(5);
-        $tags = Tag::where('status', 0)->get();
-        return view('user.dashboard', compact('visits', 'appointments', 'tags'));
+        // $appointments = Appointment::orderByDesc('updated_at')->paginate(5);
+        // $visits = Visit::orderByDesc('updated_at')->where('status', 1)->paginate(5);
+        // $tags = Tag::where('status', 0)->get();
+        // return view('user.dashboard', compact('visits', 'appointments', 'tags'));
+        return view('user.dashboard');
     }
 }

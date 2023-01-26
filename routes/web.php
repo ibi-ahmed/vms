@@ -67,6 +67,7 @@ Route::get('/all-visitor/{query?}', [App\Http\Controllers\VisitorController::cla
 Route::get('/tagged-visitors/{query?}', [App\Http\Controllers\VisitorController::class, 'taggedVisitors'])->name('tagged.visitors');
 
 Route::get('/single-visitor/{id}', [App\Http\Controllers\VisitorController::class, 'single'])->name('visitor.single');
+Route::get('/my-visitors', [App\Http\Controllers\VisitorController::class, 'my'])->name('visitor.my');
 
 Route::get('/recent-visits', [App\Http\Controllers\VisitorController::class, 'recent'])->name('visitor.recent');
 // Route::get('/add-visit', [App\Http\Controllers\VisitorController::class, 'addVisit'])->name('visitor.add-visit');

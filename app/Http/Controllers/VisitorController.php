@@ -195,6 +195,12 @@ class VisitorController extends Controller
         // return response()->json($visitors);
     }
 
+    public function my()
+    {
+        $visits = Visit::orderByDesc('updated_at')->where('user_id', Auth::user()->id)->paginate(5);
+        return view('visitor.my', compact('visits'));
+    }
+
     public function taggedVisitors()
     {
         $visits = Visit::orderByDesc('updated_at')->where('status', 1)->paginate(5);

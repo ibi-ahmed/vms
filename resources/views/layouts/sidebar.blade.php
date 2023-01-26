@@ -57,6 +57,11 @@
                     <div class="nav-link-icon"><i data-feather="bookmark"></i></div>
                     My Appointments
                 </a>
+                
+                <a class="nav-link" href="/my-visitors">
+                    <div class="nav-link-icon"><i data-feather="users"></i></div>
+                    My Visitors
+                </a>
                 @endif
 
                 @if(Auth::user()->type !== 'staff')
