@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,11 +22,15 @@ Route::get('/', function () {
     }
 });
 
+Route::get('/test', function () {
+    return response()->json('test');
+});
+
 Auth::routes(['register' => false]);
 
 // User Routes
 // Route::middleware(['user-access:user'])->group(function () {
-    Route::get('/user-dashboard', [App\Http\Controllers\UserController::class, 'userDashboard'])->name('user.dashboard');
+    Route::get('/user-dashboard', [App\Http\Controllers\UserController::class, 'userDashboard'])->name('user.dashboard')->middleware('user-access:user');
 // });
 
 // Route::middleware(['user-access:user'])->group(function () {

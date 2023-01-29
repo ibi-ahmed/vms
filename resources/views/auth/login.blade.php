@@ -23,6 +23,9 @@
                 <div class="container-xl px-4">
                     <div class="row justify-content-center">
                         <div class="col-lg-5">
+                            <div class="mt-3">
+                                <x-alerts />
+                            </div>
                             <!-- Basic login form-->
                             <div class="card shadow-lg border-0 rounded-lg mt-5">
                                 <div class="card-header justify-content-center">
