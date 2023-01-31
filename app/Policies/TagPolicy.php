@@ -3,34 +3,22 @@
 namespace App\Policies;
 
 use App\Models\Tag;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class TagPolicy
 {
     use HandlesAuthorization;
-
-    /**
-     * Determine whether the user can view any models.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function viewAny(User $user)
+    
+    public function tagAssign(User $user, Tag $tag)
     {
-        //
+        return in_array($user->role_id, [Role::IS_SUPER, Role::IS_ADMIN, Role::IS_SECURITY]);
     }
 
-    /**
-     * Determine whether the user can view the model.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Tag  $tag
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function view(User $user, Tag $tag)
+    public function tagDeactivate(User $user, Tag $tag)
     {
-        //
+        return in_array($user->role_id, [Role::IS_SUPER, Role::IS_ADMIN, Role::IS_SECURITY]);
     }
 
     /**

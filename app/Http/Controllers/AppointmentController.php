@@ -16,7 +16,7 @@ class AppointmentController extends Controller
     public function all()
     {
         $this->authorize('allAppointments', Appointment::class);
-        $appointments = Appointment::orderByDesc('updated_at')->paginate(5);
+        $appointments = Appointment::orderByDesc('updated_at')->paginate(10);
         $tags = Tag::where('status', 0)->get();
         return view('appointments.all', compact('appointments', 'tags'));
     }

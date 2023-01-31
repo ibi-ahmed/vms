@@ -21,16 +21,9 @@ class VisitorPolicy
         return in_array($user->role_id, [Role::IS_SUPER, Role::IS_ADMIN]);
     }
 
-    /**
-     * Determine whether the user can update the model.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Visitor  $visitor
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function update(User $user, Visitor $visitor)
+    public function editVisitor(User $user, Visitor $visitor)
     {
-        //
+        return in_array($user->role_id, [Role::IS_SUPER, Role::IS_ADMIN]);
     }
 
     /**

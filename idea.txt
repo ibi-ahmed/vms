@@ -7,5 +7,6 @@
 # azure auth
 # separate personal/official vist by radio/checkbox
 
-# add role when creating user
 # fix HQ, annex, floor r/ship bug
+
+# (all vis, tagged vis) add view all after search(if url has query)

@@ -1,9 +1,9 @@
 @extends('layouts.layout')
-@section('title', 'Administrator Dashboard')
+@section('title', 'Recent Visits')
 
 @section('content')
 @section('icon', 'activity')
-@section('sub_head', 'Administrator Dashboard')
+@section('sub_head', 'Recent Visits')
 
 <div class="mt-4 row">
     <div class="col-sm-8 offset-sm-2">
@@ -47,12 +47,14 @@
 
                                                     <button class="btn btn-sm btn-primary" type="submit">View</button>
                                                 </form>
+                                                @if (Auth::user()->role_id == 5 || Auth::user()->role_id == 4 || Auth::user()->role_id == 2)                                                
                                                 <form action="{{ route('tag.deactivate', $visit->visitor->id) }}"
                                                     method="POST">
                                                     @csrf
                                                     <button class="btn btn-danger btn-sm"
-                                                        type="submit">Deactivate</button>
+                                                    type="submit">Deactivate</button>
                                                 </form>
+                                                @endif
                                             </div>
                                         </td>
                                     </tr>

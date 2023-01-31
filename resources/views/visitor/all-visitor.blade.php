@@ -58,9 +58,11 @@
                                         <form action="{{ route('visitor.single', $visitor->id) }}" method="GET">
                                             <button class="btn btn-sm btn-primary" type="submit">View</button>
                                         </form>
+                                        @can('editVisitor', $visitor)                                         
                                         <form action="{{ route('visitor.edit', $visitor->id) }}" method="GET">
                                             <button class="btn btn-sm btn-info" type="submit">Edit</button>
                                         </form>
+                                        @endcan
                                     </div>
                                     </td>
                                 </tr>

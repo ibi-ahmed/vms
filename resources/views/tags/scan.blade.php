@@ -7,7 +7,7 @@
 <div class="row">
     <div class="col-sm-6 offset-sm-3">
         <div class="card mb-4">
-            <div class="card-header">
+            <div class="card-header text-center">
                 Visitor Info
             </div>
             @if (isset($visit))
@@ -21,13 +21,17 @@
                     <li class="list-group-item">{{ $visit->visitor->first_name . ' ' . $visit->visitor->last_name }}</li>
                     <li class="list-group-item">{{ $visit->visitor->company }}</li>
                     <li class="list-group-item">Department - {{ $visit->department->name }}</li>
-                    <li class="list-group-item">Staff - {{ $visit->user->first_name . ' ' . $visit->user->last_name }}</li>
-                    <li class="list-group-item">
-                        <form action="{{ route('tag.deactivate', $visit->visitor->id) }}" method="POST">
-                            @csrf
-                            <button class="btn btn-danger btn-sm" type="submit">Deactivate</button>
-                        </form>
-                    </li>
+                    <li class="list-group-item">Staff - {{ $visit->user->name }}</li>
+                    @if (Auth::check()) 
+                        @if (Auth::user()->role_id == 5 || Auth::user()->role_id == 4 || Auth::user()->role_id == 2)
+                        <li class="list-group-item">
+                            <form action="{{ route('tag.deactivate', $visit->visitor->id) }}" method="POST">
+                                @csrf
+                                <button class="btn btn-danger btn-sm" type="submit">Deactivate</button>
+                            </form>
+                        </li>
+                        @endif
+                    @endif
                 </ul>
             @else
                 <div class="card-body text-center">

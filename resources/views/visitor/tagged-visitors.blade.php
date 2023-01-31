@@ -6,7 +6,7 @@
 @section('sub_head', 'Tagged Visitors')
 
 <div class="row">
-    <div class="col-sm-10 offset-sm-1">
+    <div class="col-sm-8 offset-sm-2">
         <div class="card">
             <div class="card-header text-center">Tagged Visitors</div>
             <div class="card-body">
@@ -43,13 +43,17 @@
                                                 <form action="{{ route('visitor.single', $visit->visitor->id) }}" method="GET">                                          
                                                     <button class="btn btn-success btn-sm me-sm-2" type="submit">View</button>
                                                 </form>
+                                                @if (Auth::user()->role_id == 5 || Auth::user()->role_id == 4)
                                                 <form action="{{ route('visitor.edit', $visit->visitor->id) }}" method="GET">
                                                     <button class="btn btn-primary btn-sm" type="submit">Edit</button>
                                                 </form>
+                                                @endif
+                                                @if (Auth::user()->role_id == 5 || Auth::user()->role_id == 4 || Auth::user()->role_id == 2)
                                                 <form action="{{ route('tag.deactivate', $visit->visitor->id) }}" method="POST">
                                                     @csrf
                                                     <button class="btn btn-danger btn-sm" type="submit">Deactivate</button>
                                                 </form>
+                                                @endif
                                         </div>
                                     </td>
                                 </tr>

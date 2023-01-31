@@ -7,7 +7,7 @@
 <div class="row">
     <div class="col-sm-4">
         <div class="card mb-4">
-            <div class="card-header">
+            <div class="card-header text-center">
                 Visitor Info
             </div>
             <div class="card-body text-center">
@@ -25,14 +25,18 @@
                 <li class="list-group-item">{{ $visitor->phone }}</li>
                 <li class="list-group-item text-center">
                     <div class="d-grid gap-2 d-sm-flex justify-content-sm-end">
+                        @can('editVisitor', $visitor)
                         <form action="{{ route('visitor.edit', $visitor->id) }}" method="GET">
                             <button class="btn btn-primary btn-sm" type="submit">Edit</button>
                         </form>
+                        @endcan
                         @if ($visitor->status == 1)
+                            @if (Auth::user()->role_id == 5 || Auth::user()->role_id == 4 || Auth::user()->role_id == 2)
                             <form action="{{ route('tag.deactivate', $visitor->id) }}" method="POST">
                                 @csrf
                                 <button class="btn btn-danger btn-sm" type="submit">Deactivate</button>
                             </form>
+                            @endif
                         @endif
                     </div>
                 </li>

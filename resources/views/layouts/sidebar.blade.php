@@ -3,7 +3,9 @@
         <div class="sidenav-menu">
             <div class="nav accordion" id="accordionSidenav">
                 <!-- Sidenav Menu Heading (Core)-->
+                @if (Auth::check()) 
                 <div class="sidenav-menu-heading">{{ auth()->user()->role->name }}</div>
+                @endif
                 <!-- Sidenav Accordion (Dashboard)-->
                 <a class="nav-link" href="/">
                     <div class="nav-link-icon"><i data-feather="activity"></i></div>
@@ -84,10 +86,12 @@
         </div>
         <!-- Sidenav Footer-->
         <div class="sidenav-footer">
+            @if (Auth::check())              
             <div class="sidenav-footer-content">
                 <div class="sidenav-footer-subtitle">Logged in as:</div>
                 <div class="sidenav-footer-title">{{ auth()->user()->role->name }}</div>
             </div>
+            @endif
         </div>
     </nav>
 </div>

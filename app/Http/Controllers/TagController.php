@@ -13,7 +13,7 @@ class TagController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth')->except('scan');
     }
 
     public function scan($tag_no)
@@ -27,6 +27,9 @@ class TagController extends Controller
 
     public function tagAssign(Request $request, $id)
     {
+        $tag = Tag::find($request->tag_id);
+        $this->authorize('tagAssign', $tag);
+        
         $appointment = Appointment::find($id);
         $appointment->status = 1;
         $appointment->save();
@@ -35,7 +38,7 @@ class TagController extends Controller
         $visitor->status = 1;
         $visitor->save();
 
-        $tag = Tag::find($request->tag_id);
+        // $tag = Tag::find($request->tag_id);
         $tag->status = 1;
         $tag->save();
 
@@ -53,14 +56,19 @@ class TagController extends Controller
     public function tagDeactivate($id)
     {
         $visitor = Visitor::find($id);
+        $visit = Visit::where('visitor_id', $visitor->id)->first();
+        $tag = Tag::find($visit->tag_id);
+        $this->authorize('tagDeactivate', $tag);
+
+        // $visitor = Visitor::find($id);
         $visitor->status = 0;
         $visitor->save();
 
-        $visit = Visit::where('visitor_id', $visitor->id)->first();
+        // $visit = Visit::where('visitor_id', $visitor->id)->first();
         $visit->status = 0;
         $visit->save();
 
-        $tag = Tag::find($visit->tag_id);
+        // $tag = Tag::find($visit->tag_id);
         $tag->status = 0;
         $tag->save();
 

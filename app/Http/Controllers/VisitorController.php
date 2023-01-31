@@ -133,11 +133,14 @@ class VisitorController extends Controller
     public function edit($id)
     {
         $visitor = Visitor::find($id);
+        $this->authorize('editVisitor', $visitor);
         return view('visitor.edit-visitor', compact('visitor'));
     }
     
     public function editVisitor(Request $request, $id)
     {
+        $visitor = Visitor::find($id);
+        $this->authorize('editVisitor', $visitor);
         $input = $request->validate([
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
@@ -158,7 +161,7 @@ class VisitorController extends Controller
             ]);
         }
 
-        $visitor = Visitor::find($id);
+        // $visitor = Visitor::find($id);
 
         $visitor->first_name = $input['first_name'];
         $visitor->last_name = $input['last_name'];
@@ -187,7 +190,7 @@ class VisitorController extends Controller
         $visitors = Visitor::where('email', 'LIKE', '%'.$query.'%')
             ->orWhere('phone', 'LIKE', '%'.$query.'%')
             ->orWhere('last_name', 'LIKE', '%'.$query.'%')
-            ->paginate(5);
+            ->paginate(10);
             
         return view('visitor.all-visitor', compact('visitors'));
 
@@ -209,7 +212,7 @@ class VisitorController extends Controller
     public function taggedVisitors()
     {
         $this->authorize('taggedVisitors', Visit::class);
-        $visits = Visit::orderByDesc('updated_at')->where('status', 1)->paginate(5);
+        $visits = Visit::orderByDesc('updated_at')->where('status', 1)->paginate(10);
         return view('visitor.tagged-visitors', compact('visits'));
     }
 
