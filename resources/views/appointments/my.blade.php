@@ -10,6 +10,7 @@
 <div class="row">
     <div class="col-sm-12">
         <div class="card">
+            <div class="card-header border-bottom text-center">My Appointments</div>
             <div class="card-body">
                 @if (count($appointments) > 0)
                 <div class="table-responsive">

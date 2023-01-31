@@ -10,6 +10,7 @@
 <div class="row">
     <div class="col-sm-12">
         <div class="card">
+            <div class="card-header border-bottom text-center">All Appointments</div>
             <div class="card-body">
                 @if (count($appointments) > 0)
                 <div class="table-responsive">
@@ -43,7 +44,7 @@
                                     </td>
                                     <td>{{ $appointment->company }}</td>
                                     <td>
-                                        {{ $appointment->staff->first_name . ' ' . $appointment->staff->last_name }}
+                                        {{ $appointment->staff->name}}
                                     </td>
                                     <td>{{ $appointment->department->name }}</td>
                                     <td>

@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Role;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -16,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     if (Auth::check()) {
-        return redirect()->route(Auth::user()->type.'.dashboard');
+        return redirect()->route(strtolower(Auth::user()->role->name).'.dashboard');
     }else {
         return redirect()->route('login');
     }
@@ -30,32 +31,27 @@ Auth::routes(['register' => false]);
 
 // User Routes
 // Route::middleware(['user-access:user'])->group(function () {
-    Route::get('/user-dashboard', [App\Http\Controllers\UserController::class, 'userDashboard'])->name('user.dashboard')->middleware('user-access:user');
-// });
-
-// Route::middleware(['user-access:user'])->group(function () {
-    // Route::get('/q', function(){ 
-    //     return response()->json('supp'); 
-    // })->middleware(['user-access:staff', 'user-access:user']);
+    Route::get('/security-dashboard', [App\Http\Controllers\UserController::class, 'securityDashboard'])->name('security.dashboard');
+    Route::get('/contractor-dashboard', [App\Http\Controllers\UserController::class, 'contractorDashboard'])->name('contractor.dashboard');
 // });
 
 // Staff Routes
 // Route::middleware(['auth', 'user-access:staff'])->group(function () {
-    Route::get('/staff-dashboard', [App\Http\Controllers\StaffController::class, 'staffDashboard'])->name('staff.dashboard');
+    Route::get('/staff-dashboard', [App\Http\Controllers\UserController::class, 'staffDashboard'])->name('staff.dashboard');
 // });
 
 // Admin Routes
 // Route::middleware(['auth', 'user-access:admin'])->group(function () {
-    Route::get('/admin-dashboard', [App\Http\Controllers\AdminController::class, 'adminDashboard'])->name('admin.dashboard');
+    Route::get('/admin-dashboard', [App\Http\Controllers\UserController::class, 'adminDashboard'])->name('admin.dashboard');
 // });
 
 // Super Routes
 // Route::middleware(['auth', 'user-access:super'])->group(function () {  
-    Route::get('/super-dashboard', [App\Http\Controllers\SuperController::class, 'superDashboard'])->name('super.dashboard');
+    Route::get('/super-dashboard', [App\Http\Controllers\UserController::class, 'superDashboard'])->name('super.dashboard');
 // });
 
-Route::get('/add-user', [App\Http\Controllers\AdminController::class, 'addUser'])->name('user.register');
-Route::post('/add-user', [App\Http\Controllers\AdminController::class, 'storeUser'])->name('user.store');
+Route::get('/add-user', [App\Http\Controllers\UserController::class, 'addUser'])->name('user.register');
+Route::post('/add-user', [App\Http\Controllers\UserController::class, 'storeUser'])->name('user.store');
 
 Route::get('/visitor-search', [App\Http\Controllers\VisitorController::class, 'getVisitor'])->name('visitor.search');
 // Route::get('/visitor-search-phone', [App\Http\Controllers\VisitorController::class, 'getVisitorByPhone'])->name('visitor.search.phone');

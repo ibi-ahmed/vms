@@ -1,9 +1,9 @@
 @extends('layouts.layout')
-@section('title', 'User Dashboard')
+@section('title', 'Security Dashboard')
 
 @section('content')
 @section('icon', 'activity')
-@section('sub_head', 'User Dashboard')
+@section('sub_head', 'Security Dashboard')
 
 <div class="mt-4 row">
     <div class="col-sm-8 offset-sm-2">

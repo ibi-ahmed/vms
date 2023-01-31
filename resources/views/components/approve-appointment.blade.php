@@ -87,7 +87,7 @@
                     <!-- Form Group (Staff)-->
                     <div class="mb-3">
                         <label class="mb-1" for="staff_email">Receiving Staff</label>
-                        <input class="form-control" name="staff_name" type="text" value="{{ $appointment->staff->first_name.' '.$appointment->staff->last_name }}" required readonly/>
+                        <input class="form-control" name="staff_name" type="text" value="{{ $appointment->staff->name }}" required readonly/>
                         {{-- <staff-search-component></staff-search-component> --}}
                     </div>
 

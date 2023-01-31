@@ -42,7 +42,7 @@
                                         </td>
                                         <td>{{ $appointment->company }}</td>
                                         <td>
-                                            {{ $appointment->staff->first_name . ' ' . $appointment->staff->last_name }}
+                                            {{ $appointment->staff->name }}
                                         </td>
                                         <td>{{ $appointment->department->name }}</td>
                                         <td>

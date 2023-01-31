@@ -47,7 +47,7 @@ class TagController extends Controller
         $visit->status = 1;
         $visit->save();
 
-        return redirect()->route(Auth::user()->type.'.dashboard')->with('success', 'Tag Assigned!');
+        return redirect()->route(strtolower(Auth::user()->role->name).'.dashboard')->with('success', 'Tag Assigned!');
     }
 
     public function tagDeactivate($id)
@@ -64,6 +64,6 @@ class TagController extends Controller
         $tag->status = 0;
         $tag->save();
 
-        return redirect()->route(Auth::user()->type.'.dashboard')->with('success', 'Tag Deactivated!');
+        return redirect()->route(strtolower(Auth::user()->role->name).'.dashboard')->with('success', 'Tag Deactivated!');
     }
 }

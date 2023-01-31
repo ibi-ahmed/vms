@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Models\Role;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -50,15 +51,16 @@ class LoginController extends Controller
      
         if(auth()->attempt(array('email' => $input['email'], 'password' => $input['password'])))
         {
-            if (auth()->user()->type == 'super') {
+            if (auth()->user()->role_id == Role::IS_SUPER) {
                 return redirect()->route('super.dashboard');
-            }else if (auth()->user()->type == 'admin') {
+            }else if (auth()->user()->role_id == Role::IS_ADMIN) {
                 return redirect()->route('admin.dashboard');
-            }else if (auth()->user()->type == 'staff'){
+            }else if (auth()->user()->role_id == Role::IS_STAFF) {
                 return redirect()->route('staff.dashboard');
-            }
-            else{
-                return redirect()->route('user.dashboard');
+            }else if (auth()->user()->role_id == Role::IS_SECURITY) {
+                return redirect()->route('security.dashboard');
+            }else if (auth()->user()->role_id == Role::IS_CONTRACTOR) {
+                return redirect()->route('contractor.dashboard');
             }
         }else{
             return redirect()->route('login')

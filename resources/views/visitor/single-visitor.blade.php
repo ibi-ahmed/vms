@@ -61,7 +61,7 @@
                                         <td>
                                             <div class="d-flex">
                                                 <div class=""></div>
-                                                {{ $visit->user->first_name . ' ' . $visit->user->last_name }}
+                                                {{ $visit->user->name }}
                                             </div>
                                         </td>
                                         <td>{{ $visit->department->name }}</td>

@@ -9,11 +9,13 @@ use App\Models\Visit;
 use App\Models\Visitor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 class AppointmentController extends Controller
 {
     public function all()
     {
+        $this->authorize('allAppointments', Appointment::class);
         $appointments = Appointment::orderByDesc('updated_at')->paginate(5);
         $tags = Tag::where('status', 0)->get();
         return view('appointments.all', compact('appointments', 'tags'));
@@ -21,12 +23,14 @@ class AppointmentController extends Controller
 
     public function schedule()
     {
+        $this->authorize('schedule', Appointment::class);
         $departments = Department::all();
         return view('appointments.schedule', compact('departments'));
     }
 
     public function recent()
     {
+        $this->authorize('recentAppointments', Appointment::class);
         $appointments = Appointment::orderByDesc('updated_at')->paginate(5);
         $tags = Tag::where('status', 0)->get();
         return view('appointments.recent', compact('appointments', 'tags'));
@@ -34,6 +38,7 @@ class AppointmentController extends Controller
 
     public function storeAppointment(Request $request)
     {
+        $this->authorize('schedule', Appointment::class);
         $input = $request->validate([
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
@@ -59,7 +64,7 @@ class AppointmentController extends Controller
         $appointment->staff_id = Auth::user()->id;
         $appointment->save();
 
-        return redirect()->route(Auth::user()->type . '.dashboard')->with('success', 'Appointment Created!');
+        return redirect()->route(Auth::user()->role->name . '.dashboard')->with('success', 'Appointment Created!');
     }
 
     public function storeExistingVisitorAppointment(Request $request)
@@ -78,11 +83,12 @@ class AppointmentController extends Controller
         $appointment->staff_id = Auth::user()->id;
         $appointment->save();
 
-        return redirect()->route(Auth::user()->type . '.dashboard')->with('success', 'Appointment Created!');
+        return redirect()->route(strtolower(Auth::user()->role->name).'.dashboard')->with('success', 'Appointment Created!');
     }
 
     public function myAppointments()
     {
+        $this->authorize('myAppointments', Appointment::class);   
         $appointments = Appointment::where('staff_id', Auth::user()->id)
             ->orderByDesc('updated_at')
             ->paginate(5);
@@ -149,7 +155,7 @@ class AppointmentController extends Controller
         $tag->status = 1;
         $tag->save();
 
-        return redirect()->route(Auth::user()->type . '.dashboard')->with('success', 'Visit Added');
+        return redirect()->route(strtolower(Auth::user()->role->name).'.dashboard')->with('success', 'Visit Added');
     }
 
     public function staffApproveAppointment($id)

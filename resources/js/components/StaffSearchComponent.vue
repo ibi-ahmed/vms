@@ -3,7 +3,7 @@
         <input class="form-control" type="text" v-model="keyword" @input="handleInput" placeholder="Search Staff..." required>
         <ul class="list-group" v-if="Users.length > 0">
             <a role="button">
-                <li class="list-group-item" v-for="user in Users" :key="user.id" v-text="user.first_name + ' ' + user.last_name" @click="autocomplete(user.first_name + ' ' + user.last_name, user.id)"></li>
+                <li class="list-group-item" v-for="user in Users" :key="user.id" v-text="user.name" @click="autocomplete(user.name, user.id)"></li>
             </a>
         </ul>
         <input type="text" name="staff_id" v-model="staff_id" hidden>

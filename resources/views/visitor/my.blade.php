@@ -7,21 +7,8 @@
 <div class="mt-4 row">
     <div class="col-sm-10 offset-sm-1">
         <div class="card">
-            <div class="card-header border-bottom">My Visitors
-                {{-- <ul class="nav nav-tabs card-header-tabs" id="cardTab" role="tablist">
-                    <li class="nav-item">
-                        <a class="nav-link" id="visitors-tab" href="#visitors" data-bs-toggle="tab" role="tab"
-                            aria-controls="visitors" aria-selected="true">My Visitors</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" id="appointments-tab" href="#appointments" data-bs-toggle="tab"
-                            role="tab" aria-controls="appointments" aria-selected="false">My Appointments</a>
-                    </li>
-                </ul> --}}
-            </div>
+            <div class="card-header border-bottom text-center">My Visitors</div>
             <div class="card-body">
-                {{-- <div class="tab-content" id="cardTabContent"> --}}
-                    {{-- <div class="tab-pane fade show" id="visitors" role="tabpanel" aria-labelledby="visitors-tab"> --}}
                         @if (count($visits) > 0)
                         <div class="table-responsive">
                             <table class="table table-striped table-hover">

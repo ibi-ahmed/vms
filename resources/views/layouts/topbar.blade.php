@@ -19,7 +19,7 @@
         <!-- Documentation Dropdown-->
         <li class="nav-item dropdown no-caret d-none d-sm-block me-3">
             <span class="dropdown-toggle" id="navbarDropdownDocs" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <div class="fw-500">{{ Auth::user()->first_name.' '.Auth::user()->last_name }}</div>
+                <div class="fw-500">{{ Auth::user()->name }}</div>
                 {{-- <i class="fas fa-chevron-right dropdown-arrow"></i> --}}
             </span>
             {{-- <div class="dropdown-menu dropdown-menu-end py-0 me-sm-n15 me-lg-0 o-hidden animated--fade-in-up" aria-labelledby="navbarDropdownDocs">

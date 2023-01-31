@@ -16,11 +16,12 @@ class VisitorController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+
     }
 
     public function add()
     {
+        $this->authorize('add', Visitor::class);
         $departments = Department::all();
         $tags = Tag::where('status', 0)->get();
         return view('visitor.add-visitor', compact('departments', 'tags'));
@@ -28,6 +29,7 @@ class VisitorController extends Controller
 
     public function recent()
     {
+        $this->authorize('recentVisits', Visit::class);
         $visits = Visit::orderByDesc('updated_at')->where('status', 1)->paginate(5);
         $tags = Tag::where('status', 0)->get();
         return view('visitor.recent', compact('visits', 'tags'));
@@ -35,6 +37,7 @@ class VisitorController extends Controller
     
     public function storeVisitor(Request $request)
     {   
+        $this->authorize('add', Visitor::class);
         $input = $request->validate([
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
@@ -87,7 +90,7 @@ class VisitorController extends Controller
         $appointment->status = 3;
         $appointment->save();
 
-        return redirect()->route(Auth::user()->type.'.dashboard')->with('success', 'Appointment Created!');
+        return redirect()->route(strtolower(Auth::user()->role->name).'.dashboard')->with('success', 'Appointment Created!');
     }
 
     public function storeVisit(Request $request)
@@ -107,7 +110,7 @@ class VisitorController extends Controller
         $appointment->status = 3;
         $appointment->save();
 
-        return redirect()->route(Auth::user()->type.'.dashboard')->with('success', 'Appointment Created!');
+        return redirect()->route(strtolower(Auth::user()->role->name).'.dashboard')->with('success', 'Appointment Created!');
     }
 
     public function getVisitor(Request $request)
@@ -179,6 +182,7 @@ class VisitorController extends Controller
 
     public function all(Request $request)
     {
+        $this->authorize('allVisitors', Visitor::class);
         $query = $request->get('query');
         $visitors = Visitor::where('email', 'LIKE', '%'.$query.'%')
             ->orWhere('phone', 'LIKE', '%'.$query.'%')
@@ -197,12 +201,14 @@ class VisitorController extends Controller
 
     public function my()
     {
+        $this->authorize('myVisitors', Visit::class);
         $visits = Visit::orderByDesc('updated_at')->where('user_id', Auth::user()->id)->paginate(5);
         return view('visitor.my', compact('visits'));
     }
 
     public function taggedVisitors()
     {
+        $this->authorize('taggedVisitors', Visit::class);
         $visits = Visit::orderByDesc('updated_at')->where('status', 1)->paginate(5);
         return view('visitor.tagged-visitors', compact('visits'));
     }

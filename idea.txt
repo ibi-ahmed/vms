@@ -4,7 +4,8 @@
         edit visitor, total visits by dept, add new tag, delete tag, unattach tag to visitor 
 #   super -> all + add/edit staff/admin
 # <h3><img src="https://api.qrserver.com/v1/create-qr-code/?data=https://ticketroom.ng/attendance/{{$tran->reference}}&amp;size=100x100"/></h3>
-# optimise for all screen sizes
 # azure auth
-# separate user table
 # separate personal/official vist by radio/checkbox
+
+# add role when creating user
+# fix HQ, annex, floor r/ship bug
