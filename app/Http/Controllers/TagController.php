@@ -47,6 +47,7 @@ class TagController extends Controller
         $visit->user_id = $appointment->staff_id;
         $visit->tag_id = $request->tag_id;
         $visit->department_id = $appointment->department_id;
+        $visit->location_id = $appointment->location_id;
         $visit->status = 1;
         $visit->save();
 

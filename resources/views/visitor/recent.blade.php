@@ -6,7 +6,7 @@
 @section('sub_head', 'Recent Visits')
 
 <div class="mt-4 row">
-    <div class="col-sm-8 offset-sm-2">
+    <div class="col-sm-10 offset-sm-1">
         <div class="card">
             <div class="card-header border-bottom text-center">Recent Visits</div>
             <div class="card-body">

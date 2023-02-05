@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('email')->unique()->nullable();
             $table->string('phone')->unique();
             $table->integer('department_id');
+            $table->integer('location_id');
             $table->integer('staff_id');
             $table->tinyInteger('status')->default(0);
             $table->timestamps();

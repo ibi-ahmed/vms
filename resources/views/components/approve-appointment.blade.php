@@ -60,19 +60,25 @@
                     </div>
 
                     <div class="row gx-3 mb-3">
-                        <!-- Form Group (Department)-->
-                        <div class="col-sm-6">
-                            <label class="mb-1" for="department_id">Select Destination</label>
-                            <select class="form-select" name="department_id" aria-label="Default select example"
+                        <!-- Form Group (Location)-->
+                        <div class="col-sm-4">
+                            <label class="mb-1" for="location_id">Select Location</label>
+                            <select class="form-select" name="location_id" aria-label="Default select example"
                                 required>
-                                {{-- <option selected>Select Destination</option> --}}
-                                {{-- @foreach ($departments as $department) --}}
-                                    <option value="{{ $appointment->department_id }}">{{ $appointment->department->name }}</option>
-                                {{-- @endforeach --}}
+                                    <option value="{{ $appointment->location_id }}">{{ $appointment->location->name }}</option>
                             </select>
                         </div>
 
-                        <div class="col-sm-6">
+                        <!-- Form Group (Department)-->
+                        <div class="col-sm-4">
+                            <label class="mb-1" for="department_id">Select Destination</label>
+                            <select class="form-select" name="department_id" aria-label="Default select example"
+                                required>
+                                    <option value="{{ $appointment->department_id }}">{{ $appointment->department->name }}</option>
+                            </select>
+                        </div>
+
+                        <div class="col-sm-4">
                             <label class="mb-1" for="tag_id">Select Tag</label>
                             <select class="form-select" name="tag_id" aria-label="Default select example"
                                 required>

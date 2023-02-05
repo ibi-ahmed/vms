@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Visitor;
 use App\Models\Visit;
+use Ramsey\Uuid\Type\Integer;
 
 class HomeController extends Controller
 {

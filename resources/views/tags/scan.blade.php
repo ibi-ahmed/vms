@@ -6,7 +6,7 @@
 @section('sub_head', 'Visit Details')
 <div class="row">
     <div class="col-sm-6 offset-sm-3">
-        <div class="card mb-4">
+        <div class="card mb-4 text-center">
             <div class="card-header text-center">
                 Visitor Info
             </div>
@@ -21,6 +21,7 @@
                     <li class="list-group-item">{{ $visit->visitor->first_name . ' ' . $visit->visitor->last_name }}</li>
                     <li class="list-group-item">{{ $visit->visitor->company }}</li>
                     <li class="list-group-item">Department - {{ $visit->department->name }}</li>
+                    <li class="list-group-item">Location - {{ $visit->location->name }}</li>
                     <li class="list-group-item">Staff - {{ $visit->user->name }}</li>
                     @if (Auth::check()) 
                         @if (Auth::user()->role_id == 5 || Auth::user()->role_id == 4 || Auth::user()->role_id == 2)

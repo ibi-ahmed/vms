@@ -21,6 +21,7 @@
                                     <th>Company</th>
                                     <th>Staff</th>
                                     <th>Department</th>
+                                    <th>Location</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -45,6 +46,7 @@
                                             {{ $appointment->staff->name }}
                                         </td>
                                         <td>{{ $appointment->department->name }}</td>
+                                        <td>{{ $appointment->location->name }}</td>
                                         <td>
                                             @if ($appointment->status == 0)
                                                 <button type="button" class="btn btn-sm btn-success"

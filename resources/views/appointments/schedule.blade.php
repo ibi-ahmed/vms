@@ -64,8 +64,10 @@
                                 </div>
                                 
                             </div>
-        
-                            <!-- Form Group (Department)-->
+
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <!-- Form Group (Department)-->
                             <div class="mb-3">
                                 <label class="mb-1" for="department_id">Select Destination</label>
                                 <select class="form-select" name="department_id" aria-label="Default select example" required>
@@ -74,6 +76,20 @@
                                         <option value="{{ $department->id }}">{{ $department->name }}</option>
                                     @endforeach
                                 </select>
+                            </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <!-- Form Group (Location)-->
+                            <div class="mb-3">
+                                <label class="mb-1" for="location_id">Select Location</label>
+                                <select class="form-select" name="location_id" aria-label="Default select example" required>
+                                    {{-- <option selected>Select Destination</option> --}}
+                                    @foreach ($locations as $location)
+                                        <option value="{{ $location->id }}">{{ $location->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                                </div>
                             </div>
         
                             <!-- Submit button-->
@@ -86,17 +102,27 @@
                         <form method="POST" action="{{ route('existing_visitor_appointments.store') }}">
                             @csrf
                             <div class="mb-4 row">
-                                <div class="col-sm-6">
+                                <div class="col-sm-4">
                                     <label class="mb-1" for="vis_id">Select Visitor</label>
                                     <visitor-search-component></visitor-search-component>
                                 </div>
-                                <div class="col-sm-6">
+                                <div class="col-sm-4">
                                     <label class="mb-1" for="department_id">Select Destination</label>
                                     <select class="form-select" name="department_id"
                                         aria-label="Default select example" required>
                                         {{-- <option selected>Select Destination</option> --}}
                                         @foreach ($departments as $department)
                                             <option value="{{ $department->id }}">{{ $department->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label class="mb-1" for="location_id">Select Location</label>
+                                    <select class="form-select" name="location_id"
+                                        aria-label="Default select example" required>
+                                        {{-- <option selected>Select Destination</option> --}}
+                                        @foreach ($locations as $location)
+                                            <option value="{{ $location->id }}">{{ $location->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>

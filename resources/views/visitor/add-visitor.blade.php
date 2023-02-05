@@ -72,8 +72,20 @@
                             </div>
 
                             <div class="row gx-3 mb-3">
+                                <!-- Form Group (Location)-->
+                                <div class="col-sm-4">
+                                    <label class="mb-1" for="location_id">Select Location</label>
+                                    <select class="form-select" name="location_id" aria-label="Default select example"
+                                        required>
+                                        {{-- <option selected>Select Location</option> --}}
+                                        @foreach ($locations as $location)
+                                            <option value="{{ $location->id }}">{{ $location->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
                                 <!-- Form Group (Department)-->
-                                <div class="col-sm-6">
+                                <div class="col-sm-4">
                                     <label class="mb-1" for="department_id">Select Destination</label>
                                     <select class="form-select" name="department_id" aria-label="Default select example"
                                         required>
@@ -84,7 +96,7 @@
                                     </select>
                                 </div>
 
-                                <div class="col-sm-6">
+                                <div class="col-sm-4">
                                     <label class="mb-1" for="staff_email">Receiving Staff</label>
                                 <staff-search-component></staff-search-component>
                                 </div>
@@ -107,8 +119,20 @@
                             </div><hr>
 
                             <div class="row gx-3 mb-3">
+                                <!-- Form Group (Location)-->
+                                <div class="col-sm-4">
+                                    <label class="mb-1" for="department_id">Select Location</label>
+                                    <select class="form-select" name="location_id"
+                                        aria-label="Default select example" required>
+                                        {{-- <option selected>Select Location</option> --}}
+                                        @foreach ($locations as $location)
+                                            <option value="{{ $location->id }}">{{ $location->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
                                 <!-- Form Group (Department)-->
-                                <div class="col-sm-6">
+                                <div class="col-sm-4">
                                     <label class="mb-1" for="department_id">Select Destination</label>
                                     <select class="form-select" name="department_id"
                                         aria-label="Default select example" required>
@@ -119,7 +143,7 @@
                                     </select>
                                 </div>
 
-                                <div class="col-sm-6">
+                                <div class="col-sm-4">
                                     <label class="mb-1" for="staff_id">Receiving Staff</label>
                                 <staff-search-component></staff-search-component>
                                 </div>

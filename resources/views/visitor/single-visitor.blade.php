@@ -54,6 +54,7 @@
                                     <th>S/N</th>
                                     <th>Staff</th>
                                     <th>Department</th>
+                                    <th>Location</th>
                                     <th>Time</th>
                                     <th>Date</th>
                                 </tr>
@@ -69,6 +70,7 @@
                                             </div>
                                         </td>
                                         <td>{{ $visit->department->name }}</td>
+                                        <td>{{ $visit->location->name }}</td>
                                         <td>
                                             {{ date('h:i A', strtotime($visit->created_at)) }}
                                         </td>
@@ -78,7 +80,7 @@
                             </tbody>
                             <tfoot class="text-center">
                                 <tr>
-                                    <td class="" colspan="5">PREVIOUS VISITS</td>
+                                    <td class="" colspan="6">PREVIOUS VISITS</td>
                                 </tr>
                             </tfoot>
                         </table>

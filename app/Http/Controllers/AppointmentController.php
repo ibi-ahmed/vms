@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Appointment;
 use App\Models\Department;
+use App\Models\Location;
 use App\Models\Tag;
 use App\Models\Visit;
 use App\Models\Visitor;
@@ -25,7 +26,8 @@ class AppointmentController extends Controller
     {
         $this->authorize('schedule', Appointment::class);
         $departments = Department::all();
-        return view('appointments.schedule', compact('departments'));
+        $locations = Location::all();
+        return view('appointments.schedule', compact('departments', 'locations'));
     }
 
     public function recent()
@@ -61,6 +63,7 @@ class AppointmentController extends Controller
         }
         $appointment->phone = $input['phone'];
         $appointment->department_id = $request->department_id;
+        $appointment->location_id = $request->location_id;
         $appointment->staff_id = Auth::user()->id;
         $appointment->save();
 
@@ -80,6 +83,7 @@ class AppointmentController extends Controller
         }
         $appointment->phone = $visitor->phone;
         $appointment->department_id = $request->department_id;
+        $appointment->location_id = $request->location_id;
         $appointment->staff_id = Auth::user()->id;
         $appointment->save();
 
@@ -148,6 +152,7 @@ class AppointmentController extends Controller
         $visit->user_id = $appointment->staff_id;
         $visit->tag_id = $request->tag_id;
         $visit->department_id = $appointment->department_id;
+        $visit->location_id = $appointment->location_id;
         $visit->status = 1;
         $visit->save();
 

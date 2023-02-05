@@ -13,14 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('visits', function (Blueprint $table) {
+        Schema::create('locations', function (Blueprint $table) {
             $table->id();
-            $table->integer('visitor_id');
-            $table->integer('user_id');
-            $table->integer('tag_id');
-            $table->integer('department_id');
-            $table->integer('location_id');
-            $table->tinyInteger('status')->default(1);
+            $table->string('name');
             $table->timestamps();
         });
     }
@@ -32,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('visits');
+        Schema::dropIfExists('locations');
     }
 };
