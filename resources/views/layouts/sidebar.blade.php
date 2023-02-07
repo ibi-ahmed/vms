@@ -11,6 +11,13 @@
                     <div class="nav-link-icon"><i data-feather="activity"></i></div>
                     Dashboard
                 </a>
+
+                @can('allUsers', \App\Models\User::class) 
+                <a class="nav-link" href="{{ route('users.all') }}">
+                    <div class="nav-link-icon"><i data-feather="user-plus"></i></div>
+                    All Users
+                </a>
+                @endcan
                 
                 @can('create', \App\Models\User::class)               
                 <a class="nav-link" href="{{ route('user.register') }}">
@@ -90,6 +97,7 @@
             <div class="sidenav-footer-content">
                 <div class="sidenav-footer-subtitle">Logged in as:</div>
                 <div class="sidenav-footer-title">{{ auth()->user()->role->name }}</div>
+                <div class="sidenav-footer-title">{{ auth()->user()->email }}</div>
             </div>
             @endif
         </div>

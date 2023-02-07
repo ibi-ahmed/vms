@@ -78,7 +78,7 @@
                                     </form>
                                 </div>
                                 <div class="card-footer text-center">
-                                    <div class="small"><a href="auth-register-basic.html">Need an account? Sign up!</a>
+                                    <div class="small"><a href="/auth/redirect">Staff Login</a>
                                     </div>
                                 </div>
                             </div>

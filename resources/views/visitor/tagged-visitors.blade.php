@@ -8,7 +8,18 @@
 <div class="row">
     <div class="col-sm-10 offset-sm-1">
         <div class="card">
-            <div class="card-header text-center">Tagged Visitors</div>
+            <div class="card-header text-center">
+                <div class="row">
+                    <div class="col-4 offset-4">
+                        <form action="{{ route('tagged.visitors') }}">
+                            <div class="input-group">
+                                <input class="form-control text-center" name="query" type="text" placeholder="Search Visitor..." aria-describedby="button-addon" required>
+                                <button class="btn btn-sm btn-primary" type="submit" id="button-addon">Search</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
             <div class="card-body">
                 @if (count($visits) > 0)
                 <div class="table-responsive">
@@ -59,6 +70,15 @@
                                 </tr>
                             @endforeach
                         </tbody>
+                        @if (Str::contains(Request::fullUrl(), 'query'))          
+                        <tfoot class="text-center">
+                            <tr>
+                                <td class="" colspan="6">
+                                    <a class="btn btn-primary" href="{{ route('tagged.visitors') }}">View All</a>
+                                </td>
+                            </tr>
+                        </tfoot>
+                        @endif
                     </table>
                     <div class="text-center">
                         {{ $visits->links() }}

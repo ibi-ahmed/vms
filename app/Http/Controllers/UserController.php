@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
 use App\Models\Role;
+use App\Models\User;
+use App\Models\Visit;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
@@ -22,7 +24,11 @@ class UserController extends Controller
     public function adminDashboard()
     {
         $this->authorize('adminDashboard', User::class);
-        return view('admin.dashboard');
+        $hq_count = Visit::where('status', 1)
+            ->where('location_id', 1)->count();
+        $annex_count = Visit::where('status', 1)
+            ->where('location_id', 2)->count();
+        return view('admin.dashboard', compact('hq_count', 'annex_count'));
     }
 
     public function staffDashboard()
@@ -59,7 +65,89 @@ class UserController extends Controller
             'role_id' => ['required'],
         ]);
 
-        User::create($input);
+        $user = new User();
+        $user->name = $input['name'];
+        $user->email = $input['email'];
+        $user->password = bcrypt('123');
+        $user->role_id = $input['role_id'];
+        $user->save();
+        
         return redirect()->route(strtolower(Auth::user()->role->name).'.dashboard')->with('success', 'New User Created!');
     }
+
+    public function userProfile()
+    {
+        $this->authorize('userProfile', User::class);
+        return view('user.profile');
+    }
+    
+    public function updateUserProfile(Request $request, User $user)
+    {
+        $this->authorize('userProfile', User::class);
+        $input = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['string', 'email', 'max:255', Rule::unique('users')->ignore($user)],
+        ]);
+
+        // $user = User::find($user->id);
+        $user->name = $input['name'];
+        $user->email = $input['email'];
+        $user->save();
+
+        return redirect()->route(strtolower(Auth::user()->role->name).'.dashboard')->with('success', 'Profile Updated!');
+    }
+
+    public function allUsers(Request $request)
+    {
+        $this->authorize('allUsers', User::class);
+        $users = User::where('role_id', 1)
+            ->orWhere('role_id', 2)
+            ->paginate(10);
+            
+        return view('user.all', compact('users'));
+    }
+
+    public function searchUsers(Request $request)
+    {
+        $this->authorize('allUsers', User::class);
+        $query = $request->get('query');
+        // dd($query);
+        $users = User::whereBetween('role_id', [1, 2]);
+
+        $users = $users->where('name', 'LIKE', '%'.$query.'%')
+            ->paginate(10);
+        
+        return view('user.all', compact('users'));
+    }
+
+    public function singleUser($id)
+    {
+        $this->authorize('singleUser', User::class);
+        $user = User::find($id);
+        return view('user.single-user', compact('user'));
+    }
+
+    public function edit($id)
+    {
+        $this->authorize('editUser', User::class);
+        $user = User::find($id);
+        return view('user.edit-user', compact('user'));
+    }
+
+    public function editUser(Request $request, User $user)
+    {
+        $this->authorize('editUser', User::class);
+        $input = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['string', 'email', 'max:255', Rule::unique('users')->ignore($user)],
+        ]);
+
+        // $user = User::find($user->id);
+        $user->name = $input['name'];
+        $user->email = $input['email'];
+        $user->save();
+
+        return redirect()->route(strtolower(Auth::user()->role->name).'.dashboard')->with('success', 'User Profile Updated!');
+    }
+
 }

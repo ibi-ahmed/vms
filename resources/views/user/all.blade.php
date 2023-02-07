@@ -1,11 +1,11 @@
 @extends('layouts.layout')
-@section('title', 'All Visitors')
+@section('title', 'All Users')
 
 {{-- <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" /> --}}
 
 @section('content')
 @section('icon', 'users')
-@section('sub_head', 'All Visitors')
+@section('sub_head', 'All Users')
 
 <div class="row">
     <div class="col-sm-10 offset-sm-1">
@@ -13,9 +13,9 @@
             <div class="card-header text-center">
                 <div class="row">
                     <div class="col-4 offset-4">
-                        <form action="{{ route('visitor.all') }}">
+                        <form action="{{ route('search.users') }}">
                             <div class="input-group">
-                                <input class="form-control text-center" name="query" type="text" placeholder="Search Visitor..." aria-describedby="button-addon" required>
+                                <input class="form-control text-center" name="query" type="text" placeholder="Search User..." aria-describedby="button-addon" required>
                                 <button class="btn btn-sm btn-primary" type="submit" id="button-addon">Search</button>
                             </div>
                         </form>
@@ -23,7 +23,7 @@
                 </div>
             </div>
             <div class="card-body">
-                @if (count($visitors) > 0)
+                @if (count($users) > 0)
                 <div class="table-responsive">
                     <table class="table table-striped table-hover">
                         <thead>
@@ -31,39 +31,35 @@
                                 <th>S/N</th>
                                 <th>Name</th>
                                 <th>Email</th>
-                                <th>Phone</th>
-                                <th>Company</th>
+                                <th>Designation</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($visitors as $visitor)
+                            @foreach ($users as $user)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>
                                         <div class="d-flex">
                                             <div class=""></div>
-                                            {{ $visitor->first_name . ' ' . $visitor->last_name }}
+                                            {{ $user->name }}
                                         </div>
                                     </td>
-                                    <td>{{ $visitor->email }}</td>
-                                    <td>{{ $visitor->phone }}</td>
+                                    <td>{{ $user->email }}</td>
+                                    <td>{{ $user->role->name }}</td>
                                     <td>
-                                        {{ $visitor->company }}
-                                    </td>
-                                    <td>
-                                        {{-- <a class="btn btn-datatable btn-icon btn-transparent-dark me-2" href="user-management-edit-user.html"><i data-feather="edit"></i></a> --}}
-                                        {{-- <a class="btn btn-datatable btn-icon btn-transparent-dark" href="#!"><i data-feather="trash-2"></i></a> --}}
-                                    <div class="d-grid gap-2 d-sm-flex justify-content-sm">
-                                        <form action="{{ route('visitor.single', $visitor->id) }}" method="GET">
-                                            <button class="btn btn-sm btn-primary" type="submit">View</button>
-                                        </form>
-                                        @can('editVisitor', $visitor)                                         
-                                        <form action="{{ route('visitor.edit', $visitor->id) }}" method="GET">
-                                            <button class="btn btn-sm btn-info" type="submit">Edit</button>
-                                        </form>
-                                        @endcan
-                                    </div>
+                                        <div class="d-grid gap-2 d-sm-flex justify-content-sm">
+                                            @can('singleUser', $user)
+                                            <form action="{{ route('user.single', $user->id) }}" method="GET">
+                                                <button class="btn btn-sm btn-primary" type="submit">View</button>
+                                            </form>
+                                            @endcan
+                                            @can('editUser', $user)                                         
+                                            <form action="{{ route('user.edit', $user->id) }}" method="GET">
+                                                <button class="btn btn-sm btn-info" type="submit">Edit</button>
+                                            </form>
+                                            @endcan
+                                        </div>
                                     </td>
                                 </tr>
                             @endforeach
@@ -72,14 +68,14 @@
                         <tfoot class="text-center">
                             <tr>
                                 <td class="" colspan="6">
-                                    <a class="btn btn-primary" href="{{ route('visitor.all') }}">View All</a>
+                                    <a class="btn btn-primary" href="{{ route('users.all') }}">View All</a>
                                 </td>
                             </tr>
                         </tfoot>
                         @endif
                     </table>
                     <div class="">
-                        {{ $visitors->links() }}
+                        {{ $users->links() }}
                     </div>
                 </div>
                 @else

@@ -3,6 +3,7 @@
 use App\Models\Role;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Laravel\Socialite\Facades\Socialite;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,16 +24,29 @@ Route::get('/', function () {
     }
 });
 
-Route::get('/test', function () {
-    return response()->json('test');
-});
+// Route::get('/test', function () {
+//     return response()->json('test');
+// });
 
 Auth::routes(['register' => false]);
+
+Route::get('/auth/redirect', function () {
+    return Socialite::driver('azure')->redirect();
+});
+
+Route::get('/auth/callback', [App\Http\Controllers\Auth\LoginController::class, 'staffLogin']);
 
 // User Routes
 // Route::middleware(['user-access:user'])->group(function () {
     Route::get('/security-dashboard', [App\Http\Controllers\UserController::class, 'securityDashboard'])->name('security.dashboard');
     Route::get('/contractor-dashboard', [App\Http\Controllers\UserController::class, 'contractorDashboard'])->name('contractor.dashboard');
+    Route::get('/user-profile', [App\Http\Controllers\UserController::class, 'userProfile'])->name('user.profile');
+    Route::post('/user-profile/{user}', [App\Http\Controllers\UserController::class, 'updateUserProfile'])->name('update.user.profile');
+    Route::get('/all-users', [App\Http\Controllers\UserController::class, 'allUsers'])->name('users.all');
+    Route::get('/searchUsers/{query?}', [App\Http\Controllers\UserController::class, 'searchUsers'])->name('search.users');
+    Route::get('/single-user/{id}', [App\Http\Controllers\UserController::class, 'singleUser'])->name('user.single');
+    Route::get('/edit-user/{id}', [App\Http\Controllers\UserController::class, 'edit'])->name('user.edit');
+    Route::post('/edit-user/{user}', [App\Http\Controllers\UserController::class, 'editUser'])->name('user.editUser');
 // });
 
 // Staff Routes
