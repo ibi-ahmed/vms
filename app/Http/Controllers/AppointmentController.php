@@ -67,7 +67,7 @@ class AppointmentController extends Controller
         $appointment->staff_id = Auth::user()->id;
         $appointment->save();
 
-        return redirect()->route(Auth::user()->role->name . '.dashboard')->with('success', 'Appointment Created!');
+        return redirect()->route(strtolower(Auth::user()->role->name) . '.dashboard')->with('success', 'Appointment Created!');
     }
 
     public function storeExistingVisitorAppointment(Request $request)
