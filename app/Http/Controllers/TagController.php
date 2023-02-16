@@ -38,7 +38,7 @@ class TagController extends Controller
         $visitor->status = 1;
         $visitor->save();
 
-        // $tag = Tag::find($request->tag_id);
+        $tag = Tag::find($request->tag_id);
         $tag->status = 1;
         $tag->save();
 
@@ -49,6 +49,7 @@ class TagController extends Controller
         $visit->department_id = $appointment->department_id;
         $visit->location_id = $appointment->location_id;
         $visit->status = 1;
+        $visit->created_by = Auth::user()->id;
         $visit->save();
 
         return redirect()->route(strtolower(Auth::user()->role->name).'.dashboard')->with('success', 'Tag Assigned!');
@@ -57,7 +58,9 @@ class TagController extends Controller
     public function tagDeactivate($id)
     {
         $visitor = Visitor::find($id);
-        $visit = Visit::where('visitor_id', $visitor->id)->first();
+        $visit = Visit::where('visitor_id', $visitor->id)
+            ->where('status', 1)
+            ->first();
         $tag = Tag::find($visit->tag_id);
         $this->authorize('tagDeactivate', $tag);
 

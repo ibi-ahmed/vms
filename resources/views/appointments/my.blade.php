@@ -21,6 +21,7 @@
                                 <th>First Name</th>
                                 <th>Last Name</th>
                                 <th>Company</th>
+                                <th>Created By</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -41,6 +42,7 @@
                                         </div>
                                     </td>
                                     <td>{{ $appointment->company }}</td>
+                                    <td>{{ DB::table('users')->where('id', $appointment->created_by)->pluck('name')->first() }}</td>
                                     <td class="">
 
                                         @if ($appointment->status == 0)

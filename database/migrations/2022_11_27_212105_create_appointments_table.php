@@ -18,12 +18,13 @@ return new class extends Migration
             $table->string('first_name');
             $table->string('last_name');
             $table->string('company');
-            $table->string('email')->unique()->nullable();
-            $table->string('phone')->unique();
+            $table->string('email')->nullable();
+            $table->string('phone');
             $table->integer('department_id');
             $table->integer('location_id');
             $table->integer('staff_id');
             $table->tinyInteger('status')->default(0);
+            $table->integer('created_by');
             $table->timestamps();
         });
     }

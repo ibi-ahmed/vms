@@ -45,12 +45,12 @@ class AppointmentController extends Controller
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
             'company' => ['required', 'string', 'max:255'],
-            'phone' => ['required', 'string', 'max:15', 'unique:appointments'],
+            'phone' => ['required', 'string', 'max:15'],
         ]);
 
         if ($request->email) {
             $email = $request->validate([
-                'email' => ['string', 'email', 'max:255', 'unique:appointments']
+                'email' => ['string', 'email', 'max:255']
             ]);
         }
 
@@ -65,6 +65,7 @@ class AppointmentController extends Controller
         $appointment->department_id = $request->department_id;
         $appointment->location_id = $request->location_id;
         $appointment->staff_id = Auth::user()->id;
+        $appointment->created_by = Auth::user()->id;
         $appointment->save();
 
         return redirect()->route(strtolower(Auth::user()->role->name) . '.dashboard')->with('success', 'Appointment Created!');
@@ -85,6 +86,7 @@ class AppointmentController extends Controller
         $appointment->department_id = $request->department_id;
         $appointment->location_id = $request->location_id;
         $appointment->staff_id = Auth::user()->id;
+        $appointment->created_by = Auth::user()->id;
         $appointment->save();
 
         return redirect()->route(strtolower(Auth::user()->role->name).'.dashboard')->with('success', 'Appointment Created!');
@@ -154,6 +156,7 @@ class AppointmentController extends Controller
         $visit->department_id = $appointment->department_id;
         $visit->location_id = $appointment->location_id;
         $visit->status = 1;
+        $visit->created_by = Auth::user()->id;
         $visit->save();
 
         $tag = Tag::find($request->tag_id);

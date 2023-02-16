@@ -17,35 +17,35 @@ class CreateUsersSeeder extends Seeder
     {
         $users = [
             [
-               'name'=>'Super',
+               'name'=>'Super Mario',
             //    'last_name'=>'Super',
                'email'=>'super@super.vms',
                'role_id'=> 5,
                'password'=> bcrypt('123'),
             ],
             [
-               'name'=>'Admin',
+               'name'=>'Julius Nyerere',
             //    'last_name'=>'Admin',
                'email'=>'admin@admin.vms',
                'role_id'=>4,
                'password'=> bcrypt('123'),
             ],
             [
-                'name'=>'Staff',
+                'name'=>'Thomas Sankara',
                 // 'last_name'=>'Staff',
                 'email'=>'staff@staff.vms',
                 'role_id'=>3,
                 'password'=> bcrypt('123'),
              ],
             [
-               'name'=>'Security',
+               'name'=>'Gamal Abdel Nasser',
             //    'last_name'=>'Security',
                'email'=>'security@security.vms',
                'role_id'=>2,
                'password'=> bcrypt('123'),
             ],
             [
-               'name'=>'Contractor',
+               'name'=>'Musa Mansa',
             //    'last_name'=>'Contractor',
                'email'=>'contractor@contractor.vms',
                'role_id'=>1,

@@ -24,6 +24,7 @@
                                 <th>Staff</th>
                                 <th>Department</th>
                                 <th>Location</th>
+                                <th>Created By</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -49,6 +50,7 @@
                                     </td>
                                     <td>{{ $appointment->department->name }}</td>
                                     <td>{{ $appointment->location->name }}</td>
+                                    <td>{{ DB::table('users')->where('id', $appointment->created_by)->pluck('name')->first() }}</td>
                                     <td>
                                         @if ($appointment->status == 0)
                                             <button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal"

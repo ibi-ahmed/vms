@@ -91,6 +91,7 @@ class VisitorController extends Controller
         $appointment->location_id = $request->location_id;
         $appointment->staff_id = $request->staff_id;
         $appointment->status = 3;
+        $appointment->created_by = Auth::user()->id;
         $appointment->save();
 
         return redirect()->route(strtolower(Auth::user()->role->name).'.dashboard')->with('success', 'Appointment Created!');
@@ -112,6 +113,7 @@ class VisitorController extends Controller
         $appointment->location_id = $request->location_id;
         $appointment->staff_id = $request->staff_id;
         $appointment->status = 3;
+        $appointment->created_by = Auth::user()->id;
         $appointment->save();
 
         return redirect()->route(strtolower(Auth::user()->role->name).'.dashboard')->with('success', 'Appointment Created!');
@@ -223,7 +225,7 @@ class VisitorController extends Controller
     public function single($id)
     {
         $visitor = Visitor::find($id);
-        $visits = $visitor->visits;
+        $visits = $visitor->visits()->paginate(3);
         return view('visitor.single-visitor', compact('visits', 'visitor'));
     }
 

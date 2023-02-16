@@ -21,6 +21,7 @@
                                     <th>Company</th>
                                     <th>Date</th>
                                     <th>Tag No</th>
+                                    <th>Created By</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
@@ -40,6 +41,7 @@
                                         </td>
                                         <td>{{ date('D M j - h:i A', strtotime($visit->created_at)) }}</td>
                                         <td>{{ $visit->tag->number }}</td>
+                                        <td>{{ DB::table('users')->where('id', $visit->created_by)->pluck('name')->first() }}</td>
                                         <td>
                                             <div class="d-grid gap-2 d-sm-flex justify-content-sm">
                                                 <form action="{{ route('visitor.single', $visit->visitor->id) }}"

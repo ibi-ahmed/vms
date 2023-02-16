@@ -21,6 +21,7 @@ return new class extends Migration
             $table->integer('department_id');
             $table->integer('location_id');
             $table->tinyInteger('status')->default(1);
+            $table->integer('created_by');
             $table->timestamps();
         });
     }

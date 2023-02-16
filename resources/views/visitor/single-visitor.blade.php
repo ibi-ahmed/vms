@@ -84,6 +84,9 @@
                                 </tr>
                             </tfoot>
                         </table>
+                        <div class="">
+                            {{ $visits->links() }}
+                        </div>
                     </div>
                 @else
                     <h4 class=" font-monospace mt-2 text-center">No records to show!</h4>
