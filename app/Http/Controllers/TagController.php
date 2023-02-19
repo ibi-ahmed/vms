@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Appointment;
 use App\Models\Tag;
 use App\Models\Visit;
 use App\Models\Visitor;
+use App\Models\Appointment;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
 
 class TagController extends Controller
@@ -27,6 +28,12 @@ class TagController extends Controller
 
     public function tagAssign(Request $request, $id)
     {
+        $request->validate([
+            'tag_id' => ['required', 'numeric',
+                Rule::exists('tags', 'number')->where('status', 0),
+            ],
+        ]);
+
         $tag = Tag::find($request->tag_id);
         $this->authorize('tagAssign', $tag);
         

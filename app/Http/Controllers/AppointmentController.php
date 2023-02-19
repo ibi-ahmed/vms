@@ -2,15 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Appointment;
-use App\Models\Department;
-use App\Models\Location;
 use App\Models\Tag;
+use App\Models\User;
 use App\Models\Visit;
 use App\Models\Visitor;
+use App\Models\Location;
+use App\Models\Department;
+use App\Models\Appointment;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
-use App\Models\User;
+use Illuminate\Support\Facades\Validator;
 
 class AppointmentController extends Controller
 {
@@ -111,6 +113,12 @@ class AppointmentController extends Controller
 
     public function approveAppointment(Request $request, $id)
     {
+        $request->validate([
+            'tag_id' => ['required', 'numeric',
+                Rule::exists('tags', 'number')->where('status', 0),
+            ],
+        ]);
+
         if ($request->photo) {
             $request->validate([
                 'photo' => ['image', 'mimes:jpeg,png,jpg,svg', 'max:5120']

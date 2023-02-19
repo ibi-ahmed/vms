@@ -11,7 +11,7 @@
             <div class="card-header text-center">
                 <div class="row">
                     <div class="col-4 offset-4">
-                        <form action="{{ route('tagged.visitors') }}">
+                        <form action="{{ route('visitor.all') }}">
                             <div class="input-group">
                                 <input class="form-control text-center" name="query" type="text" placeholder="Search Visitor..." aria-describedby="button-addon" required>
                                 <button class="btn btn-sm btn-primary" type="submit" id="button-addon">Search</button>
@@ -70,7 +70,7 @@
                                 </tr>
                             @endforeach
                         </tbody>
-                        @if (Str::contains(Request::fullUrl(), 'query'))          
+                        {{-- @if (Str::contains(Request::fullUrl(), 'query'))          
                         <tfoot class="text-center">
                             <tr>
                                 <td class="" colspan="6">
@@ -78,7 +78,7 @@
                                 </td>
                             </tr>
                         </tfoot>
-                        @endif
+                        @endif --}}
                     </table>
                     <div class="text-center">
                         {{ $visits->links() }}

@@ -61,8 +61,8 @@
 
                     <div class="row gx-3 mb-3">
                         <!-- Form Group (Location)-->
-                        <div class="col-sm-4">
-                            <label class="mb-1" for="location_id">Select Location</label>
+                        <div class="col-sm-6">
+                            <label class="mb-1" for="location_id">Location</label>
                             <select class="form-select" name="location_id" aria-label="Default select example"
                                 required>
                                     <option value="{{ $appointment->location_id }}">{{ $appointment->location->name }}</option>
@@ -70,24 +70,24 @@
                         </div>
 
                         <!-- Form Group (Department)-->
-                        <div class="col-sm-4">
-                            <label class="mb-1" for="department_id">Select Destination</label>
+                        <div class="col-sm-6">
+                            <label class="mb-1" for="department_id">Destination</label>
                             <select class="form-select" name="department_id" aria-label="Default select example"
                                 required>
                                     <option value="{{ $appointment->department_id }}">{{ $appointment->department->name }}</option>
                             </select>
                         </div>
 
-                        <div class="col-sm-4">
-                            <label class="mb-1" for="tag_id">Select Tag</label>
-                            <select class="form-select" name="tag_id" aria-label="Default select example"
-                                required>
-                                {{-- <option selected>Assign Tag</option> --}}
-                                @foreach ($tags as $tag)
-                                    <option value="{{ $tag->id }}">{{ $tag->number }}</option>
-                                @endforeach
-                            </select>
-                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="mb-1" for="tag_id">Enter Tag Number</label>
+                        <input class="form-control" name="tag_id" type="number" required />
+                        {{-- <select class="form-select" name="tag_id" aria-label="Default select example" required> --}}
+                            {{-- <option selected>Assign Tag</option> --}}
+                            {{-- @foreach ($tags as $tag) --}}
+                                {{-- <option value="{{ $tag->id }}">{{ $tag->number }}</option> --}}
+                            {{-- @endforeach --}}
+                        {{-- </select> --}}
                     </div>
 
                     <!-- Form Group (Staff)-->

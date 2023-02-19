@@ -78,7 +78,7 @@ Route::post('/edit-visitor/{id}', [App\Http\Controllers\VisitorController::class
 
 Route::get('/all-visitor/{query?}', [App\Http\Controllers\VisitorController::class, 'all'])->name('visitor.all');
 // Route::get('/all-visitors', [App\Http\Controllers\VisitorController::class, 'all'])->name('visitor.all')->middleware('user-access:staff');
-Route::get('/tagged-visitors/{query?}', [App\Http\Controllers\VisitorController::class, 'taggedVisitors'])->name('tagged.visitors');
+Route::get('/tagged-visitors', [App\Http\Controllers\VisitorController::class, 'taggedVisitors'])->name('tagged.visitors');
 
 Route::get('/single-visitor/{id}', [App\Http\Controllers\VisitorController::class, 'single'])->name('visitor.single');
 Route::get('/my-visitors', [App\Http\Controllers\VisitorController::class, 'my'])->name('visitor.my');

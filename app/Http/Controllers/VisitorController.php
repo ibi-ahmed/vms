@@ -33,8 +33,9 @@ class VisitorController extends Controller
     {
         $this->authorize('recentVisits', Visit::class);
         $visits = Visit::orderByDesc('updated_at')->where('status', 1)->paginate(5);
-        $tags = Tag::where('status', 0)->get();
-        return view('visitor.recent', compact('visits', 'tags'));
+        // $tags = Tag::where('status', 0)->get();
+        // return view('visitor.recent', compact('visits', 'tags'));
+        return view('visitor.recent', compact('visits'));
     }
     
     public function storeVisitor(Request $request)
@@ -121,20 +122,15 @@ class VisitorController extends Controller
 
     public function getVisitor(Request $request)
     {
-        $visitor = Visitor::where('email', 'LIKE', '%'.$request->keyword.'%')
-            ->orWhere('phone', 'LIKE', '%'.$request->keyword.'%')
+        $visitor = Visitor::where(function ($query) use ($request) {
+            $query->where('email', 'LIKE', '%'.$request->keyword.'%')
+                  ->orWhere('phone', 'LIKE', '%'.$request->keyword.'%')
+                  ->orWhere('last_name', 'LIKE', '%'.$request->keyword.'%');
+        })
             ->where('status', 0)
             ->get();
         return response()->json($visitor);
     }
-    
-    // public function getVisitorByPhone(Request $request)
-    // {
-    //     $visitor = Visitor::where('phone', 'LIKE', '%'.$request->keyword.'%')
-    //     ->where('status', 0)
-    //     ->get();
-    //     return response()->json($visitor);
-    // }
     
     public function edit($id)
     {

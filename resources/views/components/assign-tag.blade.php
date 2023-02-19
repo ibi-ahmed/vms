@@ -12,13 +12,14 @@
                     <div class="col-sm-10 offset-sm-1">
                         <form action="{{ route('tag.assign', $appointment->id) }}" method="POST" id="tag_form">
                             @csrf
-                            <label class="mb-1" for="tag_id">Select Tag</label>
-                            <select class="form-select" name="tag_id" aria-label="Default select example" required>
+                            <label class="mb-1" for="tag_id">Enter Tag Number</label>
+                            <input class="form-control" name="tag_id" type="number" required />
+                            {{-- <select class="form-select" name="tag_id" aria-label="Default select example" required> --}}
                                 {{-- <option selected>Assign Tag</option> --}}
-                                @foreach ($tags as $tag)
-                                    <option value="{{ $tag->id }}">{{ $tag->number }}</option>
-                                @endforeach
-                            </select>
+                                {{-- @foreach ($tags as $tag) --}}
+                                    {{-- <option value="{{ $tag->id }}">{{ $tag->number }}</option> --}}
+                                {{-- @endforeach --}}
+                            {{-- </select> --}}
                         </form>
                     </div>
                 </div>
