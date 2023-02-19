@@ -195,13 +195,6 @@ class VisitorController extends Controller
             ->paginate(10);
             
         return view('visitor.all-visitor', compact('visitors'));
-
-        // $visitors = Visitor::whereNotNull('status')
-        //     ->orWhere('email', 'LIKE', '%'.$request->keyword.'%')
-        //     ->orWhere('phone', 'LIKE', '%'.$request->keyword.'%')
-        //     ->orWhere('last_name', 'LIKE', '%'.$request->keyword.'%')
-        //     ->paginate(5);
-        // return response()->json($visitors);
     }
 
     public function my()

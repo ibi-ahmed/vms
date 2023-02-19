@@ -99,7 +99,7 @@ Route::post('/cancel-appointment/{id}', [App\Http\Controllers\AppointmentControl
 Route::post('/approve-appointment/{id}', [App\Http\Controllers\AppointmentController::class, 'approveAppointment'])->name('appointments.approve');
 Route::post('/staff-approve-appointment/{id}', [App\Http\Controllers\AppointmentController::class, 'staffApproveAppointment'])->name('appointments.staff-approve');
 
-Route::get('/all-appointments', [App\Http\Controllers\AppointmentController::class, 'all'])->name('appointments.all');
+Route::get('/all-appointments/{query?}', [App\Http\Controllers\AppointmentController::class, 'all'])->name('appointments.all');
 Route::get('/my-appointments', [App\Http\Controllers\AppointmentController::class, 'myAppointments'])->name('appointments.my');
 Route::get('/recent-appointments', [App\Http\Controllers\AppointmentController::class, 'recent'])->name('appointments.recent');
 

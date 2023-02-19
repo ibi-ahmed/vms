@@ -12,6 +12,7 @@
         "laravel/socialite": "^5.6",
         "laravel/tinker": "^2.7",
         "laravel/ui": "^4.1",
+        "microsoft/microsoft-graph": "^1.88",
         "socialiteproviders/microsoft-azure": "^5.1",
         "yajra/laravel-datatables-oracle": "^10.2"
     },

@@ -8,7 +8,18 @@
 <div class="mt-4 row">
     <div class="col-sm-10 offset-sm-1">
         <div class="card">
-            <div class="card-header border-bottom text-center">Recent Appointments</div>
+            <div class="card-header border-bottom text-center">
+                <div class="row">
+                    <div class="col-4 offset-4">
+                        <form action="{{ route('appointments.all') }}">
+                            <div class="input-group">
+                                <input class="form-control text-center" name="query" type="text" placeholder="Search Visitor Appointment" aria-describedby="button-addon" required>
+                                <button class="btn btn-sm btn-primary" type="submit" id="button-addon">Search</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
             <div class="card-body">
                 @if (count($appointments) > 0)
                     <div class="table-responsive">

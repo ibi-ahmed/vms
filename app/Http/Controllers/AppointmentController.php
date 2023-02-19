@@ -16,10 +16,17 @@ use Illuminate\Support\Facades\Validator;
 
 class AppointmentController extends Controller
 {
-    public function all()
+    public function all(Request $request)
     {
         $this->authorize('allAppointments', Appointment::class);
-        $appointments = Appointment::orderByDesc('updated_at')->paginate(10);
+        // $query = $request->get('query');
+        $appointments = Appointment::where(function ($query) use ($request) {
+            $query->where('email', 'LIKE', '%'.$request->query->get('query').'%')
+                  ->orWhere('phone', 'LIKE', '%'.$request->query->get('query').'%')
+                  ->orWhere('last_name', 'LIKE', '%'.$request->query->get('query').'%');
+        })
+            ->orderByDesc('updated_at')
+            ->paginate(10);
         $tags = Tag::where('status', 0)->get();
         return view('appointments.all', compact('appointments', 'tags'));
     }
