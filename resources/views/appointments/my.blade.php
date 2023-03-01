@@ -56,11 +56,18 @@
                                         @elseif ($appointment->status == 2)
                                             <button class="btn btn-warning btn-sm disabled">Canceled</button>
                                         @elseif ($appointment->status == 3)
+                                        <div class="d-grid gap-2 d-sm-flex justify-content-sm">
                                             <form action="{{ route('appointments.staff-approve', $appointment->id) }}"
                                                 method="post">
                                                 @csrf
                                                 <button class="btn btn-success btn-sm" type="submit">Approve</button>
                                             </form>
+                                            <form action="{{ route('appointments.cancel', $appointment->id) }}"
+                                                method="post">
+                                                @csrf
+                                                <button class="btn btn-danger btn-sm" type="submit">Reject</button>
+                                            </form>
+                                        </div>
                                         @elseif ($appointment->status == 4)
                                             <button class="btn btn-dark btn-sm disabled">Pending</button>
                                         @endif

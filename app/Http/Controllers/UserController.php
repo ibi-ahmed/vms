@@ -18,7 +18,11 @@ class UserController extends Controller
     public function superDashboard()
     {
         $this->authorize('superDashboard', User::class);
-        return view('super.dashboard');
+        $hq_count = Visit::where('status', 1)
+            ->where('location_id', 1)->count();
+        $annex_count = Visit::where('status', 1)
+            ->where('location_id', 2)->count();
+        return view('super.dashboard', compact('hq_count', 'annex_count'));
     }
 
     public function adminDashboard()
@@ -35,6 +39,47 @@ class UserController extends Controller
     {
         $this->authorize('staffDashboard', User::class);
         return view('staff.dashboard');
+    }
+
+    public function editStaffSearch()
+    {
+        $this->authorize('editStaffRole', User::class);
+        return view('staff.edit-staff-search');
+    }
+    
+    public function editStaffView(Request $request)
+    {
+        $this->authorize('editStaffRole', User::class);
+        
+        $staff = User::where('azure_id', $request->staff_id)->first();
+        
+        if ($staff !=null ) {
+            $staff->name = $request->staff_name;
+            $staff->email = $request->staff_email;
+        }else{
+            $staff = new User();
+            $staff->name = $request->staff_name;
+            $staff->email = $request->staff_email;
+            $staff->role_id = 3;
+            $staff->azure_id = $request->staff_id;
+        }
+        
+        $staff->save();
+
+        $roles = Role::whereBetween('id', [3, 4])->get();
+        
+        return view('staff.edit-staff-view', compact('staff', 'roles'));
+    }
+
+    public function editStaffRole(Request $request)
+    {
+        $this->authorize('editStaffRole', User::class);
+        
+        $staff = User::where('email', $request->email)->first();
+        $staff->role_id = $request->role_id;
+        $staff->save();
+
+        return redirect()->route(strtolower(Auth::user()->role->name).'.dashboard')->with('success', 'Profile Updated!');
     }
 
     public function securityDashboard()

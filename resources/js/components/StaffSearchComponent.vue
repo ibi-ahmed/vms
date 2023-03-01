@@ -1,45 +1,52 @@
 <template>
     <div>
-        <input class="form-control" type="text" v-model="keyword" @input="handleInput" placeholder="Search Staff..." required>
-        <ul class="list-group" v-if="Users.length > 0">
+        <input class="form-control" type="text" v-model="keyword" @input="handleInput" placeholder="Search Staff..."
+            required>
+        <ul class="list-group" v-if="response.length > 0">
             <a role="button">
-                <li class="list-group-item" v-for="user in Users" :key="user.id" v-text="user.name" @click="autocomplete(user.name, user.id)"></li>
+                <li class="list-group-item" v-for="user in response" :key="user.id" @click="autocomplete(user)">
+                    {{ user.displayName }}
+                </li>
             </a>
         </ul>
         <input type="text" name="staff_id" v-model="staff_id" hidden>
+        <input type="text" name="staff_name" v-model="staff_name" hidden>
+        <input type="text" name="staff_email" v-model="staff_email" hidden>
     </div>
 </template>
+
 <script>
+import _ from 'lodash';
 export default {
     data() {
         return {
             keyword: null,
             staff_id: null,
-            Users: []
+            staff_name: null,
+            staff_email: null,
+            response: [],
         };
     },
-    watch: {
-        keyword(after, before) {
-            this.getResults();
-        }
+    created() {
+        const delay = 500; // delay in milliseconds
+        this.debouncedGetResults = _.debounce(this.getResults, delay);
     },
     methods: {
         getResults() {
             axios.get('/staff-search', { params: { keyword: this.keyword } })
-                .then(res => this.Users = res.data)
+                .then(res => this.response = res.data)
                 .catch(error => { });
         },
         handleInput(userInput) {
-            this.getResults();
+            this.debouncedGetResults();
         },
-        autocomplete(names, id) {
-            // Change "keyword" programmatically
-            this.keyword = names;
-            this.staff_id = id;
-
-            // Reset to hide autocomplete list
-            this.Users = [];
-        }
-    }
-}
+        autocomplete(user) {
+            this.keyword = user.displayName;
+            this.staff_id = user.id;
+            this.staff_name = user.displayName;
+            this.staff_email = user.mail;
+            this.response = [];
+        },
+    },
+};
 </script>

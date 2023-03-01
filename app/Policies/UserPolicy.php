@@ -48,6 +48,11 @@ class UserPolicy
         return in_array($user->role_id, [Role::IS_SUPER, Role::IS_SECURITY, Role::IS_CONTRACTOR]); 
     }
     
+    public function editStaffRole(User $user)
+    {
+        return in_array($user->role_id, [Role::IS_SUPER, Role::IS_ADMIN]); 
+    }
+    
     public function allUsers(User $user)
     {
         return in_array($user->role_id, [Role::IS_SUPER, Role::IS_ADMIN]); 

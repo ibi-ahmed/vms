@@ -14,12 +14,6 @@
                             @csrf
                             <label class="mb-1" for="tag_id">Enter Tag Number</label>
                             <input class="form-control" name="tag_id" type="number" required />
-                            {{-- <select class="form-select" name="tag_id" aria-label="Default select example" required> --}}
-                                {{-- <option selected>Assign Tag</option> --}}
-                                {{-- @foreach ($tags as $tag) --}}
-                                    {{-- <option value="{{ $tag->id }}">{{ $tag->number }}</option> --}}
-                                {{-- @endforeach --}}
-                            {{-- </select> --}}
                         </form>
                     </div>
                 </div>

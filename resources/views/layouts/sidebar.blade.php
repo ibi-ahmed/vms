@@ -12,6 +12,13 @@
                     Dashboard
                 </a>
 
+                @can('editStaffRole', \App\Models\User::class) 
+                <a class="nav-link" href="{{ route('staff.edit.search') }}">
+                    <div class="nav-link-icon"><i data-feather="user-plus"></i></div>
+                    Edit Staff Role
+                </a>
+                @endcan
+
                 @can('allUsers', \App\Models\User::class) 
                 <a class="nav-link" href="{{ route('users.all') }}">
                     <div class="nav-link-icon"><i data-feather="user-plus"></i></div>

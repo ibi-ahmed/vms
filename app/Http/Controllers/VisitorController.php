@@ -6,10 +6,11 @@ use App\Models\Tag;
 use App\Models\User;
 use App\Models\Visit;
 use App\Models\Visitor;
+use App\Models\Location;
 use App\Models\Department;
 use App\Models\Appointment;
-use App\Models\Location;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
 
@@ -32,9 +33,8 @@ class VisitorController extends Controller
     public function recent()
     {
         $this->authorize('recentVisits', Visit::class);
-        $visits = Visit::orderByDesc('updated_at')->where('status', 1)->paginate(5);
-        // $tags = Tag::where('status', 0)->get();
-        // return view('visitor.recent', compact('visits', 'tags'));
+        $visits = Visit::where('updated_at', '>=', Carbon::now()->subHours(24))
+            ->orderByDesc('updated_at')->where('status', 1)->paginate(10);
         return view('visitor.recent', compact('visits'));
     }
     
@@ -80,6 +80,21 @@ class VisitorController extends Controller
 
         $visitor = Visitor::where('phone', $input['phone'])->first();
 
+        $staff = User::where('azure_id', $request->staff_id)->first();
+        
+        if ($staff !=null ) {
+            $staff->name = $request->staff_name;
+            $staff->email = $request->staff_email;
+        }else{
+            $staff = new User();
+            $staff->name = $request->staff_name;
+            $staff->email = $request->staff_email;
+            $staff->role_id = 3;
+            $staff->azure_id = $request->staff_id;
+        }
+        
+        $staff->save();
+
         $appointment = new Appointment();
         $appointment->first_name = $visitor->first_name;
         $appointment->last_name = $visitor->last_name;
@@ -90,7 +105,7 @@ class VisitorController extends Controller
         $appointment->phone = $visitor->phone;
         $appointment->department_id = $request->department_id;
         $appointment->location_id = $request->location_id;
-        $appointment->staff_id = $request->staff_id;
+        $appointment->staff_id = $staff->id;
         $appointment->status = 3;
         $appointment->created_by = Auth::user()->id;
         $appointment->save();
@@ -101,6 +116,21 @@ class VisitorController extends Controller
     public function storeVisit(Request $request)
     {
         $visitor = Visitor::where('id', $request->vis_id)->first();
+
+        $staff = User::where('azure_id', $request->staff_id)->first();
+        
+        if ($staff !=null ) {
+            $staff->name = $request->staff_name;
+            $staff->email = $request->staff_email;
+        }else{
+            $staff = new User();
+            $staff->name = $request->staff_name;
+            $staff->email = $request->staff_email;
+            $staff->role_id = 3;
+            $staff->azure_id = $request->staff_id;
+        }
+        
+        $staff->save();
         
         $appointment = new Appointment();
         $appointment->first_name = $visitor->first_name;
@@ -112,7 +142,7 @@ class VisitorController extends Controller
         $appointment->phone = $visitor->phone;
         $appointment->department_id = $request->department_id;
         $appointment->location_id = $request->location_id;
-        $appointment->staff_id = $request->staff_id;
+        $appointment->staff_id = $staff->id;
         $appointment->status = 3;
         $appointment->created_by = Auth::user()->id;
         $appointment->save();

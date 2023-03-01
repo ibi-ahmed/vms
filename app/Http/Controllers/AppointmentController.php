@@ -10,6 +10,7 @@ use App\Models\Location;
 use App\Models\Department;
 use App\Models\Appointment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -42,7 +43,8 @@ class AppointmentController extends Controller
     public function recent()
     {
         $this->authorize('recentAppointments', Appointment::class);
-        $appointments = Appointment::orderByDesc('updated_at')->paginate(5);
+        $appointments = Appointment::where('updated_at', '>=', Carbon::now()->subHours(24))
+            ->orderByDesc('updated_at')->paginate(10);
         $tags = Tag::where('status', 0)->get();
         return view('appointments.recent', compact('appointments', 'tags'));
     }
@@ -106,7 +108,7 @@ class AppointmentController extends Controller
         $this->authorize('myAppointments', Appointment::class);   
         $appointments = Appointment::where('staff_id', Auth::user()->id)
             ->orderByDesc('updated_at')
-            ->paginate(5);
+            ->paginate(10);
         return view('appointments.my', compact('appointments'));
     }
 

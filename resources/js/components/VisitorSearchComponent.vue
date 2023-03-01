@@ -1,9 +1,12 @@
 <template>
     <div>
-        <input class="form-control" type="text" v-model="keyword" @input="handleInput" placeholder="Search Visitor..." required>
+        <input class="form-control" type="text" v-model="keyword" @input="handleInput" placeholder="Search Visitor..."
+            required>
         <ul class="list-group" v-if="Visitors.length > 0">
             <a role="button">
-                <li class="list-group-item" v-for="visitor in Visitors" :key="visitor.id" v-text="visitor.first_name + ' ' + visitor.last_name" @click="autocomplete(visitor.first_name + ' ' + visitor.last_name, visitor.id)"></li>
+                <li class="list-group-item" v-for="visitor in Visitors" :key="visitor.id"
+                    v-text="visitor.first_name + ' ' + visitor.last_name"
+                    @click="autocomplete(visitor.first_name + ' ' + visitor.last_name, visitor.id)"></li>
             </a>
         </ul>
         <input type="text" name="vis_id" v-model="vis_id" hidden>
@@ -25,6 +28,10 @@ export default {
     },
     methods: {
         getResults() {
+            if (!this.keyword) {
+                this.Visitors = [];
+                return;
+            }
             axios.get('/visitor-search', { params: { keyword: this.keyword } })
                 .then(res => this.Visitors = res.data)
                 .catch(error => { });

@@ -1,8 +1,10 @@
 <?php
 
 use App\Models\Role;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MicrosoftGraph;
 use Laravel\Socialite\Facades\Socialite;
 
 /*
@@ -25,7 +27,8 @@ Route::get('/', function () {
 });
 
 // Route::get('/test', function () {
-//     return response()->json('test');
+//     // return response()->json('test');
+//     return view('blank');
 // });
 
 Auth::routes(['register' => false]);
@@ -52,6 +55,9 @@ Route::get('/auth/callback', [App\Http\Controllers\Auth\LoginController::class, 
 // Staff Routes
 // Route::middleware(['auth', 'user-access:staff'])->group(function () {
     Route::get('/staff-dashboard', [App\Http\Controllers\UserController::class, 'staffDashboard'])->name('staff.dashboard');
+    Route::get('/edit-staff-search', [App\Http\Controllers\UserController::class, 'editStaffSearch'])->name('staff.edit.search');
+    Route::post('/edit-staff-view', [App\Http\Controllers\UserController::class, 'editStaffView'])->name('staff.edit.view');
+    Route::post('/edit-staff-role', [App\Http\Controllers\UserController::class, 'editStaffRole'])->name('staff.edit.role');
 // });
 
 // Admin Routes
@@ -104,7 +110,13 @@ Route::get('/my-appointments', [App\Http\Controllers\AppointmentController::clas
 Route::get('/recent-appointments', [App\Http\Controllers\AppointmentController::class, 'recent'])->name('appointments.recent');
 
 
-Route::get('/staff-search', [App\Http\Controllers\HomeController::class, 'getStaff'])->name('staff.search');
+// Route::get('/staff-search', [App\Http\Controllers\MicrosoftGraph::class, 'users'])->name('staff.search');
+Route::get('/staff-search', function (Request $request) {
+    // access request data using $request variable
+    $keyword = $request->input('keyword');
+    // return response()->json('test');
+    return MicrosoftGraph::users($keyword);
+});
 
 
 
