@@ -50,13 +50,13 @@ class LoginController extends Controller
         $user = User::where('azure_id', $azureUser->id)->first();
         
         if ($user !=null ) {
-            $user->name = $azureUser->name;
-            $user->email = $azureUser->email;
+            $user->name = str_replace(',', '', $azureUser->name);
+            $user->email = strtolower($azureUser->email);
             $user->token = $azureUser->token;
         }else{
             $user = new User();
-            $user->name = $azureUser->name;
-            $user->email = $azureUser->email;
+            $user->name = str_replace(',', '', $azureUser->name);
+            $user->email = strtolower($azureUser->email);
             $user->role_id = 3;
             $user->azure_id = $azureUser->id;
             $user->token = $azureUser->token;

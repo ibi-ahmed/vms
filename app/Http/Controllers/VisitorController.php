@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\AppointmentCreated;
 use App\Models\Tag;
 use App\Models\User;
 use App\Models\Visit;
@@ -13,6 +14,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class VisitorController extends Controller
 {
@@ -83,12 +85,12 @@ class VisitorController extends Controller
         $staff = User::where('azure_id', $request->staff_id)->first();
         
         if ($staff !=null ) {
-            $staff->name = $request->staff_name;
-            $staff->email = $request->staff_email;
+            $staff->name = str_replace(',', '', $request->staff_name);
+            $staff->email = strtolower($request->staff_email);
         }else{
             $staff = new User();
-            $staff->name = $request->staff_name;
-            $staff->email = $request->staff_email;
+            $staff->name = str_replace(',', '', $request->staff_name);
+            $staff->email = strtolower($request->staff_email);
             $staff->role_id = 3;
             $staff->azure_id = $request->staff_id;
         }
@@ -109,6 +111,8 @@ class VisitorController extends Controller
         $appointment->status = 3;
         $appointment->created_by = Auth::user()->id;
         $appointment->save();
+
+        Mail::to($staff)->send(new AppointmentCreated($staff, $appointment));
 
         return redirect()->route(strtolower(Auth::user()->role->name).'.dashboard')->with('success', 'Appointment Created!');
     }
@@ -120,12 +124,12 @@ class VisitorController extends Controller
         $staff = User::where('azure_id', $request->staff_id)->first();
         
         if ($staff !=null ) {
-            $staff->name = $request->staff_name;
-            $staff->email = $request->staff_email;
+            $staff->name = str_replace(',', '', $request->staff_name);
+            $staff->email = strtolower($request->staff_email);
         }else{
             $staff = new User();
-            $staff->name = $request->staff_name;
-            $staff->email = $request->staff_email;
+            $staff->name = str_replace(',', '', $request->staff_name);
+            $staff->email = strtolower($request->staff_email);
             $staff->role_id = 3;
             $staff->azure_id = $request->staff_id;
         }
@@ -146,6 +150,8 @@ class VisitorController extends Controller
         $appointment->status = 3;
         $appointment->created_by = Auth::user()->id;
         $appointment->save();
+
+        Mail::to($staff)->send(new AppointmentCreated($staff, $appointment));
 
         return redirect()->route(strtolower(Auth::user()->role->name).'.dashboard')->with('success', 'Appointment Created!');
     }

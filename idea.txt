@@ -4,3 +4,6 @@
         edit visitor, total visits by dept, add new tag, delete tag, unattach tag to visitor 
 #   super -> all + add/edit staff/admin
 # <h3><img src="https://api.qrserver.com/v1/create-qr-code/?data=https://ticketroom.ng/attendance/{{$tran->reference}}&amp;size=100x100"/></h3>
+# seeder fix
+# web route fix
+# logo

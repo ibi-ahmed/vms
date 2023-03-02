@@ -55,11 +55,11 @@ class UserController extends Controller
         
         if ($staff !=null ) {
             $staff->name = $request->staff_name;
-            $staff->email = $request->staff_email;
+            $staff->email = strtolower($request->staff_email);
         }else{
             $staff = new User();
             $staff->name = $request->staff_name;
-            $staff->email = $request->staff_email;
+            $staff->email = strtolower($request->staff_email);
             $staff->role_id = 3;
             $staff->azure_id = $request->staff_id;
         }

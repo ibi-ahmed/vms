@@ -5,6 +5,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MicrosoftGraph;
+use App\Models\Appointment;
+use App\Models\User;
 use Laravel\Socialite\Facades\Socialite;
 
 /*
@@ -26,10 +28,14 @@ Route::get('/', function () {
     }
 });
 
-// Route::get('/test', function () {
-//     // return response()->json('test');
-//     return view('blank');
-// });
+Route::get('/test', function () {
+    // return response()->json('test');
+    // return view('blank');
+
+    $staff = User::where('id', 6)->first();
+    $appointment = Appointment::where('id', 20)->first();
+    return new App\Mail\AppointmentCreated($staff, $appointment);
+});
 
 Auth::routes(['register' => false]);
 
