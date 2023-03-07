@@ -26,6 +26,11 @@ class VisitorPolicy
         return in_array($user->role_id, [Role::IS_SUPER, Role::IS_ADMIN]);
     }
 
+    // public function taggedVisitors(User $user)
+    // {
+    //     return in_array($user->role_id, [Role::IS_SUPER, Role::IS_ADMIN, Role::IS_SECURITY]);
+    // }
+
     /**
      * Determine whether the user can delete the model.
      *

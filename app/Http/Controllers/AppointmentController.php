@@ -20,11 +20,11 @@ class AppointmentController extends Controller
     public function all(Request $request)
     {
         $this->authorize('allAppointments', Appointment::class);
-        // $query = $request->get('query');
-        $appointments = Appointment::where(function ($query) use ($request) {
-            $query->where('email', 'LIKE', '%'.$request->query->get('query').'%')
-                  ->orWhere('phone', 'LIKE', '%'.$request->query->get('query').'%')
-                  ->orWhere('last_name', 'LIKE', '%'.$request->query->get('query').'%');
+        $appointments = Appointment::where('updated_at', '>=', Carbon::now()->subHours(12))
+            ->where(function ($query) use ($request) {
+                $query->where('email', 'LIKE', '%'.$request->query->get('query').'%')
+                    ->orWhere('phone', 'LIKE', '%'.$request->query->get('query').'%')
+                    ->orWhere('last_name', 'LIKE', '%'.$request->query->get('query').'%');
         })
             ->orderByDesc('updated_at')
             ->paginate(10);
@@ -43,7 +43,7 @@ class AppointmentController extends Controller
     public function recent()
     {
         $this->authorize('recentAppointments', Appointment::class);
-        $appointments = Appointment::where('updated_at', '>=', Carbon::now()->subHours(24))
+        $appointments = Appointment::where('updated_at', '>=', Carbon::now()->subHours(12))
             ->orderByDesc('updated_at')->paginate(10);
         $tags = Tag::where('status', 0)->get();
         return view('appointments.recent', compact('appointments', 'tags'));

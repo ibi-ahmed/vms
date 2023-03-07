@@ -19,9 +19,7 @@ use Illuminate\Support\Facades\Mail;
 class VisitorController extends Controller
 {
     public function __construct()
-    {
-
-    }
+    {}
 
     public function add()
     {
@@ -35,7 +33,7 @@ class VisitorController extends Controller
     public function recent()
     {
         $this->authorize('recentVisits', Visit::class);
-        $visits = Visit::where('updated_at', '>=', Carbon::now()->subHours(24))
+        $visits = Visit::where('updated_at', '>=', Carbon::now()->subHours(12))
             ->orderByDesc('updated_at')->where('status', 1)->paginate(10);
         return view('visitor.recent', compact('visits'));
     }
@@ -78,6 +76,7 @@ class VisitorController extends Controller
 
         $visitor->phone = $input['phone'];
         $visitor->company = $input['company'];
+        $visitor->status = 0;
         $visitor->save();
 
         $visitor = Visitor::where('phone', $input['phone'])->first();
@@ -198,8 +197,6 @@ class VisitorController extends Controller
                 'photo' => ['image', 'mimes:jpeg,png,jpg,svg', 'max:5120']
             ]);
         }
-
-        // $visitor = Visitor::find($id);
 
         $visitor->first_name = $input['first_name'];
         $visitor->last_name = $input['last_name'];

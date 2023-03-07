@@ -1,5 +1,5 @@
 <x-mail::message>
-# Appointment Created
+# Appointment Created!
 
 Hello {{ $staffName }},  
 

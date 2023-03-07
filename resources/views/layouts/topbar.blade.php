@@ -5,14 +5,19 @@
     <!-- * * Tip * * You can use text or an image for your navbar brand.-->
     <!-- * * * * * * When using an image, we recommend the SVG format.-->
     <!-- * * * * * * Dimensions: Maximum height: 32px, maximum width: 240px-->
-    <a class="navbar-brand pe-3 ps-4 ps-lg-2" href="/">NMDPRA VMS</a>
-    @if (Auth::check())
-    <a class="navbar-brand pe-3 ps-4 ps-lg-2">{{ Auth::user()->name }}</a>
-    @endif
+    <div>
+        <a class="navbar-brand pe-3 ps-4 ps-lg-2" href="/">NMDPRA VMS</a>
+        <img src="{{ asset('/images/logo-small.png') }}" alt="Logo" height="35" width="35">
+    </div>
+    {{-- @if (Auth::check())
+    <a class="navbar-brand pe-3 ps-4 ps-lg-2 ml-10">{{ Auth::user()->name }}</a>
+    @endif --}}
     <!-- Navbar Items-->
     <ul class="navbar-nav align-items-center ms-auto">
         <!-- User Dropdown-->
+        
         @if (Auth::check())
+        <a class="navbar-brand pe-3 ps-4 ps-lg-2 ml-10">{{ Auth::user()->name }}</a>
             @can('userProfile', \App\Models\User::class)
                 <li class="nav-item no-caret me-3">
                     <a class="btn" href="{{ route('user.profile') }}">Profile</a>

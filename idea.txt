@@ -7,3 +7,5 @@
 # seeder fix
 # web route fix
 # logo
+# tag add, remove, replace
+# approve or reject from mail

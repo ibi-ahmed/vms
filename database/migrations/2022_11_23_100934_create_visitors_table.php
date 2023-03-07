@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('phone')->unique();
             $table->string('company');
             $table->string('photo')->default('avatar.png');
-            $table->tinyInteger('status')->default(1);
+            $table->tinyInteger('status')->default(0);
             $table->timestamps();
         });
     }
