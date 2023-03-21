@@ -17,40 +17,40 @@ class CreateUsersSeeder extends Seeder
     {
         $users = [
             [
-               'name'=>'Super Mario',
+               'name'=>'Super Admin',
             //    'last_name'=>'Super',
-               'email'=>'super@super.vms',
+               'email'=>'isahmed@protonmail.com',
                'role_id'=> 5,
                'password'=> bcrypt('123'),
             ],
-            [
-               'name'=>'Julius Nyerere',
-            //    'last_name'=>'Admin',
-               'email'=>'admin@admin.vms',
-               'role_id'=>4,
-               'password'=> bcrypt('123'),
-            ],
-            [
-                'name'=>'Thomas Sankara',
-                // 'last_name'=>'Staff',
-                'email'=>'staff@staff.vms',
-                'role_id'=>3,
-                'password'=> bcrypt('123'),
-             ],
-            [
-               'name'=>'Gamal Abdel Nasser',
-            //    'last_name'=>'Security',
-               'email'=>'security@security.vms',
-               'role_id'=>2,
-               'password'=> bcrypt('123'),
-            ],
-            [
-               'name'=>'Musa Mansa',
-            //    'last_name'=>'Contractor',
-               'email'=>'contractor@contractor.vms',
-               'role_id'=>1,
-               'password'=> bcrypt('123'),
-            ],
+            // [
+            //    'name'=>'Julius Nyerere',
+            // //    'last_name'=>'Admin',
+            //    'email'=>'admin@admin.vms',
+            //    'role_id'=>4,
+            //    'password'=> bcrypt('123'),
+            // ],
+            // [
+            //     'name'=>'Thomas Sankara',
+            //     // 'last_name'=>'Staff',
+            //     'email'=>'staff@staff.vms',
+            //     'role_id'=>3,
+            //     'password'=> bcrypt('123'),
+            //  ],
+            // [
+            //    'name'=>'Gamal Abdel Nasser',
+            // //    'last_name'=>'Security',
+            //    'email'=>'security@security.vms',
+            //    'role_id'=>2,
+            //    'password'=> bcrypt('123'),
+            // ],
+            // [
+            //    'name'=>'Musa Mansa',
+            // //    'last_name'=>'Contractor',
+            //    'email'=>'contractor@contractor.vms',
+            //    'role_id'=>1,
+            //    'password'=> bcrypt('123'),
+            // ],
         ];
 
         foreach ($users as $key => $user) {
