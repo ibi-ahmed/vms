@@ -16,7 +16,7 @@
     </script>
 </head>
 
-<body class="bg-primary">
+<body class="bg-success">
     <div id="layoutAuthentication">
         <div id="layoutAuthentication_content">
             <main>
@@ -28,8 +28,18 @@
                             </div>
                             <!-- Basic login form-->
                             <div class="card shadow-lg border-0 rounded-lg mt-5">
-                                <div class="card-header justify-content-center">
-                                    <h3 class="fw-light my-4 text-center">Login</h3>
+                                <div class="card-header text-center">
+                                    <div class="row">
+
+                                        <div class="col-sm mt-2 text-sm-start">
+                                            <img src="{{ asset('/images/logo-small.png') }}" alt="Logo" height="55" width="55">
+                                        </div>
+                                        <div class="col-sm text-sm-end">
+                                            <h3 class="fw-bolder my-4">NMDPRA VMS</h3>
+                                        </div>
+                                    </div>
+                                    
+                                    
                                 </div>
                                 <div class="card-body">
                                     <!-- Login form-->
@@ -70,15 +80,15 @@
                                         <!-- Form Group (login box)-->
                                         <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
                                             @if (Route::has('password.request'))
-                                                <a class="small" href="{{ route('password.request') }}">Forgot
+                                                <a class="small text-success" href="{{ route('password.request') }}">Forgot
                                                     Password?</a>
                                             @endif
-                                            <button type="submit" class="btn btn-primary">Login</button>
+                                            <button type="submit" class="btn btn-success">Login</button>
                                         </div>
                                     </form>
                                 </div>
                                 <div class="card-footer text-center">
-                                    <div class="small"><a href="/auth/redirect">Staff Login</a>
+                                    <div class="small fs-3"><a class="text-success" href="/auth/redirect">Staff Login</a>
                                     </div>
                                 </div>
                             </div>
