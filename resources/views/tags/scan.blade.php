@@ -18,8 +18,8 @@
 
                 </div>
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item">{{ $visit->visitor->first_name . ' ' . $visit->visitor->last_name }}</li>
-                    <li class="list-group-item">{{ $visit->visitor->company }}</li>
+                    <li class="list-group-item">Name - {{ $visit->visitor->first_name . ' ' . $visit->visitor->last_name }}</li>
+                    <li class="list-group-item">Company - {{ $visit->visitor->company }}</li>
                     <li class="list-group-item">Department - {{ $visit->department->name }}</li>
                     <li class="list-group-item">Location - {{ $visit->location->name }}</li>
                     <li class="list-group-item">Staff - {{ $visit->user->name }}</li>

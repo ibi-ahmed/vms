@@ -27,6 +27,7 @@ class DepartmentSeeder extends Seeder
             ['name' => 'Audit'],
             ['name' => 'Procurement'],
             ['name' => 'Legal'],
+            ['name' => 'S&I'],
         ];
 
         foreach ($departments as $key => $department) {

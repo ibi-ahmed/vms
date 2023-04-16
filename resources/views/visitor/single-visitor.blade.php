@@ -17,12 +17,12 @@
 
             </div>
             <ul class="list-group list-group-flush">
-                <li class="list-group-item">{{ $visitor->first_name . ' ' . $visitor->last_name }}</li>
-                <li class="list-group-item">{{ $visitor->company }}</li>
+                <li class="list-group-item">Name - {{ $visitor->first_name . ' ' . $visitor->last_name }}</li>
+                <li class="list-group-item">Company - {{ $visitor->company }}</li>
                 @if ($visitor->email)
-                    <li class="list-group-item">{{ $visitor->email }}</li>
+                    <li class="list-group-item">Email - {{ $visitor->email }}</li>
                 @endif
-                <li class="list-group-item">{{ $visitor->phone }}</li>
+                <li class="list-group-item">Phone - {{ $visitor->phone }}</li>
                 <li class="list-group-item text-center">
                     <div class="d-grid gap-2 d-sm-flex justify-content-sm-end">
                         @can('editVisitor', $visitor)
@@ -80,7 +80,15 @@
                             </tbody>
                             <tfoot class="text-center">
                                 <tr>
-                                    <td class="" colspan="6">PREVIOUS VISITS</td>
+                                    <td class="" colspan="4">PREVIOUS VISITS</td>
+                                    <td class="" colspan="2">
+                                        @can('visitorReport', $visitor)
+                                        <form action="{{ route('reports.single', $visitor->id) }}" method="POST">
+                                            @csrf
+                                            <button class="btn btn-primary btn-sm" type="submit">DOWNLOAD REPORT</button>
+                                        </form>
+                                        @endcan
+                                    </td>
                                 </tr>
                             </tfoot>
                         </table>

@@ -1,12 +1,9 @@
 <?php
 
-use App\Models\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MicrosoftGraph;
-use App\Models\Appointment;
-use App\Models\User;
 use Laravel\Socialite\Facades\Socialite;
 
 /*
@@ -22,8 +19,8 @@ use Laravel\Socialite\Facades\Socialite;
 
 Route::get('/', function () {
     if (Auth::check()) {
-        return redirect()->route(strtolower(Auth::user()->role->name).'.dashboard');
-    }else {
+        return redirect()->route(strtolower(Auth::user()->role->name) . '.dashboard');
+    } else {
         return redirect()->route('login');
     }
 });
@@ -32,9 +29,10 @@ Route::get('/test', function () {
     // return response()->json('test');
     // return view('blank');
 
-    $staff = User::where('id', 6)->first();
-    $appointment = Appointment::where('id', 20)->first();
-    return new App\Mail\AppointmentCreated($staff, $appointment);
+    // $staff = User::where('id', 6)->first();
+    // $appointment = Appointment::where('id', 20)->first();
+    // return new App\Mail\AppointmentCreated($staff, $appointment);
+    return 'test';
 });
 
 Auth::routes(['register' => false]);
@@ -47,33 +45,33 @@ Route::get('/auth/callback', [App\Http\Controllers\Auth\LoginController::class, 
 
 // User Routes
 // Route::middleware(['user-access:user'])->group(function () {
-    Route::get('/security-dashboard', [App\Http\Controllers\UserController::class, 'securityDashboard'])->name('security.dashboard');
-    Route::get('/contractor-dashboard', [App\Http\Controllers\UserController::class, 'contractorDashboard'])->name('contractor.dashboard');
-    Route::get('/user-profile', [App\Http\Controllers\UserController::class, 'userProfile'])->name('user.profile');
-    Route::post('/user-profile/{user}', [App\Http\Controllers\UserController::class, 'updateUserProfile'])->name('update.user.profile');
-    Route::get('/all-users', [App\Http\Controllers\UserController::class, 'allUsers'])->name('users.all');
-    Route::get('/searchUsers/{query?}', [App\Http\Controllers\UserController::class, 'searchUsers'])->name('search.users');
-    Route::get('/single-user/{id}', [App\Http\Controllers\UserController::class, 'singleUser'])->name('user.single');
-    Route::get('/edit-user/{id}', [App\Http\Controllers\UserController::class, 'edit'])->name('user.edit');
-    Route::post('/edit-user/{user}', [App\Http\Controllers\UserController::class, 'editUser'])->name('user.editUser');
+Route::get('/security-dashboard', [App\Http\Controllers\UserController::class, 'securityDashboard'])->name('security.dashboard');
+Route::get('/contractor-dashboard', [App\Http\Controllers\UserController::class, 'contractorDashboard'])->name('contractor.dashboard');
+Route::get('/user-profile', [App\Http\Controllers\UserController::class, 'userProfile'])->name('user.profile');
+Route::post('/user-profile/{user}', [App\Http\Controllers\UserController::class, 'updateUserProfile'])->name('update.user.profile');
+Route::get('/all-users', [App\Http\Controllers\UserController::class, 'allUsers'])->name('users.all');
+Route::get('/searchUsers/{query?}', [App\Http\Controllers\UserController::class, 'searchUsers'])->name('search.users');
+Route::get('/single-user/{id}', [App\Http\Controllers\UserController::class, 'singleUser'])->name('user.single');
+Route::get('/edit-user/{id}', [App\Http\Controllers\UserController::class, 'edit'])->name('user.edit');
+Route::post('/edit-user/{user}', [App\Http\Controllers\UserController::class, 'editUser'])->name('user.editUser');
 // });
 
 // Staff Routes
 // Route::middleware(['auth', 'user-access:staff'])->group(function () {
-    Route::get('/staff-dashboard', [App\Http\Controllers\UserController::class, 'staffDashboard'])->name('staff.dashboard');
-    Route::get('/edit-staff-search', [App\Http\Controllers\UserController::class, 'editStaffSearch'])->name('staff.edit.search');
-    Route::post('/edit-staff-view', [App\Http\Controllers\UserController::class, 'editStaffView'])->name('staff.edit.view');
-    Route::post('/edit-staff-role', [App\Http\Controllers\UserController::class, 'editStaffRole'])->name('staff.edit.role');
+Route::get('/staff-dashboard', [App\Http\Controllers\UserController::class, 'staffDashboard'])->name('staff.dashboard');
+Route::get('/edit-staff-search', [App\Http\Controllers\UserController::class, 'editStaffSearch'])->name('staff.edit.search');
+Route::post('/edit-staff-view', [App\Http\Controllers\UserController::class, 'editStaffView'])->name('staff.edit.view');
+Route::post('/edit-staff-role', [App\Http\Controllers\UserController::class, 'editStaffRole'])->name('staff.edit.role');
 // });
 
 // Admin Routes
 // Route::middleware(['auth', 'user-access:admin'])->group(function () {
-    Route::get('/admin-dashboard', [App\Http\Controllers\UserController::class, 'adminDashboard'])->name('admin.dashboard');
+Route::get('/admin-dashboard', [App\Http\Controllers\UserController::class, 'adminDashboard'])->name('admin.dashboard');
 // });
 
 // Super Routes
 // Route::middleware(['auth', 'user-access:super'])->group(function () {  
-    Route::get('/super-dashboard', [App\Http\Controllers\UserController::class, 'superDashboard'])->name('super.dashboard');
+Route::get('/super-dashboard', [App\Http\Controllers\UserController::class, 'superDashboard'])->name('super.dashboard');
 // });
 
 Route::get('/add-user', [App\Http\Controllers\UserController::class, 'addUser'])->name('user.register');
@@ -115,6 +113,8 @@ Route::get('/all-appointments/{query?}', [App\Http\Controllers\AppointmentContro
 Route::get('/my-appointments', [App\Http\Controllers\AppointmentController::class, 'myAppointments'])->name('appointments.my');
 Route::get('/recent-appointments', [App\Http\Controllers\AppointmentController::class, 'recent'])->name('appointments.recent');
 
+Route::post('/reports-single/{id}', [App\Http\Controllers\VisitorController::class, 'singleReport'])->name('reports.single');
+
 
 // Route::get('/staff-search', [App\Http\Controllers\MicrosoftGraph::class, 'users'])->name('staff.search');
 Route::get('/staff-search', function (Request $request) {
@@ -123,6 +123,3 @@ Route::get('/staff-search', function (Request $request) {
     // return response()->json('test');
     return MicrosoftGraph::users($keyword);
 });
-
-
-

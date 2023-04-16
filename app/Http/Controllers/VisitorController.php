@@ -15,11 +15,13 @@ use Illuminate\Support\Carbon;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use Barryvdh\DomPDF\Facade\Pdf as PDF;
 
 class VisitorController extends Controller
 {
     public function __construct()
-    {}
+    {
+    }
 
     public function add()
     {
@@ -37,9 +39,9 @@ class VisitorController extends Controller
             ->orderByDesc('updated_at')->where('status', 1)->paginate(10);
         return view('visitor.recent', compact('visits'));
     }
-    
+
     public function storeVisitor(Request $request)
-    {   
+    {
         $this->authorize('add', Visitor::class);
         $input = $request->validate([
             'first_name' => ['required', 'string', 'max:255'],
@@ -63,13 +65,13 @@ class VisitorController extends Controller
         $visitor = new Visitor;
         $visitor->first_name = $input['first_name'];
         $visitor->last_name = $input['last_name'];
-        
+
         if ($request->email) {
             $visitor->email = $request->email;
         }
 
         if ($request->photo) {
-            $photoName = time().'.'.$request->photo->extension();
+            $photoName = time() . '.' . $request->photo->extension();
             $request->photo->move(public_path('images/avatar'), $photoName);
             $visitor->photo = $photoName;
         }
@@ -82,18 +84,18 @@ class VisitorController extends Controller
         $visitor = Visitor::where('phone', $input['phone'])->first();
 
         $staff = User::where('azure_id', $request->staff_id)->first();
-        
-        if ($staff !=null ) {
+
+        if ($staff != null) {
             $staff->name = str_replace(',', '', $request->staff_name);
             $staff->email = strtolower($request->staff_email);
-        }else{
+        } else {
             $staff = new User();
             $staff->name = str_replace(',', '', $request->staff_name);
             $staff->email = strtolower($request->staff_email);
             $staff->role_id = 3;
             $staff->azure_id = $request->staff_id;
         }
-        
+
         $staff->save();
 
         $appointment = new Appointment();
@@ -113,7 +115,7 @@ class VisitorController extends Controller
 
         Mail::to($staff)->send(new AppointmentCreated($staff, $appointment));
 
-        return redirect()->route(strtolower(Auth::user()->role->name).'.dashboard')->with('success', 'Appointment Created!');
+        return redirect()->route(strtolower(Auth::user()->role->name) . '.dashboard')->with('success', 'Appointment Created!');
     }
 
     public function storeVisit(Request $request)
@@ -121,20 +123,20 @@ class VisitorController extends Controller
         $visitor = Visitor::where('id', $request->vis_id)->first();
 
         $staff = User::where('azure_id', $request->staff_id)->first();
-        
-        if ($staff !=null ) {
+
+        if ($staff != null) {
             $staff->name = str_replace(',', '', $request->staff_name);
             $staff->email = strtolower($request->staff_email);
-        }else{
+        } else {
             $staff = new User();
             $staff->name = str_replace(',', '', $request->staff_name);
             $staff->email = strtolower($request->staff_email);
             $staff->role_id = 3;
             $staff->azure_id = $request->staff_id;
         }
-        
+
         $staff->save();
-        
+
         $appointment = new Appointment();
         $appointment->first_name = $visitor->first_name;
         $appointment->last_name = $visitor->last_name;
@@ -152,28 +154,28 @@ class VisitorController extends Controller
 
         Mail::to($staff)->send(new AppointmentCreated($staff, $appointment));
 
-        return redirect()->route(strtolower(Auth::user()->role->name).'.dashboard')->with('success', 'Appointment Created!');
+        return redirect()->route(strtolower(Auth::user()->role->name) . '.dashboard')->with('success', 'Appointment Created!');
     }
 
     public function getVisitor(Request $request)
     {
         $visitor = Visitor::where(function ($query) use ($request) {
-            $query->where('email', 'LIKE', '%'.$request->keyword.'%')
-                  ->orWhere('phone', 'LIKE', '%'.$request->keyword.'%')
-                  ->orWhere('last_name', 'LIKE', '%'.$request->keyword.'%');
+            $query->where('email', 'LIKE', '%' . $request->keyword . '%')
+                ->orWhere('phone', 'LIKE', '%' . $request->keyword . '%')
+                ->orWhere('last_name', 'LIKE', '%' . $request->keyword . '%');
         })
             ->where('status', 0)
             ->get();
         return response()->json($visitor);
     }
-    
+
     public function edit($id)
     {
         $visitor = Visitor::find($id);
         $this->authorize('editVisitor', $visitor);
         return view('visitor.edit-visitor', compact('visitor'));
     }
-    
+
     public function editVisitor(Request $request, $id)
     {
         $visitor = Visitor::find($id);
@@ -185,7 +187,7 @@ class VisitorController extends Controller
             'phone' => ['required', 'string', 'max:15', Rule::unique('visitors')->ignore(Visitor::find($id))],
             'company' => ['required', 'string', 'max:255'],
         ]);
-        
+
         if ($request->email) {
             $request->validate([
                 'email' => ['string', 'email', 'max:255', Rule::unique('visitors')->ignore(Visitor::find($id))]
@@ -200,13 +202,13 @@ class VisitorController extends Controller
 
         $visitor->first_name = $input['first_name'];
         $visitor->last_name = $input['last_name'];
-        
+
         if ($request->email) {
             $visitor->email = $request->email;
         }
-        
+
         if ($request->photo) {
-            $photoName = time().'.'.$request->photo->extension();
+            $photoName = time() . '.' . $request->photo->extension();
             $request->photo->move(public_path('images/avatar'), $photoName);
             $visitor->photo = $photoName;
         }
@@ -222,18 +224,18 @@ class VisitorController extends Controller
     {
         $this->authorize('allVisitors', Visitor::class);
         $query = $request->get('query');
-        $visitors = Visitor::where('email', 'LIKE', '%'.$query.'%')
-            ->orWhere('phone', 'LIKE', '%'.$query.'%')
-            ->orWhere('last_name', 'LIKE', '%'.$query.'%')
+        $visitors = Visitor::where('email', 'LIKE', '%' . $query . '%')
+            ->orWhere('phone', 'LIKE', '%' . $query . '%')
+            ->orWhere('last_name', 'LIKE', '%' . $query . '%')
             ->paginate(10);
-            
+
         return view('visitor.all-visitor', compact('visitors'));
     }
 
     public function my()
     {
         $this->authorize('myVisitors', Visit::class);
-        $visits = Visit::orderByDesc('updated_at')->where('user_id', Auth::user()->id)->paginate(5);
+        $visits = Visit::orderByDesc('updated_at')->where('user_id', Auth::user()->id)->paginate(10);
         return view('visitor.my', compact('visits'));
     }
 
@@ -247,7 +249,7 @@ class VisitorController extends Controller
     public function single($id)
     {
         $visitor = Visitor::find($id);
-        $visits = $visitor->visits()->paginate(3);
+        $visits = $visitor->visits()->paginate(10);
         return view('visitor.single-visitor', compact('visits', 'visitor'));
     }
 
@@ -255,4 +257,14 @@ class VisitorController extends Controller
     // {
     //     return view('visitor.add-visit');
     // }
+
+    public function singleReport($id)
+    {
+        $this->authorize('visitorReport', Visitor::class);
+        $visitor = Visitor::find($id);
+        $visits = $visitor->visits()->get();
+
+        $pdf = PDF::loadView('reports.single', compact('visitor', 'visits'));
+        return $pdf->download(Carbon::now() . '.pdf');
+    }
 }

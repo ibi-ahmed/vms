@@ -20,6 +20,11 @@ class VisitorPolicy
     {
         return in_array($user->role_id, [Role::IS_SUPER, Role::IS_ADMIN]);
     }
+    
+    public function visitorReport(User $user)
+    {
+        return in_array($user->role_id, [Role::IS_SUPER, Role::IS_ADMIN]);
+    }
 
     public function editVisitor(User $user, Visitor $visitor)
     {
