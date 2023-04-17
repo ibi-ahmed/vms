@@ -6,11 +6,11 @@
 @section('sub_head', 'Administrator Dashboard')
 
 <div class="mt-4 row">
-    <div class="col-sm-8 offset-sm-2">
+    <div class="col-sm-10 offset-sm-1">
         <div class="card">
             <div class="card-header text-center">
                 <div class="row">
-                    <div class="col-4 offset-4">
+                    <div class="col-sm-6 offset-sm-3">
                         <form action="{{ route('appointments.all') }}">
                             <div class="input-group">
                                 <input class="form-control text-center" name="query" type="text" placeholder="Search Visitor Appointment" aria-describedby="button-addon" required>

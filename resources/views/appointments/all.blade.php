@@ -8,11 +8,11 @@
 @section('sub_head', 'All Appointments')
 
 <div class="row">
-    <div class="col-sm-12">
+    <div class="col-sm-10 offset-sm-1">
         <div class="card">
             <div class="card-header border-bottom text-center">
                 <div class="row">
-                    <div class="col-4 offset-4">
+                    <div class="col-sm-6 offset-sm-3">
                         <form action="{{ route('appointments.all') }}">
                             <div class="input-group">
                                 <input class="form-control text-center" name="query" type="text" placeholder="Search Visitor..." aria-describedby="button-addon" required>
