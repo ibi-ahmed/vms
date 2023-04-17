@@ -28,6 +28,11 @@ class DepartmentSeeder extends Seeder
             ['name' => 'Procurement'],
             ['name' => 'Legal'],
             ['name' => 'S&I'],
+            ['name' => 'Operations'],
+            ['name' => 'Registry'],
+            ['name' => 'Abuja Regional Office'],
+            ['name' => 'Customer Service'],
+            ['name' => 'Auditorium'],
         ];
 
         foreach ($departments as $key => $department) {

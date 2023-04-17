@@ -1,6 +1,9 @@
 <?php
 
+// use App\Models\Visit;
+// use Barryvdh\DomPDF\Facade\Pdf as PDF;
 use Illuminate\Http\Request;
+// use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MicrosoftGraph;
@@ -29,8 +32,8 @@ Route::get('/test', function () {
     // return response()->json('test');
     // return view('blank');
 
-    // $staff = User::where('id', 6)->first();
-    // $appointment = Appointment::where('id', 20)->first();
+    // $staff = App\Models\User::where('id', 6)->first();
+    // $appointment = App\Models\Appointment::where('id', 2)->first();
     // return new App\Mail\AppointmentCreated($staff, $appointment);
     return 'test';
 });
@@ -114,6 +117,8 @@ Route::get('/my-appointments', [App\Http\Controllers\AppointmentController::clas
 Route::get('/recent-appointments', [App\Http\Controllers\AppointmentController::class, 'recent'])->name('appointments.recent');
 
 Route::post('/reports-single/{id}', [App\Http\Controllers\VisitorController::class, 'singleReport'])->name('reports.single');
+Route::get('/reports-search', [App\Http\Controllers\VisitorController::class, 'reportSearch'])->name('reports.search');
+Route::post('/reports-search-result', [App\Http\Controllers\VisitorController::class, 'reportSearchResult'])->name('reports.search.result');
 
 
 // Route::get('/staff-search', [App\Http\Controllers\MicrosoftGraph::class, 'users'])->name('staff.search');

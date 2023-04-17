@@ -267,4 +267,23 @@ class VisitorController extends Controller
         $pdf = PDF::loadView('reports.single', compact('visitor', 'visits'));
         return $pdf->download(Carbon::now() . '.pdf');
     }
+
+    public function reportSearch()
+    {
+        return view('reports.search');
+    }
+
+    public function reportSearchResult(Request $request)
+    { 
+        $visit_date = $request->date;
+        $visits = Visit::whereDate('created_at', '=', $request->date)
+            ->orderByDesc('created_at')->get();
+        
+        if ($visits->isEmpty()) {
+            return back()->with('error', 'No Visitors on Selected Date!');
+        }
+
+        $pdf = PDF::loadView('reports.all', compact('visits', 'visit_date'));
+        return $pdf->download(Carbon::now() . '.pdf');
+    }
 }

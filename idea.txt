@@ -1,11 +1,5 @@
-#   user dashboard -> all appointments, search visitor, add visitor, add visit, (deactivate tag)
-#   staff dashboard -> prev appointments, prev visitors, set appointment, cancel appointment, approve appt
-#   admin -> all above + active visits, add user, edit staff, edit user, 
-        edit visitor, total visits by dept, add new tag, delete tag, unattach tag to visitor 
-#   super -> all + add/edit staff/admin
+
 # <h3><img src="https://api.qrserver.com/v1/create-qr-code/?data=https://ticketroom.ng/attendance/{{$tran->reference}}&amp;size=100x100"/></h3>
-# seeder fix
-# web route fix
-# logo
 # tag add, remove, replace
 # approve or reject from mail
+# CI/CD cloudways, block storage
