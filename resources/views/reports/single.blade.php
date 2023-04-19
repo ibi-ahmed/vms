@@ -1,6 +1,9 @@
 
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <link rel="stylesheet" href="{{ asset('/theme/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ public_path('/theme/css/bootstrap.min.css') }}">
+    {{-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> --}}
+    {{-- <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+    <script src="{{ mix('js/app.js') }}" defer></script> --}}
     
     <div class="container-fluid"> 
     <div class="row">

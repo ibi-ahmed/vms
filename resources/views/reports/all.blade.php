@@ -1,5 +1,5 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link rel="stylesheet" href="{{ asset('/theme/css/bootstrap.min.css') }}">
+<link rel="stylesheet" href="{{ public_path('/theme/css/bootstrap.min.css') }}">
 
 <div class="container-fluid">
     <div class="mt-4 row">
