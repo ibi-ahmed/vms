@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('password')->nullable();
             $table->tinyInteger('role_id'); /* Users: 1=>Contractor, 2=>Security, 3=>Staff, 4=>Admin 5=>Super */
             $table->string('azure_id')->nullable();
-            $table->string('token')->nullable();
+            $table->text('token')->nullable();
             // $table->tinyInteger('type')->default(0); /* Users: 0=>User, 1=>Staff, 2=>Admin 3=>Super */
             // $table->boolean('changed_password')->default(false); 
             $table->rememberToken();
