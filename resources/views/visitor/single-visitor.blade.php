@@ -12,7 +12,7 @@
             </div>
             <div class="card-body text-center">
                 <!-- Profile picture image-->
-                <img class="img-account-profile rounded-circle mb-2" src="/images/avatar/{{ $visitor->photo }}"
+                <img class="img-account-profile rounded-circle mb-2" src="{{ asset('images/avatar/' . $visitor->photo) }}"
                     alt="Profile Pic" />
 
             </div>
@@ -26,16 +26,16 @@
                 <li class="list-group-item text-center">
                     <div class="d-grid gap-2 d-sm-flex justify-content-sm-end">
                         @can('editVisitor', $visitor)
-                        <form action="{{ route('visitor.edit', $visitor->id) }}" method="GET">
-                            <button class="btn btn-primary btn-sm" type="submit">Edit</button>
-                        </form>
+                            <form action="{{ route('visitor.edit', $visitor->id) }}" method="GET">
+                                <button class="btn btn-primary btn-sm" type="submit">Edit</button>
+                            </form>
                         @endcan
                         @if ($visitor->status == 1)
                             @if (Auth::user()->role_id == 5 || Auth::user()->role_id == 4 || Auth::user()->role_id == 2)
-                            <form action="{{ route('tag.deactivate', $visitor->id) }}" method="POST">
-                                @csrf
-                                <button class="btn btn-danger btn-sm" type="submit">Deactivate</button>
-                            </form>
+                                <form action="{{ route('tag.deactivate', $visitor->id) }}" method="POST">
+                                    @csrf
+                                    <button class="btn btn-danger btn-sm" type="submit">Deactivate</button>
+                                </form>
                             @endif
                         @endif
                     </div>
@@ -53,10 +53,11 @@
                                 <tr>
                                     <th>S/N</th>
                                     <th>Staff</th>
-                                    <th>Department</th>
+                                    {{-- <th>Department</th> --}}
                                     <th>Location</th>
-                                    <th>Time</th>
                                     <th>Date</th>
+                                    <th>Time In</th>
+                                    <th>Time Out</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -69,12 +70,21 @@
                                                 {{ $visit->user->name }}
                                             </div>
                                         </td>
-                                        <td>{{ $visit->department->name }}</td>
-                                        <td>{{ $visit->location->name }}</td>
+                                        <td>{{ $visit->location->name . ' / ' . $visit->department->name }}</td>
+                                        {{-- <td>{{ $visit->location->name }}</td> --}}
+                                        <td>{{ date('F jS, Y', strtotime($visit->created_at)) }}</td>
                                         <td>
                                             {{ date('h:i A', strtotime($visit->created_at)) }}
                                         </td>
-                                        <td>{{ date('D M j', strtotime($visit->created_at)) }}</td>
+                                        @if ($visit->status == 0)
+                                            <td>
+                                                {{ date('h:i A', strtotime($visit->updated_at)) }}
+                                            </td>
+                                        @else
+                                            <td>
+                                                ---------
+                                            </td>
+                                        @endif
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -83,10 +93,11 @@
                                     <td class="" colspan="4">PREVIOUS VISITS</td>
                                     <td class="" colspan="2">
                                         @can('visitorReport', $visitor)
-                                        <form action="{{ route('reports.single', $visitor->id) }}" method="POST">
-                                            @csrf
-                                            <button class="btn btn-primary btn-sm" type="submit">DOWNLOAD REPORT</button>
-                                        </form>
+                                            <form action="{{ route('reports.single', $visitor->id) }}" method="POST">
+                                                @csrf
+                                                <button class="btn btn-primary btn-sm" type="submit">DOWNLOAD
+                                                    REPORT</button>
+                                            </form>
                                         @endcan
                                     </td>
                                 </tr>

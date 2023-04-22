@@ -3,3 +3,4 @@
 # tag add, remove, replace
 # approve or reject from mail
 # CI/CD cloudways, block storage
+# upload photo from approve

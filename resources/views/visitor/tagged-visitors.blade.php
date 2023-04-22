@@ -28,8 +28,8 @@
                             <tr>
                                 <th>S/N</th>
                                 <th>Name</th>
-                                <th>Phone</th>
-                                <th>Company</th>
+                                <th>Staff</th>
+                                <th>Location</th>
                                 <th>Tag No</th>
                                 <th>Actions</th>
                             </tr>
@@ -44,9 +44,9 @@
                                             {{ $visit->visitor->first_name . ' ' . $visit->visitor->last_name }}
                                         </div>
                                     </td>
-                                    <td>{{ $visit->visitor->phone }}</td>
+                                    <td>{{ $visit->user->name }}</td>
                                     <td>
-                                        {{ $visit->visitor->company }}
+                                        {{ $visit->location->name.' / '.$visit->department->name }}
                                     </td>
                                     <td>{{ $visit->tag->number }}</td>
                                     <td>

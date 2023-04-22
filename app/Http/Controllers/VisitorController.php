@@ -249,7 +249,7 @@ class VisitorController extends Controller
     public function single($id)
     {
         $visitor = Visitor::find($id);
-        $visits = $visitor->visits()->paginate(10);
+        $visits = $visitor->visits()->orderBy('created_at', 'desc')->paginate(10);
         return view('visitor.single-visitor', compact('visits', 'visitor'));
     }
 
@@ -262,7 +262,7 @@ class VisitorController extends Controller
     {
         $this->authorize('visitorReport', Visitor::class);
         $visitor = Visitor::find($id);
-        $visits = $visitor->visits()->get();
+        $visits = $visitor->visits()->orderBy('created_at', 'desc')->get();
 
         $pdf = PDF::loadView('reports.single', compact('visitor', 'visits'));
         return $pdf->download(Carbon::now() . '.pdf');

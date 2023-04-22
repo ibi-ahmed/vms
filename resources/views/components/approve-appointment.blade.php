@@ -1,7 +1,7 @@
 
 <!-- Modal -->
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <form action="{{ route('appointments.approve', $appointment->id) }}" method="post" enctype="multipart/form-data">
+    <form action="{{ route('appointments.approve', $appointment->id) }}" method="POST" enctype="multipart/form-data" id="approveForm">
         @csrf
     <div class="modal-dialog">
       <div class="modal-content">
@@ -32,7 +32,7 @@
                     <!-- Form Group (Profile Pic)-->
                     <div class="mb-3">
                         <label class="mb-1" for="photo">Upload Photo</label>
-                        <input class="form-control" name="photo" type="file" />
+                        <input class="form-control" name="photo" type="file" form="approveForm" />
                     </div>
 
                     <div class="row gx-3 mb-3">

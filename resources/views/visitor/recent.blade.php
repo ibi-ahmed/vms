@@ -17,9 +17,9 @@
                                 <tr>
                                     <th>S/N</th>
                                     <th>Name</th>
-                                    <th>Phone</th>
-                                    <th>Company</th>
-                                    <th>Date</th>
+                                    <th>Staff</th>
+                                    <th>Location</th>
+                                    {{-- <th>Date</th> --}}
                                     <th>Tag No</th>
                                     <th>Created By</th>
                                     <th>Actions</th>
@@ -35,11 +35,12 @@
                                                 {{ $visit->visitor->first_name . ' ' . $visit->visitor->last_name }}
                                             </div>
                                         </td>
-                                        <td>{{ $visit->visitor->phone }}</td>
+                                        {{-- <td>{{ $visit->visitor->phone }}</td> --}}
+                                        <td>{{ $visit->user->name }}</td>
                                         <td>
-                                            {{ $visit->visitor->company }}
+                                            {{ $visit->location->name.' / '.$visit->department->name }}
                                         </td>
-                                        <td>{{ date('D M j - h:i A', strtotime($visit->created_at)) }}</td>
+                                        {{-- <td>{{ date('F jS, Y', strtotime($visit->created_at)) }}</td> --}}
                                         <td>{{ $visit->tag->number }}</td>
                                         <td>{{ DB::table('users')->where('id', $visit->created_by)->pluck('name')->first() }}</td>
                                         <td>

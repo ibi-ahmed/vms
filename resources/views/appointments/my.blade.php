@@ -18,10 +18,11 @@
                         <thead>
                             <tr>
                                 <th>S/N</th>
-                                <th>First Name</th>
-                                <th>Last Name</th>
+                                <th>Name</th>
+                                {{-- <th>Last Name</th> --}}
                                 <th>Company</th>
                                 <th>Created By</th>
+                                <th>Date</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -32,17 +33,18 @@
                                     <td>
                                         <div class="d-flex">
                                             <div class=""></div>
-                                            {{ $appointment->first_name }}
+                                            {{ $appointment->first_name.' '.$appointment->last_name }}
                                         </div>
                                     </td>
-                                    <td>
+                                    {{-- <td>
                                         <div class="d-flex">
                                             <div class=""></div>
                                             {{ $appointment->last_name }}
                                         </div>
-                                    </td>
+                                    </td> --}}
                                     <td>{{ $appointment->company }}</td>
                                     <td>{{ DB::table('users')->where('id', $appointment->created_by)->pluck('name')->first() }}</td>
+                                    <td>{{ date('F jS, Y', strtotime($appointment->created_at)) }}</td>
                                     <td class="">
 
                                         @if ($appointment->status == 0)

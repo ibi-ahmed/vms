@@ -29,11 +29,11 @@
                         <thead>
                             <tr>
                                 <th>S/N</th>
-                                <th>First Name</th>
-                                <th>Last Name</th>
-                                <th>Company</th>
+                                <th>Name</th>
+                                {{-- <th>Last Name</th> --}}
+                                {{-- <th>Company</th> --}}
                                 <th>Staff</th>
-                                <th>Department</th>
+                                {{-- <th>Department</th> --}}
                                 <th>Location</th>
                                 <th>Created By</th>
                                 <th>Action</th>
@@ -46,21 +46,15 @@
                                     <td>
                                         <div class="d-flex">
                                             <div class=""></div>
-                                            {{ $appointment->first_name }}
+                                            {{ $appointment->first_name.' '.$appointment->last_name }}
                                         </div>
                                     </td>
-                                    <td>
-                                        <div class="d-flex">
-                                            <div class=""></div>
-                                            {{ $appointment->last_name }}
-                                        </div>
-                                    </td>
-                                    <td>{{ $appointment->company }}</td>
+                                    {{-- <td>{{ $appointment->company }}</td> --}}
                                     <td>
                                         {{ $appointment->staff->name}}
                                     </td>
-                                    <td>{{ $appointment->department->name }}</td>
-                                    <td>{{ $appointment->location->name }}</td>
+                                    {{-- <td>{{ $appointment->department->name }}</td> --}}
+                                    <td>{{ $appointment->location->name.' / '.$appointment->department->name }}</td>
                                     <td>{{ DB::table('users')->where('id', $appointment->created_by)->pluck('name')->first() }}</td>
                                     <td>
                                         @if ($appointment->status == 0)

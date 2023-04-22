@@ -22,10 +22,10 @@ class AppointmentController extends Controller
         $this->authorize('allAppointments', Appointment::class);
         $appointments = Appointment::where('updated_at', '>=', Carbon::now()->subHours(12))
             ->where(function ($query) use ($request) {
-                $query->where('email', 'LIKE', '%'.$request->query->get('query').'%')
-                    ->orWhere('phone', 'LIKE', '%'.$request->query->get('query').'%')
-                    ->orWhere('last_name', 'LIKE', '%'.$request->query->get('query').'%');
-        })
+                $query->where('email', 'LIKE', '%' . $request->query->get('query') . '%')
+                    ->orWhere('phone', 'LIKE', '%' . $request->query->get('query') . '%')
+                    ->orWhere('last_name', 'LIKE', '%' . $request->query->get('query') . '%');
+            })
             ->orderByDesc('updated_at')
             ->paginate(10);
         $tags = Tag::where('status', 0)->get();
@@ -100,12 +100,12 @@ class AppointmentController extends Controller
         $appointment->created_by = Auth::user()->id;
         $appointment->save();
 
-        return redirect()->route(strtolower(Auth::user()->role->name).'.dashboard')->with('success', 'Appointment Created!');
+        return redirect()->route(strtolower(Auth::user()->role->name) . '.dashboard')->with('success', 'Appointment Created!');
     }
 
     public function myAppointments()
     {
-        $this->authorize('myAppointments', Appointment::class);   
+        $this->authorize('myAppointments', Appointment::class);
         $appointments = Appointment::where('staff_id', Auth::user()->id)
             ->orderByDesc('updated_at')
             ->paginate(10);
@@ -120,19 +120,83 @@ class AppointmentController extends Controller
         return redirect()->action([AppointmentController::class, 'myAppointments'])->with('success', 'Appointment Canceled!');
     }
 
+    // public function approveAppointment(Request $request, $id)
+    // {
+    //     $request->validate([
+    //         'tag_id' => [
+    //             'required', 'numeric',
+    //             Rule::exists('tags', 'number')->where('status', 0),
+    //         ],
+    //     ]);
+
+    //     if ($request->has('photo')) {
+    //         $request->validate([
+    //             'photo' => ['image', 'mimes:jpeg,png,jpg,svg', 'max:5120']
+    //         ]);
+    //     }
+
+    //     $appointment = Appointment::find($id);
+    //     $appointment->status = 1;
+    //     $appointment->save();
+
+    //     $visitor = Visitor::where('phone', $appointment->phone)->first();
+
+    //     if ($visitor == null) {
+    //         $visitor = new Visitor;
+    //         $visitor->first_name = $appointment->first_name;
+    //         $visitor->last_name = $appointment->last_name;
+
+    //         if ($appointment->email) {
+    //             $visitor->email = $appointment->email;
+    //         }
+
+    //         if ($request->has('photo')) {
+    //             $photoName = time() . '.' . $request->photo->extension();
+    //             $request->photo->move(public_path('images/avatar'), $photoName);
+    //             $visitor->photo = $photoName;
+    //         }
+
+    //         $visitor->phone = $appointment->phone;
+    //         $visitor->company = $appointment->company;
+    //         $visitor->status = 1;
+    //         $visitor->save();
+    //     } else {
+    //         if ($request->has('photo')) {
+    //             $photoName = time() . '.' . $request->photo->extension();
+    //             $request->photo->move(public_path('images/avatar'), $photoName);
+    //             $visitor->photo = $photoName;
+    //         }
+    //         $visitor->status = 1;
+    //         $visitor->save();
+    //     }
+
+    //     $visitor_id = Visitor::where('phone', $visitor->phone)->first()->id;
+
+    //     $visit = new Visit;
+    //     $visit->visitor_id = $visitor_id;
+    //     $visit->user_id = $appointment->staff_id;
+    //     $visit->tag_id = $request->tag_id;
+    //     $visit->department_id = $appointment->department_id;
+    //     $visit->location_id = $appointment->location_id;
+    //     $visit->status = 1;
+    //     $visit->created_by = Auth::user()->id;
+    //     $visit->save();
+
+    //     $tag = Tag::find($request->tag_id);
+    //     $tag->status = 1;
+    //     $tag->save();
+
+    //     return redirect()->route(strtolower(Auth::user()->role->name) . '.dashboard')->with('success', 'Visit Added');
+    // }
+
     public function approveAppointment(Request $request, $id)
     {
         $request->validate([
-            'tag_id' => ['required', 'numeric',
+            'tag_id' => [
+                'required', 'numeric',
                 Rule::exists('tags', 'number')->where('status', 0),
             ],
         ]);
-
-        if ($request->photo) {
-            $request->validate([
-                'photo' => ['image', 'mimes:jpeg,png,jpg,svg', 'max:5120']
-            ]);
-        }
 
         $appointment = Appointment::find($id);
         $appointment->status = 1;
@@ -144,27 +208,21 @@ class AppointmentController extends Controller
             $visitor = new Visitor;
             $visitor->first_name = $appointment->first_name;
             $visitor->last_name = $appointment->last_name;
-            
-            if ($appointment->email) {
-                $visitor->email = $appointment->email;
-            }
-
-            if ($request->photo) {
-                $photoName = time().'.'.$request->photo->extension();
-                $request->photo->move(public_path('images/avatar'), $photoName);
-                $visitor->photo = $photoName;
-            }
-
             $visitor->phone = $appointment->phone;
             $visitor->company = $appointment->company;
             $visitor->status = 1;
-            $visitor->save();
-        } else {
-            $visitor->status = 1;
-            $visitor->save();
         }
 
-        $visitor_id = Visitor::where('phone', $visitor->phone)->first()->id;
+        if ($appointment->email) {
+            $visitor->email = $appointment->email;
+        }
+
+        // Call function to handle photo upload
+        $visitor = $this->handlePhotoUpload($request, $visitor);
+
+        $visitor->save();
+
+        $visitor_id = $visitor->id;
 
         $visit = new Visit;
         $visit->visitor_id = $visitor_id;
@@ -180,8 +238,24 @@ class AppointmentController extends Controller
         $tag->status = 1;
         $tag->save();
 
-        return redirect()->route(strtolower(Auth::user()->role->name).'.dashboard')->with('success', 'Visit Added');
+        return redirect()->route(strtolower(Auth::user()->role->name) . '.dashboard')->with('success', 'Visit Added');
     }
+
+    private function handlePhotoUpload(Request $request, Visitor $visitor)
+    {
+        if ($request->has('photo')) {
+            $request->validate([
+                'photo' => ['image', 'mimes:jpeg,png,jpg,svg', 'max:5120']
+            ]);
+
+            $photoName = time() . '.' . $request->photo->extension();
+            $request->photo->move(public_path('images/avatar'), $photoName);
+            $visitor->photo = $photoName;
+        }
+
+        return $visitor;
+    }
+
 
     public function staffApproveAppointment($id)
     {

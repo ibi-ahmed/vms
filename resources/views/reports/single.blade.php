@@ -1,11 +1,10 @@
-
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <link rel="stylesheet" href="{{ public_path('/theme/css/bootstrap.min.css') }}">
-    {{-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> --}}
-    {{-- <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="{{ public_path('/theme/css/bootstrap.min.css') }}">
+{{-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> --}}
+{{-- <link rel="stylesheet" href="{{ mix('css/app.css') }}">
     <script src="{{ mix('js/app.js') }}" defer></script> --}}
-    
-    <div class="container-fluid"> 
+
+<div class="container-fluid">
     <div class="row">
         <div class="col-sm-8 offset-sm-2 mt-5">
             <div class="card">
@@ -15,15 +14,17 @@
                             <table class="table table-striped table-hover">
                                 <thead class="">
                                     <tr>
-                                        <td class="text-center" colspan="6">{{ $visitor->first_name.' '.$visitor->last_name.' - PREVIOUS VISITS' }}</td>
+                                        <td class="text-center" colspan="6">
+                                            {{ $visitor->first_name . ' ' . $visitor->last_name . ' - PREVIOUS VISITS' }}</td>
                                     </tr>
                                     <tr>
                                         <th>S/N</th>
                                         <th>Staff</th>
-                                        <th>Department</th>
+                                        {{-- <th>Department</th> --}}
                                         <th>Location</th>
-                                        <th>Time</th>
                                         <th>Date</th>
+                                        <th>Time In</th>
+                                        <th>Time Out</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -36,12 +37,21 @@
                                                     {{ $visit->user->name }}
                                                 </div>
                                             </td>
-                                            <td>{{ $visit->department->name }}</td>
-                                            <td>{{ $visit->location->name }}</td>
+                                            {{-- <td>{{ $visit->department->name }}</td> --}}
+                                            <td>{{ $visit->location->name . ' / ' . $visit->department->name }}</td>
+                                            <td>{{ date('F jS, Y', strtotime($visit->created_at)) }}</td>
                                             <td>
                                                 {{ date('h:i A', strtotime($visit->created_at)) }}
                                             </td>
-                                            <td>{{ date('D M j', strtotime($visit->created_at)) }}</td>
+                                            @if ($visit->status == 0)
+                                                <td>
+                                                    {{ date('h:i A', strtotime($visit->updated_at)) }}
+                                                </td>
+                                            @else
+                                                <td>
+                                                    ---------
+                                                </td>
+                                            @endif
                                         </tr>
                                     @endforeach
                                 </tbody>
@@ -62,6 +72,3 @@
 </div>
 {{-- </body>
 </html> --}}
-
-
-
