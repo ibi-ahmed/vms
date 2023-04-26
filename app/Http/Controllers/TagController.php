@@ -21,22 +21,23 @@ class TagController extends Controller
     {
         $tag_id = Tag::where('number', $tag_no)->first()->id;
         $visit = Visit::where('tag_id', $tag_id)
-        ->where('status', 1)
-        ->first();
+            ->where('status', 1)
+            ->first();
         return view('tags.scan', compact('visit'));
     }
 
     public function tagAssign(Request $request, $id)
     {
         $request->validate([
-            'tag_id' => ['required', 'numeric',
+            'tag_id' => [
+                'required', 'numeric',
                 Rule::exists('tags', 'number')->where('status', 0),
             ],
         ]);
 
         $tag = Tag::find($request->tag_id);
         $this->authorize('tagAssign', $tag);
-        
+
         $appointment = Appointment::find($id);
         $appointment->status = 1;
         $appointment->save();
@@ -59,7 +60,7 @@ class TagController extends Controller
         $visit->created_by = Auth::user()->id;
         $visit->save();
 
-        return redirect()->route(strtolower(Auth::user()->role->name).'.dashboard')->with('success', 'Tag Assigned!');
+        return redirect()->route(strtolower(Auth::user()->role->name) . '.dashboard')->with('success', 'Tag Assigned!');
     }
 
     public function tagDeactivate($id)
@@ -83,6 +84,28 @@ class TagController extends Controller
         $tag->status = 0;
         $tag->save();
 
-        return redirect()->route(strtolower(Auth::user()->role->name).'.dashboard')->with('success', 'Tag Deactivated!');
+        return redirect()->route(strtolower(Auth::user()->role->name) . '.dashboard')->with('success', 'Tag Deactivated!');
+    }
+
+    public function addTagView()
+    {
+        // $this->authorize('addTag', [$user, $tag]);
+        $tags = Tag::all();
+        return view('tags.add', compact('tags'));
+    }
+
+    public function addTag(Request $request)
+    {
+        // Get the last tag's number or start at 0 if no tags exist yet
+        $lastTagNumber = Tag::max('number') ?? 0;
+
+        // Create and save new tags
+        for ($i = 0; $i < $request->number_tags; $i++) {
+            $tag = new Tag;
+            $tag->number = $lastTagNumber + $i + 1; // increment the number column
+            $tag->save();
+        }
+
+        return redirect()->route(strtolower(Auth::user()->role->name) . '.dashboard')->with('success', $request->number_tags . ' Tag(s) Added!');
     }
 }

@@ -21,6 +21,11 @@ class TagPolicy
         return in_array($user->role_id, [Role::IS_SUPER, Role::IS_ADMIN, Role::IS_SECURITY]);
     }
 
+    // public function addTag(User $user, Tag $tag)
+    // {
+    //     return in_array($user->role_id, [Role::IS_SUPER, Role::IS_ADMIN]);
+    // }
+
     /**
      * Determine whether the user can create models.
      *

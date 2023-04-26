@@ -15,7 +15,7 @@ class TagSeeder extends Seeder
      */
     public function run()
     {
-        for ($i=1; $i < 201; $i++) { 
+        for ($i=1; $i < 101; $i++) { 
             $tag = ['number' => $i];
             Tag::create($tag);
         }

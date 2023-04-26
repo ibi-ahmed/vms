@@ -120,6 +120,9 @@ Route::post('/reports-single/{id}', [App\Http\Controllers\VisitorController::cla
 Route::get('/reports-search', [App\Http\Controllers\VisitorController::class, 'reportSearch'])->name('reports.search');
 Route::post('/reports-search-result', [App\Http\Controllers\VisitorController::class, 'reportSearchResult'])->name('reports.search.result');
 
+Route::get('/add-tag-view', [App\Http\Controllers\TagController::class, 'addTagView'])->name('tags.add.view');
+Route::post('/add-tag', [App\Http\Controllers\TagController::class, 'addTag'])->name('tags.add');
+
 
 // Route::get('/staff-search', [App\Http\Controllers\MicrosoftGraph::class, 'users'])->name('staff.search');
 Route::get('/staff-search', function (Request $request) {

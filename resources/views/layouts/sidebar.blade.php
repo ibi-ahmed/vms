@@ -19,6 +19,13 @@
                 </a>
                 @endcan
 
+                {{-- @can('addTag', \App\Models\Tag::class)
+                <a class="nav-link" href="{{ route('tags.add.view') }}">
+                    <div class="nav-link-icon"><i data-feather="user-plus"></i></div>
+                    Add Visitor Tag
+                </a>
+                @endcan --}}
+
                 @can('allUsers', \App\Models\User::class) 
                 <a class="nav-link" href="{{ route('users.all') }}">
                     <div class="nav-link-icon"><i data-feather="user-plus"></i></div>
