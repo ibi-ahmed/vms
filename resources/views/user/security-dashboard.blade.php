@@ -21,8 +21,8 @@
                 </div>
             </div>
             <div class="card-body text-center">
-                <a href="{{ route('appointments.recent') }}" class="btn btn-lg btn-outline-primary mx-3">Recent Appointments</a>
-                <a href="{{ route('visitor.recent') }}" class="btn btn-lg btn-outline-primary">Recent Visits</a>
+                <a href="{{ route('appointments.recent') }}" class="btn btn-lg btn-outline-primary mx-3">Today's Appointments</a>
+                <a href="{{ route('visitor.recent') }}" class="btn btn-lg btn-outline-primary">Today's Visits</a>
                 <a href="{{ route('visitor.add') }}" class="btn btn-lg btn-outline-primary mx-3">Create Appointment</a>
             </div>
         </div>

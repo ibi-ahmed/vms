@@ -50,7 +50,7 @@
                 @can('recentAppointments', \App\Models\Appointment::class)
                 <a class="nav-link" href="/recent-appointments">
                     <div class="nav-link-icon"><i data-feather="briefcase"></i></div>
-                    Recent Appointments
+                    Today's Appointments
                 </a>
                 @endcan
                 
@@ -92,7 +92,7 @@
                 @can('recentVisits', \App\Models\Visit::class)
                 <a class="nav-link" href="/recent-visits">
                     <div class="nav-link-icon"><i data-feather="briefcase"></i></div>
-                    Recent Visits
+                    Today's Visits
                 </a>
                 @endcan
 
