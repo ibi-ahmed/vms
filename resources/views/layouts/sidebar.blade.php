@@ -19,6 +19,13 @@
                 </a>
                 @endcan
 
+                @can('staffSearch', \App\Models\Appointment::class)
+                <a class="nav-link" href="{{ route('appointments.staff-search') }}">
+                    <div class="nav-link-icon"><i data-feather="user-plus"></i></div>
+                    Staff Appointments
+                </a>
+                @endcan
+
                 {{-- @can('addTag', \App\Models\Tag::class)
                 <a class="nav-link" href="{{ route('tags.add.view') }}">
                     <div class="nav-link-icon"><i data-feather="user-plus"></i></div>

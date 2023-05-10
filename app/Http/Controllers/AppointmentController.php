@@ -265,4 +265,34 @@ class AppointmentController extends Controller
 
         return redirect()->route('appointments.my')->with('success', 'Appointment Approved!');
     }
+
+    public function staffSearch()
+    {
+        $this->authorize('staffSearch', Appointment::class);
+        return view('appointments.staff-search');
+    }
+    
+    public function staffView(Request $request)
+    {
+        $staff = User::where('azure_id', $request->staff_id)->first();
+        
+        if ($staff !=null ) {
+            $staff->name = $request->staff_name;
+            $staff->email = strtolower($request->staff_email);
+        }else{
+            $staff = new User();
+            $staff->name = $request->staff_name;
+            $staff->email = strtolower($request->staff_email);
+            $staff->role_id = 3;
+            $staff->azure_id = $request->staff_id;
+        }
+        
+        $staff->save();
+
+        $appointments = Appointment::where('staff_id', $staff->id)
+            ->orderByDesc('updated_at')
+            ->paginate(10);
+
+        return view('appointments.staff-appointments', compact('appointments', 'staff'));
+    }
 }

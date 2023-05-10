@@ -116,6 +116,9 @@ Route::get('/all-appointments/{query?}', [App\Http\Controllers\AppointmentContro
 Route::get('/my-appointments', [App\Http\Controllers\AppointmentController::class, 'myAppointments'])->name('appointments.my');
 Route::get('/recent-appointments', [App\Http\Controllers\AppointmentController::class, 'recent'])->name('appointments.recent');
 
+Route::get('/appointments/staff-search', [App\Http\Controllers\AppointmentController::class, 'staffSearch'])->name('appointments.staff-search');
+Route::post('/appointments/staff', [App\Http\Controllers\AppointmentController::class, 'staffView'])->name('appointments.staff-view');
+
 Route::post('/reports-single/{id}', [App\Http\Controllers\VisitorController::class, 'singleReport'])->name('reports.single');
 Route::get('/reports-search', [App\Http\Controllers\VisitorController::class, 'reportSearch'])->name('reports.search');
 Route::post('/reports-search-result', [App\Http\Controllers\VisitorController::class, 'reportSearchResult'])->name('reports.search.result');

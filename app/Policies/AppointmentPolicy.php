@@ -36,6 +36,11 @@ class AppointmentPolicy
     {
         return in_array($user->role_id, [Role::IS_SUPER, Role::IS_ADMIN, Role::IS_STAFF, Role::IS_CONTRACTOR]);
     }
+    
+    public function staffSearch(User $user)
+    {
+        return in_array($user->role_id, [Role::IS_SUPER, Role::IS_ADMIN]);
+    }
 
     /**
      * Determine whether the user can view the model.
