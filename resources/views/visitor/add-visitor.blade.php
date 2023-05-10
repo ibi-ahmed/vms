@@ -64,11 +64,19 @@
                                 
                             </div>
 
-                            <!-- Form Group (company name)-->
-                            <div class="mb-3">
-                                <label class="mb-1" for="company">Company Name</label>
-                                <input class="form-control" name="company" type="text"
-                                    placeholder="Enter company name" value="" required />
+                            <div class="row gx-3 mb-3">
+                                <!-- Form Group (Company)-->
+                                <div class="col-sm-6">
+                                    <label class="mb-1" for="company">Company</label>
+                                <input class="form-control" name="company" type="text" placeholder="Enter company name"
+                                    value="" required/>
+                                </div>
+                                <!-- Form Group (date)-->
+                                <div class="col-sm-6">
+                                    <label class="mb-1" for="date">Date of Appointment</label>
+                                    <input class="form-control" name="date" type="date"
+                                         value="" required/>
+                                </div>
                             </div>
 
                             <div class="row gx-3 mb-3">
@@ -112,11 +120,17 @@
                         <form method="POST" action="{{ route('visit.store') }}">
                             @csrf
                             <div class="mb-4 row">
-                                <div class="col-6 offset-3">
+                                <div class="col-sm-6">
                                     <label class="mb-1" for="vis_id">Select Visitor</label>
                                     <visitor-search-component></visitor-search-component>
                                 </div>
-                            </div><hr>
+                                <div class="col-sm-6">
+                                    <label class="" for="date">Date of Appointment</label>
+                                    <input class="form-control" name="date" type="date"
+                                         value="" required/>
+                                </div>
+                            </div>
+                            <hr>
 
                             <div class="row gx-3 mb-3">
                                 <!-- Form Group (Location)-->

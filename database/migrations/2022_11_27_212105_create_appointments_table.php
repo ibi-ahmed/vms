@@ -25,6 +25,7 @@ return new class extends Migration
             $table->integer('staff_id');
             $table->tinyInteger('status')->default(0);
             $table->integer('created_by');
+            $table->date('appointment_date');
             $table->timestamps();
         });
     }

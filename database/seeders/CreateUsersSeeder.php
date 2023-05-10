@@ -24,7 +24,7 @@ class CreateUsersSeeder extends Seeder
                'password'=> bcrypt('123'),
             ],
             // [
-            //    'name'=>'Julius Nyerere',
+            //    'name'=>'Mista Mann',
             // //    'last_name'=>'Admin',
             //    'email'=>'admin@admin.vms',
             //    'role_id'=>4,

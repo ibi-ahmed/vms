@@ -35,7 +35,7 @@ class VisitorController extends Controller
     public function recent()
     {
         $this->authorize('recentVisits', Visit::class);
-        $visits = Visit::where('updated_at', '>=', Carbon::now()->subHours(12))
+        $visits = Visit::whereDate('updated_at', Carbon::today())
             ->orderByDesc('updated_at')->where('status', 1)->paginate(10);
         return view('visitor.recent', compact('visits'));
     }
@@ -48,6 +48,7 @@ class VisitorController extends Controller
             'last_name' => ['required', 'string', 'max:255'],
             'phone' => ['required', 'string', 'max:15', 'unique:visitors'],
             'company' => ['required', 'string', 'max:255'],
+            'date' => ['required', 'date', 'after_or_equal:today'],
         ]);
 
         if ($request->email) {
@@ -116,8 +117,8 @@ class VisitorController extends Controller
             $appointment->status = 3;
         }
 
-
         $appointment->created_by = Auth::user()->id;
+        $appointment->appointment_date = $input['date'];
         $appointment->save();
 
         Mail::to($staff)->send(new AppointmentCreated($staff, $appointment));
@@ -127,6 +128,10 @@ class VisitorController extends Controller
 
     public function storeVisit(Request $request)
     {
+        $input = $request->validate([
+            'date' => ['required', 'date', 'after_or_equal:today'],
+        ]);
+
         $visitor = Visitor::where('id', $request->vis_id)->first();
 
         $staff = User::where('azure_id', $request->staff_id)->first();
@@ -163,6 +168,7 @@ class VisitorController extends Controller
         }
 
         $appointment->created_by = Auth::user()->id;
+        $appointment->appointment_date = $input['date'];
         $appointment->save();
 
         Mail::to($staff)->send(new AppointmentCreated($staff, $appointment));

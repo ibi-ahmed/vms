@@ -14,6 +14,7 @@ use Illuminate\Support\Carbon;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+// use Carbon\Carbon;
 
 class AppointmentController extends Controller
 {
@@ -43,7 +44,7 @@ class AppointmentController extends Controller
     public function recent()
     {
         $this->authorize('recentAppointments', Appointment::class);
-        $appointments = Appointment::where('updated_at', '>=', Carbon::now()->subHours(12))
+        $appointments = Appointment::whereDate('appointment_date', Carbon::today())
             ->orderByDesc('updated_at')->paginate(10);
         $tags = Tag::where('status', 0)->get();
         return view('appointments.recent', compact('appointments', 'tags'));
@@ -57,6 +58,7 @@ class AppointmentController extends Controller
             'last_name' => ['required', 'string', 'max:255'],
             'company' => ['required', 'string', 'max:255'],
             'phone' => ['required', 'string', 'max:15'],
+            'date' => ['required', 'date', 'after_or_equal:today'],
         ]);
 
         if ($request->email) {
@@ -77,6 +79,7 @@ class AppointmentController extends Controller
         $appointment->location_id = $request->location_id;
         $appointment->staff_id = Auth::user()->id;
         $appointment->created_by = Auth::user()->id;
+        $appointment->appointment_date = $input['date'];
         $appointment->save();
 
         return redirect()->route(strtolower(Auth::user()->role->name) . '.dashboard')->with('success', 'Appointment Created!');
@@ -84,6 +87,10 @@ class AppointmentController extends Controller
 
     public function storeExistingVisitorAppointment(Request $request)
     {
+        $input = $request->validate([
+            'date' => ['required', 'date', 'after_or_equal:today'],
+        ]);
+
         $visitor = Visitor::where('id', $request->vis_id)->first();
 
         $appointment = new Appointment();
@@ -98,6 +105,7 @@ class AppointmentController extends Controller
         $appointment->location_id = $request->location_id;
         $appointment->staff_id = Auth::user()->id;
         $appointment->created_by = Auth::user()->id;
+        $appointment->appointment_date = $input['date'];
         $appointment->save();
 
         return redirect()->route(strtolower(Auth::user()->role->name) . '.dashboard')->with('success', 'Appointment Created!');
@@ -290,9 +298,11 @@ class AppointmentController extends Controller
         $staff->save();
 
         $appointments = Appointment::where('staff_id', $staff->id)
-            ->orderByDesc('updated_at')
+            ->orderByDesc('appointment_date')
             ->paginate(10);
 
-        return view('appointments.staff-appointments', compact('appointments', 'staff'));
+            $tags = Tag::where('status', 0)->get();
+
+        return view('appointments.staff-appointments', compact('appointments', 'staff', 'tags'));
     }
 }
