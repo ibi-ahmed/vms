@@ -109,7 +109,14 @@ class VisitorController extends Controller
         $appointment->department_id = $request->department_id;
         $appointment->location_id = $request->location_id;
         $appointment->staff_id = $staff->id;
-        $appointment->status = 3;
+
+        if (Auth::user()->role_id >= 4) {
+            $appointment->status = 4;
+        }else {
+            $appointment->status = 3;
+        }
+
+
         $appointment->created_by = Auth::user()->id;
         $appointment->save();
 
@@ -148,7 +155,13 @@ class VisitorController extends Controller
         $appointment->department_id = $request->department_id;
         $appointment->location_id = $request->location_id;
         $appointment->staff_id = $staff->id;
-        $appointment->status = 3;
+
+        if (Auth::user()->role_id >= 4) {
+            $appointment->status = 4;
+        }else {
+            $appointment->status = 3;
+        }
+
         $appointment->created_by = Auth::user()->id;
         $appointment->save();
 

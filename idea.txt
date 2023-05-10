@@ -4,4 +4,3 @@
 # auto approve
 # allow visitors to book appt **
 # schedule future appts
-# view particluar staff appts / access ctrl
