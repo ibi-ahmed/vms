@@ -43,7 +43,7 @@
                                             <td>
                                                 {{ date('h:i A', strtotime($visit->created_at)) }}
                                             </td>
-                                            @if ($visit->status == 0)
+                                            @if ($visit->status == 2)
                                                 <td>
                                                     {{ date('h:i A', strtotime($visit->updated_at)) }}
                                                 </td>

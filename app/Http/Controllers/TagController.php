@@ -77,7 +77,7 @@ class TagController extends Controller
         $visitor->save();
 
         // $visit = Visit::where('visitor_id', $visitor->id)->first();
-        $visit->status = 0;
+        $visit->status = 2;
         $visit->save();
 
         // $tag = Tag::find($visit->tag_id);

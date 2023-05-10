@@ -1,14 +1,14 @@
 @extends('layouts.layout')
-@section('title', 'Recent Visits')
+@section('title', 'Today\'s Visits')
 
 @section('content')
 @section('icon', 'activity')
-@section('sub_head', 'Recent Visits')
+@section('sub_head', 'Today\'s Visits')
 
 <div class="mt-4 row">
     <div class="col-sm-10 offset-sm-1">
         <div class="card">
-            <div class="card-header border-bottom text-center">Recent Visits</div>
+            <div class="card-header border-bottom text-center">Today's Visits</div>
             <div class="card-body">
                 @if (count($visits) > 0)
                     <div class="table-responsive">

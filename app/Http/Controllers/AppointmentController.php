@@ -210,16 +210,16 @@ class AppointmentController extends Controller
             $visitor->last_name = $appointment->last_name;
             $visitor->phone = $appointment->phone;
             $visitor->company = $appointment->company;
-            $visitor->status = 1;
         }
-
+        
         if ($appointment->email) {
             $visitor->email = $appointment->email;
         }
-
+        
         // Call function to handle photo upload
         $visitor = $this->handlePhotoUpload($request, $visitor);
-
+        
+        $visitor->status = 1;
         $visitor->save();
 
         $visitor_id = $visitor->id;

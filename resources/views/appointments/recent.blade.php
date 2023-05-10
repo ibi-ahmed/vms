@@ -1,9 +1,9 @@
 @extends('layouts.layout')
-@section('title', 'Recent Appointments')
+@section('title', 'Today\'s Appointments')
 
 @section('content')
 @section('icon', 'activity')
-@section('sub_head', 'Recent Appointments')
+@section('sub_head', 'Today\'s Appointments')
 
 <div class="mt-4 row">
     <div class="col-sm-10 offset-sm-1">
