@@ -6,6 +6,7 @@
         <div class="col-sm-12">
             <div class="card">
                 <div class="card-header border-bottom text-center">All Visitors on {{ date('F jS Y', strtotime($visit_date)) }}</div>
+                <br>
                 <div class="card-body">
                     @if (count($visits) > 0)
                         <div class="table-responsive">
@@ -17,7 +18,10 @@
                                         <th>Phone</th>
                                         {{-- <th>Email</th> --}}
                                         <th>Company</th>
-                                        <th>Created By</th>
+                                        <th>Staff</th>
+                                        {{-- <th>Approved By</th> --}}
+                                        <th>Time In</th>
+                                        <th>Time Out</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -35,20 +39,35 @@
                                             <td>
                                                 {{ $visit->visitor->company }}
                                             </td>
-                                            <td>{{ DB::table('users')->where('id', $visit->created_by)->pluck('name')->first() }}
+                                            <td>
+                                                {{ $visit->user->name }}
                                             </td>
+                                            {{-- <td>{{ DB::table('users')->where('id', $visit->created_by)->pluck('name')->first() }}
+                                            </td> --}}
+                                            <td>
+                                                {{ date('h:i A', strtotime($visit->created_at)) }}
+                                            </td>
+                                            @if ($visit->status == 2)
+                                                <td>
+                                                    {{ date('h:i A', strtotime($visit->updated_at)) }}
+                                                </td>
+                                            @else
+                                                <td>
+                                                    ---------
+                                                </td>
+                                            @endif
                                         </tr>
                                     @endforeach
                                 </tbody>
                                 <tfoot class="text-center">
                                     <tr>
-                                        <td class="" colspan="6">NMDPRA VMS REPORT</td>
+                                        <td class="" colspan="7">NMDPRA VMS REPORT</td>
                                     </tr>
                                 </tfoot>
                             </table>
                         </div>
                     @else
-                        <h4 class=" font-monospace mt-2 text-center">No records to show!</h4>
+                        <h4 class="fw-bold font-monospace mt-2 text-center">No records to show!</h4>
                     @endif
                 </div>
             </div>

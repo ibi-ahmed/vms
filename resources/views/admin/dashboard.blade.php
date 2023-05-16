@@ -6,7 +6,7 @@
 @section('sub_head', 'Administrator Dashboard')
 
 <div class="mt-4 row">
-    <div class="col-sm-10 offset-sm-1">
+    <div class="col-sm-12">
         <div class="card">
             <div class="card-header text-center">
                 <div class="row">
@@ -21,11 +21,11 @@
                 </div>
             </div>
             <div class="card-body text-center">
-                <a href="{{ route('appointments.recent') }}" class="btn btn-md btn-outline-primary mx-2">Today's Appointments</a>
-                <a href="{{ route('visitor.recent') }}" class="btn btn-md btn-outline-primary mx-2">Today's Visits</a>
-                <a href="{{ route('reports.search') }}" class="btn btn-md btn-outline-primary mx-2">Reports</a>
-                <a href="{{ route('tags.add.view') }}" class="btn btn-md btn-outline-primary mx-2">Add Tag</a>
-                <a href="{{ route('visitor.add') }}" class="btn btn-md btn-outline-primary mx-2">Create Appointment</a>
+                <a href="{{ route('appointments.recent') }}" class="btn btn-md btn-outline-primary mx-1">Today's Appointments</a>
+                <a href="{{ route('visitor.recent') }}" class="btn btn-md btn-outline-primary mx-1">Today's Visits</a>
+                <a href="{{ route('reports.search') }}" class="btn btn-md btn-outline-primary mx-1">Reports</a>
+                <a href="{{ route('tags.add.view') }}" class="btn btn-md btn-outline-primary mx-1">Add Tag</a>
+                <a href="{{ route('visitor.add') }}" class="btn btn-md btn-outline-primary mx-1">Create Appointment</a>
             </div>
             <div class="card">
                 <div class="card-body">

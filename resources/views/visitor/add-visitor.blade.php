@@ -29,13 +29,13 @@
                             <div class="row gx-3 mb-3">
                                 <!-- Form Group (first name)-->
                                 <div class="col-sm-6">
-                                    <label class="mb-1" for="first_name">First Name</label>
+                                    <label class="mb-1" for="first_name">First Name *</label>
                                     <input class="form-control" name="first_name" type="text"
                                         placeholder="Enter first name" value="" required />
                                 </div>
                                 <!-- Form Group (last name)-->
                                 <div class="col-sm-6">
-                                    <label class="mb-1" for="last_name">Last Name</label>
+                                    <label class="mb-1" for="last_name">Last Name *</label>
                                     <input class="form-control" name="last_name" type="text"
                                         placeholder="Enter last name" value="" required />
                                 </div>
@@ -50,14 +50,14 @@
                             <div class="row gx-3 mb-3">
                                 <!-- Form Group (Phone)-->
                                 <div class="col-sm-6">
-                                    <label class="mb-1" for="phone">Phone Number</label>
+                                    <label class="mb-1" for="phone">Phone Number *</label>
                                     <input class="form-control" name="phone" type="text"
                                         placeholder="Enter phone number" value="" required />
                                 </div>
 
                                 <!-- Form Group (Email Address)-->
                                 <div class="col-sm-6">
-                                    <label class="mb-1" for="email">Email Address</label>
+                                    <label class="mb-1" for="email">Email Address *</label>
                                     <input class="form-control" name="email" type="email"
                                         placeholder="Enter email address : optional" value="" />
                                 </div>
@@ -67,13 +67,13 @@
                             <div class="row gx-3 mb-3">
                                 <!-- Form Group (Company)-->
                                 <div class="col-sm-6">
-                                    <label class="mb-1" for="company">Company</label>
+                                    <label class="mb-1" for="company">Company *</label>
                                 <input class="form-control" name="company" type="text" placeholder="Enter company name"
                                     value="" required/>
                                 </div>
                                 <!-- Form Group (date)-->
                                 <div class="col-sm-6">
-                                    <label class="mb-1" for="date">Date of Appointment</label>
+                                    <label class="mb-1" for="date">Date of Appointment *</label>
                                     <input class="form-control" name="date" type="date"
                                          value="" required/>
                                 </div>
@@ -82,10 +82,10 @@
                             <div class="row gx-3 mb-3">
                                 <!-- Form Group (Location)-->
                                 <div class="col-sm-4">
-                                    <label class="mb-1" for="location_id">Select Location</label>
+                                    <label class="mb-1" for="location_id">Select Location *</label>
                                     <select class="form-select" name="location_id" aria-label="Default select example"
                                         required>
-                                        {{-- <option selected>Select Location</option> --}}
+                                        <option selected>Select Location</option>
                                         @foreach ($locations as $location)
                                             <option value="{{ $location->id }}">{{ $location->name }}</option>
                                         @endforeach
@@ -94,10 +94,10 @@
 
                                 <!-- Form Group (Department)-->
                                 <div class="col-sm-4">
-                                    <label class="mb-1" for="department_id">Select Destination</label>
+                                    <label class="mb-1" for="department_id">Select Destination *</label>
                                     <select class="form-select" name="department_id" aria-label="Default select example"
                                         required>
-                                        {{-- <option selected>Select Destination</option> --}}
+                                        <option selected>Select Destination</option>
                                         @foreach ($departments as $department)
                                             <option value="{{ $department->id }}">{{ $department->name }}</option>
                                         @endforeach
@@ -105,7 +105,7 @@
                                 </div>
 
                                 <div class="col-sm-4">
-                                    <label class="mb-1" for="staff_email">Receiving Staff</label>
+                                    <label class="mb-1" for="staff_email">Receiving Staff *</label>
                                 <staff-search-component></staff-search-component>
                                 </div>
                             </div>
@@ -121,11 +121,11 @@
                             @csrf
                             <div class="mb-4 row">
                                 <div class="col-sm-6">
-                                    <label class="mb-1" for="vis_id">Select Visitor</label>
+                                    <label class="mb-1" for="vis_id">Select Visitor *</label>
                                     <visitor-search-component></visitor-search-component>
                                 </div>
                                 <div class="col-sm-6">
-                                    <label class="" for="date">Date of Appointment</label>
+                                    <label class="" for="date">Date of Appointment *</label>
                                     <input class="form-control" name="date" type="date"
                                          value="" required/>
                                 </div>
@@ -135,10 +135,10 @@
                             <div class="row gx-3 mb-3">
                                 <!-- Form Group (Location)-->
                                 <div class="col-sm-4">
-                                    <label class="mb-1" for="department_id">Select Location</label>
+                                    <label class="mb-1" for="department_id">Select Location *</label>
                                     <select class="form-select" name="location_id"
                                         aria-label="Default select example" required>
-                                        {{-- <option selected>Select Location</option> --}}
+                                        <option selected>Select Location</option>
                                         @foreach ($locations as $location)
                                             <option value="{{ $location->id }}">{{ $location->name }}</option>
                                         @endforeach
@@ -147,10 +147,10 @@
 
                                 <!-- Form Group (Department)-->
                                 <div class="col-sm-4">
-                                    <label class="mb-1" for="department_id">Select Destination</label>
+                                    <label class="mb-1" for="department_id">Select Destination *</label>
                                     <select class="form-select" name="department_id"
                                         aria-label="Default select example" required>
-                                        {{-- <option selected>Select Destination</option> --}}
+                                        <option selected>Select Destination</option>
                                         @foreach ($departments as $department)
                                             <option value="{{ $department->id }}">{{ $department->name }}</option>
                                         @endforeach
@@ -158,7 +158,7 @@
                                 </div>
 
                                 <div class="col-sm-4">
-                                    <label class="mb-1" for="staff_id">Receiving Staff</label>
+                                    <label class="mb-1" for="staff_id">Receiving Staff *</label>
                                 <staff-search-component></staff-search-component>
                                 </div>
                             </div>

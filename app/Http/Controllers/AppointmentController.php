@@ -59,6 +59,8 @@ class AppointmentController extends Controller
             'company' => ['required', 'string', 'max:255'],
             'phone' => ['required', 'string', 'max:15'],
             'date' => ['required', 'date', 'after_or_equal:today'],
+            'department_id' => ['required', 'exists:departments,id'],
+            'location_id' => ['required', 'exists:locations,id'],
         ]);
 
         if ($request->email) {
@@ -89,6 +91,8 @@ class AppointmentController extends Controller
     {
         $input = $request->validate([
             'date' => ['required', 'date', 'after_or_equal:today'],
+            'department_id' => ['required', 'exists:departments,id'],
+            'location_id' => ['required', 'exists:locations,id'],
         ]);
 
         $visitor = Visitor::where('id', $request->vis_id)->first();

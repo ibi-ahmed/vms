@@ -49,6 +49,8 @@ class VisitorController extends Controller
             'phone' => ['required', 'string', 'max:15', 'unique:visitors'],
             'company' => ['required', 'string', 'max:255'],
             'date' => ['required', 'date', 'after_or_equal:today'],
+            'department_id' => ['required', 'exists:departments,id'],
+            'location_id' => ['required', 'exists:locations,id'],
         ]);
 
         if ($request->email) {
@@ -130,6 +132,8 @@ class VisitorController extends Controller
     {
         $input = $request->validate([
             'date' => ['required', 'date', 'after_or_equal:today'],
+            'department_id' => ['required', 'exists:departments,id'],
+            'location_id' => ['required', 'exists:locations,id'],
         ]);
 
         $visitor = Visitor::where('id', $request->vis_id)->first();
